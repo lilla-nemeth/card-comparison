@@ -1,0 +1,35 @@
+{
+  "name": "ff.api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "engines": {
+    "node": ">=20.12 <21"
+  },
+  "scripts": {
+    "test": "jest --detectOpenHandles",
+    "build": "tsc",
+    "start": "nodemon src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/cors": "^2.8.17",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/supertest": "^6.0.2",
+    "install": "^0.13.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.4",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}

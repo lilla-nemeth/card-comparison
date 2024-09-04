@@ -1,0 +1,12 @@
+.icon {
+  fill: currentColor;
+  display: inline-block;
+  vertical-align: middle;
+  max-width: none;
+  font-size: 1em;
+  width: 1em;
+  height: 1em;
+}
+.icon * {
+  fill: currentColor !important;
+}

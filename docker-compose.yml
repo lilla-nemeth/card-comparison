@@ -1,0 +1,47 @@
+services:
+  #########################################
+  # FF.web, fixfood.com/app
+  ff.web:
+    build:
+      context: ./ff.web/
+      dockerfile: Dockerfile
+    command: npm run dev
+    volumes:
+      - /app/node_modules # Prevent the node_modules folder from being overwritten by the volume
+      - ./ff.web/:/app/ # Mount the current directory to the container's /app directory
+    ports:
+      - "7701:7701"
+    environment:
+      VITE_FFWEB_BASE_URL: "/"
+      VITE_FFWEB_PORT: "7701"
+      VITE_FFAPI_BASE_URL: "http://localhost:7702"
+
+  #########################################
+  # FF.api, api.fixfood.com
+  ff.api:
+    ports:
+      - "7702:7702"
+    build:
+      context: ./ff.api/
+      dockerfile: Dockerfile
+    command: npm run start
+    volumes:
+      - /app/node_modules # Prevent the node_modules folder from being overwritten by the volume
+      - ./ff.api/:/app/ # Mount the current directory to the container's /app directory
+    environment:
+      VITE_FFAPI_PORT: "7702"
+      VITE_FFAPI_BASE_URL: "/"
+  #########################################
+  # Vuo Storybook, local.vuo.ai/storybook
+  ff.storybook:
+    ports:
+      - "7703:7703"
+    build:
+      context: ./ff.web/
+      dockerfile: Dockerfile
+    command: npm run storybook -- --port 7703 --host 0.0.0.0
+    volumes:
+      - /app/node_modules # Prevent the node_modules folder from being overwritten by the volume
+      - ./ff.web/:/app/ # Mount the current directory to the container's /app directory
+    environment:
+      STORYBOOK_BASE_PATH: "/"

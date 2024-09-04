@@ -1,0 +1,67 @@
+// $root-size: 100%;
+// $grid-line: 0.625rem; //10px, relative to root size
+
+// @function x($x) {
+//   @return $x * $grid-line;
+// }
+
+//TODO: use these in components, now it's just some browser defaults for headings, paragraphs etc.
+
+$font-family: 'omnes-pro', sans-serif;
+$font-size: 1rem;
+$line-height: 1.4rem; //22.4px 🥴
+
+@mixin font-h1() {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 140%; //89.6px
+  // letter-spacing: 0.08em;
+}
+@mixin font-h2() {
+  font-size: 3rem; //48px
+  font-weight: 700;
+  line-height: 140%; //67.2px
+  letter-spacing: 0.06rem;
+}
+@mixin font-h3() {
+  font-size: 2.25rem; //36px
+  font-weight: 600;
+  line-height: 140%; //50.4px
+  letter-spacing: 0.045rem;
+}
+@mixin font-h4() {
+  font-size: 1.5rem; //24px
+  font-weight: 700;
+  line-height: 140%; //33.6px
+  letter-spacing: 0.03rem;
+}
+@mixin font-big() {
+  font-size: 1.3125rem; //21px
+  font-weight: 500;
+  line-height: 140%; //33.6px
+  letter-spacing: 0.03rem;
+}
+@mixin font-small() {
+  font-size: .75rem;
+  font-weight: 500;
+  line-height: 140%; //16.8px
+}
+@mixin font-p() {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 140%; //22.4px
+  letter-spacing: 0.04rem;
+}
+@mixin font-button() {
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 140%; //22.4px
+  letter-spacing: 0.04rem;
+}
+@mixin font-label() {
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 140%; //16.8px
+  letter-spacing: 0.03rem;
+  text-transform: uppercase;
+}

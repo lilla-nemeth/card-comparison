@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "allowJs": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "module": "ESNext",
+    "noEmit": true,
+    "moduleResolution": "bundler",
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["vite/client", "vite-plugin-svgr/client"],
+    "baseUrl": ".",
+    "paths": {
+      "@vuo/*": ["./src/*", "./src/components/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@static/*": ["./public/static/*"]
+    },
+    "useDefineForClassFields": true,
+
+    /* Bundler mode */
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src", "src/custom.d.ts", "../shared-components/src/QuestLineOnboardingHero.tsx"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

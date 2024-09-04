@@ -1,0 +1,63 @@
+#app {
+  display: contents;
+}
+.layout {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--page-width);
+  margin: auto;
+}
+
+.page-actions {
+  position: absolute;
+  inset: 0;
+  top: auto;
+  bottom: 0;
+  pointer-events: none;
+
+  & > * {
+    pointer-events: auto;
+  }
+}
+
+.page-container {
+  flex: 1 1 auto;
+  width: calc(100% - 16px);
+  margin: 8px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.home > div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fixfood-logo {
+  padding: 15%;
+  margin: auto;
+}
+
+.fixfood-logo svg {
+  width: 100%;
+  height: auto;
+}

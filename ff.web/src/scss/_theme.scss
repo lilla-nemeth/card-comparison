@@ -1,0 +1,71 @@
+:root {
+  //c vs bg mixes. 100-1000 scale for mixing c to bg like in named color vars
+  --c-100: #{cmix(--c, --bg, 10%)};
+  --c-200: #{cmix(--c, --bg, 20%)};
+  --c-300: #{cmix(--c, --bg, 30%)};
+  --c-400: #{cmix(--c, --bg, 40%)};
+  --c-500: #{cmix(--c, --bg, 50%)};
+  --bg-50: #{cmix(--bg, --c, 5%)};
+  --bg-100: #{cmix(--bg, --c, 10%)};
+  --bg-200: #{cmix(--bg, --c, 20%)};
+  --bg-300: #{cmix(--bg, --c, 30%)};
+
+  --focus-accent: var(--accent-fill);
+
+  //Chips are just always orange?
+  --chip-c: #{$white};
+  --chip-bg: #{$orange};
+
+  --input-c: var(--c);
+  --input-bg: var(--bg);
+
+  //We don't have checkboxes in the ui now
+  // --checkable-c: var(--accent-text);
+  // --checkable-bg: var(--accent-fill);
+
+  --progress-c: var(--accent-fill); //Since the accent-bg is usually used as the solid color, but really on progress the solid is the progress bar, using accent as the progress bar color and accent color as the normal color.
+
+  --page-width: 40rem;
+  --adm-button-border-radius: 24px;
+}
+
+
+:root:root {
+  --adm-font-family: 'omnes-pro', sans-serif, 'Helvetica Neue',
+    helvetica, segoe ui, arial, roboto, 'PingFang SC', 'miui',
+    'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+
+  .adm-button.adm-button-large {
+    @include font-h4();
+    font-weight: 900;
+    height: 4.125rem;
+    border-radius: 24px;
+  }
+}
+
+//NOTE: commented out light mode and using only dark mode for development for now.
+// @media (prefers-color-scheme: light) {
+//   :root {
+//     --c: #{$gray-1000};
+//     --bg: #{$white};
+//     --accent-fill: #{$blue-500};
+//     --accent-text: #{$white};
+
+//     --btn-c: var(--c);
+//     --btn-bg: #{cmix(--bg, black, 15%)};
+//   }
+// }
+
+// @media (prefers-color-scheme: dark) {
+:root {
+  --c: #{$white};
+  --bg: #{$gray-1000};
+  --accent-fill: #{$blue-500};
+  --accent-text: #{$white};
+
+  --btn-c: var(--c);
+  --btn-bg: #{cmix(--bg, black, 25%)};
+  --brand-pink: #FF2D55
+}
+
+// }

@@ -1,0 +1,8 @@
+.box {
+  position: relative; //Makes aboslute positioning in layouts easier when all boxes are relative by default.
+  display: flex;
+  width: 100%;
+}
+.box.justify-fill > * {
+  flex: 1 0 0%;
+}

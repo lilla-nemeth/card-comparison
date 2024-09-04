@@ -1,0 +1,14 @@
+.menu {
+  position: relative;
+}
+.menu-toggle {
+  display: contents;
+}
+.menu-toggle > * {
+  width: 100%;
+}
+.menu-items {
+  position: absolute;
+  z-index: 99;
+  inset: auto;
+}
