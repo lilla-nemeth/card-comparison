@@ -9,7 +9,7 @@
 - Open the repository in your code editor
 
 ### Project
-- Choose a task for yourself from GitHub Issues.
+- Choose a task for yourself from our [GitHub Issue Queue](https://github.com/VuoAI/vuo-base-components/issues).
 - Implement the task you have chosen.
 - Push changes to your forked repository.
 - Create a Pull Request to the original repository.
