@@ -1,5 +1,19 @@
 # Vuo Test Repository
 
+## Your task:
+
+### Set Up the Dev Environment
+- Install Docker Desktop
+- Go to [Vuo Base Components Github repository](https://github.com/VuoAI/vuo-base-components), **fork it** and **clone it** to your local machine.
+- Open the repository directory in your *Terminal* and run `./startp.sh` to start the environent
+- Open the repository in your code editor
+
+### Project
+- Choose a task for yourself from GitHub Issues.
+- Implement the task you have chosen.
+- Push changes to your forked repository.
+- Create a Pull Request to the original repository.
+
 ## Contents:
 
 - ff.api: a server application written in Typescript & NodeJS
