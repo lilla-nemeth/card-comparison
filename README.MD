@@ -2,7 +2,7 @@
 
 ## Your task:
 
-*Designers, check your task guidelines direclty from [GitHub Issue Queue](https://github.com/VuoAI/vuo-base-components/issues).*
+*Designers, check your task guidelines directly from [GitHub Issue Queue](https://github.com/VuoAI/vuo-base-components/issues).*
 
 ### Set Up the Dev Environment
 - Install Docker Desktop
