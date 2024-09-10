@@ -2,6 +2,8 @@
 
 ## Your task:
 
+*Designers, check your task guidelines direclty from [GitHub Issue Queue](https://github.com/VuoAI/vuo-base-components/issues).*
+
 ### Set Up the Dev Environment
 - Install Docker Desktop
 - Go to [Vuo Base Components Github repository](https://github.com/VuoAI/vuo-base-components), **fork it** and **clone it** to your local machine.
