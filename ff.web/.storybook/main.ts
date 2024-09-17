@@ -1,5 +1,5 @@
-import remarkGfm from "remark-gfm";
 import type { StorybookConfig } from "@storybook/react-vite";
+import remarkGfm from "remark-gfm";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -8,9 +8,17 @@ const config: StorybookConfig = {
   staticDirs: ["../public"],
 
   addons: [
-    "@chromatic-com/storybook",
     "@storybook/addon-interactions",
     "storybook-addon-deep-controls",
+    "@chromatic-com/storybook",
+    "@storybook/addon-actions",
+    "@storybook/addon-viewport",
+    "@storybook/addon-controls",
+    "@storybook/addon-backgrounds",
+    "@storybook/addon-toolbars",
+    "@storybook/addon-measure",
+    "@storybook/addon-a11y",
+    "@storybook/addon-designs",
     {
       name: "@storybook/addon-docs",
       options: {
@@ -21,13 +29,23 @@ const config: StorybookConfig = {
         },
       },
     },
+    // {
+    //   name: "@storybook/addon-storysource",
+    //   options: {
+    //     loaderOptions: {
+    //       prettierConfig: { printWidth: 80, singleQuote: false },
+    //       injectStoryParameters: false,
+    //     },
+    //   },
+    // },
   ],
   framework: {
     name: "@storybook/react-vite",
     options: {},
   },
   docs: {
-    defaultName: "Documentation",
+    defaultName: "Docs",
+    autodocs: true,
   },
   typescript: {
     reactDocgen: "react-docgen-typescript",
