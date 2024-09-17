@@ -10,9 +10,26 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
+export const Primary: Story = {
+  args: {
+    children: "Primary",
+    color: "primary",
+    fill: "solid",
+  },
+};
+
 export const DefaultButton: Story = {
   args: {
-    children: "Click me!",
+    children: "Default Button!",
     color: "default",
+  },
+};
+
+export const FigmaDesign = {
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/design/bDk31VecUCgLkmuIXa2PCj/Fix-Food-Design-System?node-id=4-4744&t=m9gVP483atAiuV11-4",
+    },
   },
 };
