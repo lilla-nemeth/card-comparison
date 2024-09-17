@@ -2,7 +2,6 @@ import Page from "@vuo/templates/Page";
 import Button from "@vuo/atoms/Button";
 import FixFoodLogo from "@vuo/atoms/FixFoodLogo";
 import { LogoVariants } from "@vuo/utils/LogoUtils";
-import PageWithNavbarAndTabbar from "../templates/PageWithNavbarAndTabbar";
 import { useNavigate } from "react-router-dom";
 
 const Login = function (props: any) {

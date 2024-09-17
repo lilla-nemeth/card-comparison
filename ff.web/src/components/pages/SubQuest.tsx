@@ -1,7 +1,8 @@
 import React from 'react'
+import Page from '../templates/Page'
 
 export default function SubQuest() {
   return (
-    <div>SubQuest</div>
+    <Page>SubQuest</Page>
   )
 }

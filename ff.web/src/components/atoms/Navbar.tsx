@@ -2,7 +2,7 @@ import { NavBar } from "antd-mobile";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({hideBackButton = false}) {
   useEffect(() => {
     console.log("navbar mounted")
     return () => {
@@ -25,6 +25,7 @@ export default function Navbar() {
   if(isVisible) return (
     <div style={{ border: "2px solid blue", width: "100%" }}>
       <NavBar
+        back={hideBackButton ? null : ""}
         onBack={() => navigate(-1)}
       >{getTitle()}</NavBar>
     </div>
