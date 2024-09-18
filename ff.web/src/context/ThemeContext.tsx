@@ -5,7 +5,6 @@ interface ThemeContextProps {
   toggleTheme: () => void;
 }
 
-import { useGlobals } from '@storybook/addons';
 import { createContext, ReactNode, useEffect, useState } from 'react';
 
 interface ThemeProviderProps {
@@ -13,15 +12,16 @@ interface ThemeProviderProps {
   initialTheme?: 'light-theme' | 'dark-theme';
 }
 
-const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, initialTheme }) => {
+  console.log("initialTheme", initialTheme)
   const [theme, setTheme] = useState<'light-theme' | 'dark-theme'>(initialTheme || 'dark-theme');
   
-
-  // Update theme when initialTheme prop changes
+  // Update theme when initialTheme prop changes, only can be changed through storybook
   useEffect(() => {
-    if (initialTheme) {
+    if (initialTheme != theme) {
+      console.log("CHANGING THEME")
       setTheme(initialTheme);
     }
   }, [initialTheme]);

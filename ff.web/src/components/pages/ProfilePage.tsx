@@ -1,11 +1,12 @@
 import Page from "@vuo/templates/Page";
 import Button from "@vuo/atoms/Button";
-import PageWithNavbarAndTabbar from "../templates/PageWithNavbarAndTabbar";
-import { useTheme } from "@vuo/context/ThemeContext";
+import { ThemeContext } from "@vuo/context/ThemeContext";
+import { useContext } from "react";
+
 
 const ProfilePage = function (props: any) {
-  const { theme, toggleTheme } = useTheme();
-  console.log(theme)
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  // console.log(theme)
   return (
     <Page>
           <p>This is an empty profile page.</p>

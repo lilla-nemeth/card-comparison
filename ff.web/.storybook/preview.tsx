@@ -5,6 +5,7 @@ import {ThemeProvider} from '../src/context/ThemeContext';
 
 const CustomDecorator: Decorator = (Story, context) => {
   const selectedTheme = context.globals.theme;
+  // console.log("from custom decorator", selectedTheme);
   return <ThemeProvider initialTheme={selectedTheme}>
     <Story />;
   </ThemeProvider>
