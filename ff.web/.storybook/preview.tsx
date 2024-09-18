@@ -1,6 +1,5 @@
 import type { Decorator, Preview } from "@storybook/react";
 import React from 'react';
-import "../src/scss/app.scss";
 import {ThemeProvider} from '../src/context/ThemeContext';
 
 const CustomDecorator: Decorator = (Story, context) => {
@@ -22,7 +21,7 @@ const preview: Preview = {
         items: [
           { value: "light-theme", icon: "circlehollow", title: "Light" },
           { value: "dark-theme", icon: "circle", title: "Dark" },
-          { value: "wireframe", icon: "component", title: "wireframe" },
+          // { value: "wireframe", icon: "component", title: "wireframe" },
         ],
         showName: true,
       },

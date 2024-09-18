@@ -1,5 +1,3 @@
-import '../scss/app.scss';
-
 interface ThemeContextProps {
   theme: 'light-theme' | 'dark-theme';
   toggleTheme: () => void;
