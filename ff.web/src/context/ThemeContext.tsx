@@ -1,42 +1,40 @@
-import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
-import '../scss/app.scss'; // Import your SCSS file
+import '../scss/app.scss';
 
-// Define the interface for the theme context
 interface ThemeContextProps {
-  theme: 'light' | 'dark';
+  theme: 'light-theme' | 'dark-theme';
   toggleTheme: () => void;
 }
 
-// Create the context with an initial value (this will be overridden by the provider)
-const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
+import { useGlobals } from '@storybook/addons';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 
-// Custom hook to use the theme context
-export const useTheme = (): ThemeContextProps => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
-};
-
-// Define the provider component
 interface ThemeProviderProps {
   children: ReactNode;
+  initialTheme?: 'light-theme' | 'dark-theme';
 }
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
-  // Apply the current theme class to the root HTML element
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, initialTheme }) => {
+  const [theme, setTheme] = useState<'light-theme' | 'dark-theme'>(initialTheme || 'dark-theme');
+  
+
+  // Update theme when initialTheme prop changes
+  useEffect(() => {
+    if (initialTheme) {
+      setTheme(initialTheme);
+    }
+  }, [initialTheme]);
+
   useEffect(() => {
     const root = document.documentElement;
+
     root.classList.remove('light-theme', 'dark-theme');
-    root.classList.add(`${theme}-theme`);
+    root.classList.add(`${theme}`);
   }, [theme]);
 
-  // Toggle between light and dark themes
   const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme(prevTheme => (prevTheme === 'light-theme' ? 'dark-theme' : 'light-theme'));
   };
 
   return (
@@ -45,4 +43,3 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     </ThemeContext.Provider>
   );
 };
-

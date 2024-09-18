@@ -29,15 +29,15 @@ const config: StorybookConfig = {
         },
       },
     },
-    // {
-    //   name: "@storybook/addon-storysource",
-    //   options: {
-    //     loaderOptions: {
-    //       prettierConfig: { printWidth: 80, singleQuote: false },
-    //       injectStoryParameters: false,
-    //     },
-    //   },
-    // },
+    {
+      name: "@storybook/addon-storysource",
+      options: {
+        loaderOptions: {
+          prettierConfig: { printWidth: 80, singleQuote: false },
+          injectStoryParameters: false,
+        },
+      },
+    },
   ],
   framework: {
     name: "@storybook/react-vite",
