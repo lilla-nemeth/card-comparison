@@ -1,6 +1,7 @@
 import type { Decorator, Preview } from "@storybook/react";
 import React from 'react';
 import {ThemeProvider} from '../src/context/ThemeContext';
+import "../src/scss/app.scss"
 
 const CustomDecorator: Decorator = (Story, context) => {
   const selectedTheme = context.globals.theme;

@@ -1,7 +1,7 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import remarkGfm from "remark-gfm";
 import dotenv from "dotenv";
-import "../src/scss/app.scss";
+
 dotenv.config();
 
 const config: StorybookConfig = {
