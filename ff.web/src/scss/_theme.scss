@@ -57,6 +57,8 @@
 // }
 
 // @media (prefers-color-scheme: dark) {
+
+//DEFAULT DARK THEME
 :root {
   --c: #{$white};
   --bg: #{$gray-1000};
@@ -66,6 +68,17 @@
   --btn-c: var(--c);
   --btn-bg: #{cmix(--bg, black, 25%)};
   --brand-pink: #FF2D55
+}
+
+.light-theme {
+  --c: pink;
+  --bg: cyan;
+  --accent-fill: yellow;
+  --accent-text: indigo;
+
+  --btn-c: red;
+  --btn-bg: grey;
+  --brand-pink: blue
 }
 
 // }

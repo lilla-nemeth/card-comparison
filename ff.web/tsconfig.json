@@ -32,6 +32,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/custom.d.ts", "../shared-components/src/QuestLineOnboardingHero.tsx"],
+  "include": ["src", "src/custom.d.ts", "../shared-components/src/QuestLineOnboardingHero.tsx", ".storybook/"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

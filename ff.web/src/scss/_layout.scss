@@ -1,6 +1,11 @@
 #app {
   display: contents;
 }
+
+body {
+  display: flex;
+}
+
 .layout {
   height: 100%;
   width: 100%;

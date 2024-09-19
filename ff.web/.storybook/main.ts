@@ -1,6 +1,7 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import remarkGfm from "remark-gfm";
 import dotenv from "dotenv";
+
 dotenv.config();
 
 const config: StorybookConfig = {
@@ -29,15 +30,15 @@ const config: StorybookConfig = {
         },
       },
     },
-    // {
-    //   name: "@storybook/addon-storysource",
-    //   options: {
-    //     loaderOptions: {
-    //       prettierConfig: { printWidth: 80, singleQuote: false },
-    //       injectStoryParameters: false,
-    //     },
-    //   },
-    // },
+    {
+      name: "@storybook/addon-storysource",
+      options: {
+        loaderOptions: {
+          prettierConfig: { printWidth: 80, singleQuote: false },
+          injectStoryParameters: false,
+        },
+      },
+    },
   ],
   framework: {
     name: "@storybook/react-vite",

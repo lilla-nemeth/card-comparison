@@ -1,14 +1,27 @@
 import Page from "@vuo/templates/Page";
 import Button from "@vuo/atoms/Button";
-import FixFoodLogo from "@vuo/atoms/FixFoodLogo";
-import { LogoVariants } from "@vuo/utils/LogoUtils";
+import { ThemeContext } from "@vuo/context/ThemeContext";
+import { useContext } from "react";
+
 
 const ProfilePage = function (props: any) {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  // console.log(theme)
   return (
-    <Page containerClass="flex flex-col">
-      <div className="home flex flex-col">
-        <p>This is an empty page.</p>
-      </div>
+    <Page>
+          <p>This is an empty profile page.</p>
+          <Button
+            tabIndex={0}
+            block
+            color="primary"
+            size="large"
+            type="submit" 
+            onClick={() => {
+              toggleTheme()
+            }} 
+          >
+            Change theme
+          </Button>
     </Page>
   );
 };
