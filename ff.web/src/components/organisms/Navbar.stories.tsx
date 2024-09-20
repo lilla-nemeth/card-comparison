@@ -3,7 +3,6 @@ import { MemoryRouter } from 'react-router-dom';
 import Navbar from "./Navbar";
 
 const meta: Meta<typeof Navbar> = {
-  title: 'Components/Navbar',  // Adjust the title as necessary
   component: Navbar,
   tags: ["autodocs"],
   decorators: [

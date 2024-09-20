@@ -5,9 +5,8 @@ import "../src/scss/app.scss"
 
 const CustomDecorator: Decorator = (Story, context) => {
   const selectedTheme = context.globals.theme;
-  // console.log("from custom decorator", selectedTheme);
   return <ThemeProvider initialTheme={selectedTheme}>
-    <Story />;
+    <Story />
   </ThemeProvider>
 }
 

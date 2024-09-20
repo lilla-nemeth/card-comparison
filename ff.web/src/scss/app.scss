@@ -1,6 +1,8 @@
 //Import vars first so they're usable by everything that comes first
+@import "../reset.css";
 @import "./vars/_color-vars.scss";
 @import "./vars/_typography-vars.scss";
+
 
 //Base stuff here
 @import "./_theme.scss";
