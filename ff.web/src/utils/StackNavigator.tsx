@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 
-export default function NavigationLink() {
+export default function StackNavigator() {
   const navigate = useNavigate();
   const location = useLocation();
 

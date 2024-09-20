@@ -3,7 +3,6 @@ import { MemoryRouter } from 'react-router-dom';
 import BottomNavigation from "./BottomNavigation";
 
 const meta: Meta<typeof BottomNavigation> = {
-  title: 'Components/BottomNavigation', // Adjust the title as necessary
   component: BottomNavigation,
   tags: ["autodocs"],
   decorators: [

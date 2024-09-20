@@ -1,53 +1,8 @@
-import "@vuo/scss/app.scss";
-
-// import Home from "@vuo/components/pages/Home";
-
-// function Layout() {
-//   return (
-//     <div className="app">
-//       <SafeArea position="top" />
-//       <div className="app-body">
-//         <Outlet />
-//       </div>
-//       <SafeArea position="bottom" />
-//     </div>
-//   );
-// }
-
-// const router = createBrowserRouter(
-//   [
-//     {
-//       children: [
-//         {
-//           path: "/",
-//           element: <Home />,
-//         },
-//         {
-//           path: "home",
-//           element: <Home />,
-//         },
-//       ],
-//       element: <Layout />,
-//     },
-//   ],
-//   { basename: `${import.meta.env.BASE_URL}` },
-// );
-
-// function App() {
-//   useEffect(() => {
-//     document.title = "Vuo App";
-//   }, []);  
-//   return <RouterProvider router={router} />;
-// }
-
-// export default App;
-
 import {
   Route,
   Routes,
   BrowserRouter as Router,
 } from 'react-router-dom';
-import "./App.css";
 import Login from "./components/pages/Login";
 import ShoppingCart from "./components/pages/ShoppingCart";
 import ProfilePage from "./components/pages/ProfilePage";
@@ -55,7 +10,7 @@ import MealMap from "./components/pages/MealMap";
 import Home from "./components/pages/Home";
 import { ThemeProvider } from "./context/ThemeContext";
 import { SafeArea } from "antd-mobile";
-import Navbar from "./components/atoms/Navbar";
+import Navbar from "./components/organisms/Navbar";
 import BottomNavigation from "./components/organisms/BottomNavigation";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import Quest from "./components/pages/Quest";

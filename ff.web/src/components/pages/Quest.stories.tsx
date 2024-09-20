@@ -9,6 +9,7 @@ const meta = {
   decorators: [
     (Story) => (
       <MemoryRouter initialEntries={['/quest']}>
+        <Story />
       </MemoryRouter>
     )
   ]
