@@ -1,11 +1,13 @@
 import { TabBar } from "antd-mobile";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
-  AppOutline,
   MessageOutline,
   UnorderedListOutline,
   UserOutline,
 } from 'antd-mobile-icons';
+import { HomeOutlined, ShoppingCartOutlined, UserOutlined, CoffeeOutlined } from '@ant-design/icons';
+
+
 
 const BottomNavigation = () => {
     const location = useLocation();
@@ -33,22 +35,22 @@ const BottomNavigation = () => {
         {
           key: '/home',
           title: 'Home',
-          icon: <AppOutline />,
+          icon: <HomeOutlined />,
         },
         {
           key: '/meal-map',
           title: 'MealMap',
-          icon: <MessageOutline />,
+          icon: <CoffeeOutlined />,
         },
         {
           key: '/shopping-cart',
           title: 'ShoppingCart',
-          icon: <UserOutline />,
+          icon: <ShoppingCartOutlined />,
         },
         {
           key: '/profile',
           title: 'Profile',
-          icon: <UnorderedListOutline />,
+          icon: <UserOutlined />,
         }
       ];
     };

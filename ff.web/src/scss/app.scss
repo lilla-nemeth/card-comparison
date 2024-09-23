@@ -1,36 +1,37 @@
 //Import vars first so they're usable by everything that comes first
-@import "../reset.css";
+@import "./reset.css";
+@import "./_tokens.scss";
 @import "./vars/_color-vars.scss";
 @import "./vars/_typography-vars.scss";
+@import "./_layout.scss";
 
 
 //Base stuff here
 @import "./_theme.scss";
 @import "./_base.scss";
-@import "./_layout.scss";
 
 //UI components
-@import "./components/_box.scss";
-@import "./components/_button.scss";
-@import "./components/_checkable.scss";
-@import "./components/_chip.scss";
-@import "./components/_grid.scss";
-@import "./components/_cell.scss";
-@import "./components/_dialog.scss";
-@import "./components/_icon.scss";
-@import "./components/_inputs.scss";
-@import "./components/_list.scss";
-@import "./components/_menu.scss";
-@import "./components/_progress.scss";
+// @import "./components/_box.scss";
+// @import "./components/_button.scss";
+// @import "./components/_checkable.scss";
+// @import "./components/_chip.scss";
+// @import "./components/_grid.scss";
+// @import "./components/_cell.scss";
+// @import "./components/_dialog.scss";
+// @import "./components/_icon.scss";
+// @import "./components/_inputs.scss";
+// @import "./components/_list.scss";
+// @import "./components/_menu.scss";
+// @import "./components/_progress.scss";
 
 //Compound components
-@import "./components/compound/_achievements.scss";
-@import "./components/compound/_quest-thumb.scss";
+// @import "./components/compound/_achievements.scss";
+// @import "./components/compound/_quest-thumb.scss";
 // @import './components/choose/_choose.scss';
-@import "./components/compound/_quest.scss";
+// @import "./components/compound/_quest.scss";
 
 //Import utility class definitions that use vars last so using util classes will mostly override stuff in components. Could use css layers here, but that's for another day.
-@import "./utils/_color-classes.scss";
-@import "./utils/_typography.scss";
-@import "./utils/_utils.scss";
+// @import "./utils/_color-classes.scss";
+// @import "./utils/_typography.scss";
+// @import "./utils/_utils.scss";
 

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../atoms/Button";
 import Page from "../templates/Page";
 import StackNavigator from "@vuo/utils/StackNavigator";
+import Section from "../organisms/Section";
 
 const Home = () => {
 
@@ -15,15 +16,11 @@ const Home = () => {
   
     return (
         <Page>
-            <div>
-                hello honey I am home
-                <Button
-                    color="primary"
-                    onClick={goToQuest}
-                >
-                    To the quest
-                </Button>
-            </div>
+            <Section>
+                <h1>Welcome to Fix food</h1>
+                <p>Click the button below to start your adventure!</p>
+                <Button onClick={goToQuest}>Start Quest</Button>
+            </Section>
 
         </Page>
     );

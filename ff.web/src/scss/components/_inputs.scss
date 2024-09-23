@@ -5,7 +5,7 @@ input {
   white-space: nowrap;
   appearance: none;
   text-align: inherit;
-  @include font-button();
+  // @include font-button(); TODO replace with new value
   display: inline-flex;
   overflow: hidden;
   text-overflow: ellipsis;

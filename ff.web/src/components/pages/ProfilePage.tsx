@@ -2,6 +2,7 @@ import Page from "@vuo/templates/Page";
 import Button from "@vuo/atoms/Button";
 import { ThemeContext } from "@vuo/context/ThemeContext";
 import { useContext } from "react";
+import {AddSquareOutline} from "antd-mobile-icons"
 
 
 const ProfilePage = function (props: any) {
@@ -13,9 +14,9 @@ const ProfilePage = function (props: any) {
           <Button
             tabIndex={0}
             block
-            color="primary"
-            size="large"
+            variant="large"
             type="submit" 
+            color="secondary"
             onClick={() => {
               toggleTheme()
             }} 
