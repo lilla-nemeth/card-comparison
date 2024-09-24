@@ -5,6 +5,8 @@
   align-items: center;
   height: content;
   width: 100%;
-  background-color: white;
-  border: 2px solid red;
+  background-color: var(--surface-primary);
+  // border: 2px solid red;
+  padding: var(--space-8);
+  border-radius: var(--radius-16)
 }

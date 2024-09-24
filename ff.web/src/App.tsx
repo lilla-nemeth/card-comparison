@@ -18,7 +18,7 @@ import Quest from "./components/pages/Quest";
 
 const App = () => {
   return (
-    <div className="app">
+    <>
       <ThemeProvider>
         <SafeArea position="top" />
           <Router>
@@ -41,7 +41,7 @@ const App = () => {
           </Router>
           <SafeArea position="bottom" />
         </ThemeProvider>
-    </div>
+    </>
   );
 };
 

@@ -10,32 +10,32 @@
 /* Different size variants */
 .large {
     @extend .buttonBase;
-    border-radius: var(--radius-lg);
-    padding: var(--space-md);
+    border-radius: var(--radius-16);
+    padding: var(--space-16);
     font-size: 24px;
     font-weight: 600;
 }
 
 .heavy {
     @extend .buttonBase;
-    border-radius: var(--radius-xl);
-    padding: var(--space-md);
+    border-radius: var(--radius-24);
+    padding: var(--space-16);
     font-size: 24px;
     font-weight: 900;
 }
 
 .medium {
     @extend .buttonBase;
-    border-radius: var(--radius-md);
-    padding: var(--space-sm);
+    border-radius: var(--radius-8);
+    padding: var(--space-8);
     font-size: 16px;
     font-weight: 600;
 }
 
 .small {
     @extend .buttonBase;
-    border-radius: var(--radius-xl);
-    padding: var(--space-sm);
+    border-radius: var(--radius-24);
+    padding: var(--space-8);
 }
 
 .secondary {

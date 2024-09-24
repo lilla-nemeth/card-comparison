@@ -16,7 +16,7 @@ const ProfilePage = function (props: any) {
             block
             variant="large"
             type="submit" 
-            color="secondary"
+            color="primary"
             onClick={() => {
               toggleTheme()
             }} 

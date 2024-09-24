@@ -1,4 +1,5 @@
 import Card from "../atoms/Card";
+import Section from "../atoms/Section";
 
 interface ChoiceUIProps {
   children: React.ReactNode;
@@ -6,9 +7,9 @@ interface ChoiceUIProps {
 
 const ChoiceUI = ({ children }: ChoiceUIProps) => {
   return (
-    <Card title="I am a choice UI">
-      Some food for thought
-    </Card>
+    <Section>
+      <h3>Some food for thought</h3>
+    </Section>
   )
 };
 

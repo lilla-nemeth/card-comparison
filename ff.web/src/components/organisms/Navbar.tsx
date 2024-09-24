@@ -23,7 +23,7 @@ export default function Navbar({hideBackButton = false}) {
   };
 
   if(isVisible) return (
-    <div style={{ border: "2px solid blue", width: "100%" }}>
+    <div>
       <NavBar
         back={hideBackButton ? null : ""}
         onBack={() => navigate(-1)}
