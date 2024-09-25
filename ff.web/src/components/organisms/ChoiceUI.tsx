@@ -61,7 +61,7 @@ const ChoiceUI = ({ currentPair, handleChoice }: ChoiceUIProps) => {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-      {currentPair.map((meal, index) => {
+      {currentPair?.map((meal, index) => {
         const isWinner = selectedMeal === meal.id; // Check if the current card is the winner
         const otherMeal = currentPair[(index + 1) % 2]; // Get the other meal in the pair (loser)
         console.log(selectedMeal)

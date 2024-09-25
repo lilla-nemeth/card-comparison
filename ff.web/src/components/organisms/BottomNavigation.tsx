@@ -6,27 +6,27 @@ import {
   UserOutline,
 } from 'antd-mobile-icons';
 import { HomeOutlined, ShoppingCartOutlined, UserOutlined, CoffeeOutlined } from '@ant-design/icons';
+import useStackNavigator from "@vuo/utils/StackNavigator";
 
 
 
 const BottomNavigation = () => {
     const location = useLocation();
-    const navigate = useNavigate();
+    const { navigateWithState } = useStackNavigator(); 
     const { pathname } = location;
 
     const hideOnRoutes = ['/'];
     const isVisible = !hideOnRoutes.includes(location.pathname);
   
     const setRouteActive = (value) => {
-      const lastVisited = sessionStorage.getItem(value);
-      navigate(lastVisited || value);
+      navigateWithState(value);
     };
 
     const handleTabChange = (value) => {
       // Store the current pathname when changing tabs
-      if (pathname !== value) {
-        sessionStorage.setItem(pathname, pathname);
-      }
+      // if (pathname !== value) {
+      //   sessionStorage.setItem(pathname, pathname);
+      // }
       setRouteActive(value);
     };
   

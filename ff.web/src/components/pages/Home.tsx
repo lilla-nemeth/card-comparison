@@ -1,17 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../atoms/Button";
 import Page from "../templates/Page";
-import StackNavigator from "@vuo/utils/StackNavigator";
+import useStackNavigator from "@vuo/utils/StackNavigator";
 import Section from "../atoms/Section";
 
 const Home = () => {
 
-    const navigate = useNavigate();  // Initialize navigate function
-    const { navigateWithState } = StackNavigator();  // Initialize navigateWithState function
+    const { navigateWithState } = useStackNavigator();  // Initialize navigateWithState function
 
     const goToQuest = () => {
         // Save the target route to session storage before navigating
-        navigateWithState('/quest');
+        navigateWithState('/home/quest');
     };
   
     return (

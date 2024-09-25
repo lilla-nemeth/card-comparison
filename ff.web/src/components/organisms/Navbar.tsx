@@ -1,3 +1,4 @@
+import useStackNavigator from "@vuo/utils/StackNavigator";
 import { NavBar } from "antd-mobile";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -15,18 +16,23 @@ export default function Navbar({hideBackButton = false}) {
   const hideOnRoutes = ['/'];
   const isVisible = !hideOnRoutes.includes(location.pathname);
 
-  const navigate = useNavigate();
+  const { goBack } = useStackNavigator();
 
   const getTitle = () => {
     const path = pathname.replace('/', '');
     return path.charAt(0).toUpperCase() + path.slice(1);
   };
 
+  //hiding back button on first element of the stack
+  if(location.pathname.split("/").length === 2) {
+    hideBackButton = true;
+  }
+
   if(isVisible) return (
     <div>
       <NavBar
         back={hideBackButton ? null : ""}
-        onBack={() => navigate(-1)}
+        onBack={() => goBack()}
       >{getTitle()}</NavBar>
     </div>
   )
