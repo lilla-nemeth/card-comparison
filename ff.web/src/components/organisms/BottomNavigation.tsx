@@ -5,7 +5,7 @@ import {
   UnorderedListOutline,
   UserOutline,
 } from 'antd-mobile-icons';
-import { HomeOutlined, ShoppingCartOutlined, UserOutlined, CoffeeOutlined } from '@ant-design/icons';
+import { HomeOutlined, ShoppingCartOutlined, UserOutlined, CoffeeOutlined, QuestionOutlined } from '@ant-design/icons';
 import useStackNavigator from "@vuo/utils/StackNavigator";
 
 
@@ -46,6 +46,11 @@ const BottomNavigation = () => {
           key: '/shopping-cart',
           title: 'ShoppingCart',
           icon: <ShoppingCartOutlined />,
+        },
+        {
+          key: '/flavour-flow',
+          title: 'FlavourFlow',
+          icon: < QuestionOutlined/>,
         },
         {
           key: '/profile',

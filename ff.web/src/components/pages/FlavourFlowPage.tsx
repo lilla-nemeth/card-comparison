@@ -42,17 +42,16 @@ const dataset = {
 export type Meal = {
     id: string;
     title: string;
-    elo: number;  // Current ELO rating
+    elo: number;
   };
 
-const K = 32;  // This is the K-factor, which determines how much the ratings can change. You can adjust this as needed.
+const K = 32;  
 
 const calculateElo = (winner: Meal, loser: Meal): { newWinnerElo: number, newLoserElo: number } => {
-  // Calculate the expected score for both winner and loser
+
   const expectedScoreWinner = 1 / (1 + Math.pow(10, (loser.elo - winner.elo) / 400));
   const expectedScoreLoser = 1 / (1 + Math.pow(10, (winner.elo - loser.elo) / 400));
 
-  // Calculate the new ELO scores
   const newWinnerElo = winner.elo + K * (1 - expectedScoreWinner);
   const newLoserElo = loser.elo + K * (0 - expectedScoreLoser);
 
@@ -87,12 +86,12 @@ export default function FlavourFlowPage() {
   const [currentPair, setCurrentPair] = useState<Meal[]>([]);
 
 	useEffect(() => {
-		// Draw two random meals to start
 		drawNewPair();
 	}, []);
 
 	const drawNewPair = () => {
 		const shuffledMeals = [...meals].sort(() => Math.random() - 0.5);
+    
 		setCurrentPair([shuffledMeals[0], shuffledMeals[1]]);
 	};
 
@@ -111,11 +110,10 @@ export default function FlavourFlowPage() {
   	drawNewPair();
 	};
 
-  // const [first, setfirst] = useState(dataWithEloScore)
   return (
 		<Page>
       <ChoiceUI
-				currentPair={currentPair}
+				meals={currentPair}
 				handleChoice={handleChoice}
       />
 		</Page>

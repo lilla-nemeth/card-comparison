@@ -1,11 +1,43 @@
-.card {
-    cursor: pointer; /* Corrected the cursor to 'pointer' for clickable elements */
+.scrollableContainer {
+    display: flex;
+    flex-direction: row; 
+    width: 100%; 
+    overflow-x: auto;
+    gap: var(--space-16);
+    padding: var(--space-16);
+    scrollbar-width: thin;
+  }
+  
+  .staticContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: var(--space-16); 
+    padding: var(--space-16);
+    overflow-x: hidden; 
+  }
+  
+  .card {
+    flex: 0 0 50%; 
+    cursor: pointer;
     padding: var(--space-16);
     border-radius: var(--radius-16);
     background-color: var(--surface-primary);
-}
+    
+    img {
+      width: 100px;
+      height: auto;
+    }
+  
+    p {
+      margin: 8px 0 0 0;
+      font-size: 16px;
+      color: var(--text-primary);
+    }
+  }
+  
 
-.overlay {
+  .overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -20,4 +52,5 @@
     color: var(--text-primary);
     font-size: 24px;
     font-weight: bold;
-}
+    z-index: 1;
+  }
