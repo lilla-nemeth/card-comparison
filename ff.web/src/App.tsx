@@ -14,6 +14,8 @@ import Navbar from "./components/organisms/Navbar";
 import BottomNavigation from "./components/organisms/BottomNavigation";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import Quest from "./components/pages/Quest";
+import FlavourFlowPage from './components/pages/FlavourFlowPage';
+import FlavourFlowResultPage from './components/pages/FlavourFlowResultPage';
 
 
 const App = () => {
@@ -31,6 +33,8 @@ const App = () => {
                 <Route path='/meal-map' element={<MealMap />} />
                 <Route path='/shopping-cart' element={<ShoppingCart />} />
                 <Route path='/profile' element={<ProfilePage />} />
+                <Route path='/flavour-flow' element={<FlavourFlowPage />} />
+                <Route path='/flavour-flow/results' element={<FlavourFlowResultPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
               {/* <Route>
