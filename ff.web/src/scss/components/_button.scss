@@ -12,7 +12,7 @@
   white-space: nowrap;
   appearance: none;
   font: inherit;
-  @include font-button();
+  // @include font-button(); TODO replace with new value
   text-overflow: ellipsis;
   display: inline-flex;
   flex-shrink: 0;
@@ -128,7 +128,6 @@
   font-size: 1.5rem;
 }
 .btn-huge {
-  @include font-h4();
   font-weight: 900;
   height: 4.125rem;
   border-radius: 24px;

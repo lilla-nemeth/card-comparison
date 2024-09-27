@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import module from './Page.module.scss';
 
 interface PageProps {
   children?: React.ReactNode;
@@ -33,7 +34,7 @@ interface PageProps {
 export default function Page({children}: PageProps) { // TODO rename it to my version
   return (
     <motion.div 
-      style={{border: "1px solid cyan", display: "flex", flex: 1, flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "1.5rem"}}
+      className={module.container}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

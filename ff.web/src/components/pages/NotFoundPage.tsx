@@ -4,7 +4,7 @@ import Page from '../templates/Page'
 function NotFoundPage() {
   return (
     <Page>
-        <div>There is nothing to see here</div>
+        <div>You should not be here...</div>
     </Page>
   )
 }

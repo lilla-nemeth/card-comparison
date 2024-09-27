@@ -1,21 +1,43 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 
-export default function StackNavigator() {
+const useStackNavigator = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const navigateWithState = (location: string) => {
-    const urlArray = location.split('/');
-    let navigationStack = [];
-    if(urlArray.length > 1) {
-      navigationStack.push(urlArray[urlArray.length - 1])
+  //TODO do I need input or can I use just the location?
+
+  const navigateWithState = (to: string) => {
+    let urlArray = to.split('/')
+    urlArray.shift()
+
+    //check if current base has sub route
+    if(sessionStorage.getItem(urlArray[0])){
+      let savedRoutes = JSON.parse(sessionStorage.getItem(urlArray[0]))
+      if(savedRoutes.length > 1) {
+        navigate(savedRoutes.join("/"))
+        return;
+      }
     }
-    console.log(navigationStack);
-    // sessionStorage.setItem(location.pathname, location.pathname + location.search);
-    
-    // const lastVisited = sessionStorage.getItem(to);
-    // navigate(lastVisited || to);
+
+    //New route is saved to session storage
+    sessionStorage.setItem(urlArray[0], JSON.stringify(urlArray))
+    navigate(to);
   };
 
-  return {navigateWithState}
-}
+  const goBack = () => {
+    let currentLocaltion = location.pathname
+    let currentBase = currentLocaltion.split('/')[1]
+    if(sessionStorage.getItem(currentBase)){
+      let savedRoutes = JSON.parse(sessionStorage.getItem(currentBase))
+      if(savedRoutes.length > 1) {
+        savedRoutes.pop()
+        sessionStorage.setItem(currentBase, JSON.stringify(savedRoutes))
+        navigate(savedRoutes.join("/"))
+      }
+    }
+  };
+
+  return { navigateWithState, goBack };
+};
+
+export default useStackNavigator;

@@ -1,0 +1,45 @@
+.buttonBase {
+    background-color: var(--surface-brand-blue);
+    color: var(--button-text);
+    border: none;
+    font-style: normal;
+    box-shadow: var(--shadow-inner-shadow-x, 0px) var(--shadow-inner-shadow-y, -4px) 0px 0px var(--color-grey-black-25, rgba(0, 0, 0, 0.25)) inset;
+    margin-bottom: 10px;
+}
+
+/* Different size variants */
+.large {
+    @extend .buttonBase;
+    border-radius: var(--radius-16);
+    padding: var(--space-16);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.heavy {
+    @extend .buttonBase;
+    border-radius: var(--radius-24);
+    padding: var(--space-16);
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.medium {
+    @extend .buttonBase;
+    border-radius: var(--radius-8);
+    padding: var(--space-8);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.small {
+    @extend .buttonBase;
+    border-radius: var(--radius-24);
+    padding: var(--space-8);
+}
+
+.secondary {
+    background-color: var(--surface-primary) !important;
+    border: 2px solid var(--color-grey-systemGrayAccessibleLight ) !important;
+    box-shadow: var(--shadow-inner-shadow-x, 0px) var(--shadow-inner-shadow-y, -4px) 0px 0px var(--color-grey-systemGrayAccessibleLight) inset;
+}

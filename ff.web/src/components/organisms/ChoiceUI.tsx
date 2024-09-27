@@ -1,5 +1,43 @@
-const ChoiceUI = ({ children, ...props }) => {
-  return "ChoiceUI has not been implemented yet.";
+
+import { useState } from 'react';
+import { Meal } from "../pages/FlavourFlowPage";
+import module from './ChoiceUI.module.scss'; 
+
+interface ChoiceUIProps {
+  handleChoice: (winner: Meal, loser: Meal) => void;
+  meals: Meal[]; 
+}
+
+const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
+  const [selectedMeal, setSelectedMeal] = useState<string | null>(null);
+
+  const handleCardClick = (winner: Meal, loser: Meal) => {
+    setSelectedMeal(winner.id);
+    handleChoice(winner, loser);
+    setSelectedMeal(null);
+  };
+
+  const containerClass = meals.length > 2 ? module.scrollableContainer : module.staticContainer;
+
+  return (
+    <div className={containerClass}>
+      {meals?.map((meal: Meal) => {
+        const isSelected = selectedMeal === meal.id;
+
+        return (
+          <div
+            key={meal.id}
+            onClick={() => handleCardClick(meal, meals.find(m => m.id !== meal.id)!)}
+            className={`${module.card}`} 
+          >
+            {isSelected && <h4 className={module.overlay}> chosen!</h4>}  {/* Add overlay for selected card */}
+            <img src={meal.image} alt={meal.title} />
+            <p>{meal.title}</p>
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 export default ChoiceUI;

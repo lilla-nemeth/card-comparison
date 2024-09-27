@@ -1,60 +1,45 @@
-#app {
-  display: contents;
+:root {
+  // Spacing variables
+  --space-2: #{$space-2}; // xxs
+  --space-4: #{$space-4}; // xs
+  --space-8: #{$space-8}; // sm
+  --space-16: #{$space-16}; // md
+  --space-24: #{$space-24}; // lg
+  --space-32: #{$space-32}; // xl
+  --space-40: #{$space-40}; // xxl
+  --space-48: #{$space-48}; // 3xl
+  --space-64: #{$space-64}; // 4xl
+  --space-80: #{$space-80}; // 5xl
+  --space-88: #{$space-88}; // 6xl
+  --space-96: #{$space-96}; // 7xl
+  --space-104: #{$space-104}; // 8xl
+
+  // Radius variables
+  --radius-2: #{$radius-2}; // xs
+  --radius-4: #{$radius-4}; // sm
+  --radius-8: #{$radius-8}; // md
+  --radius-16: #{$radius-16}; // lg
+  --radius-24: #{$radius-24}; // xl
+  --radius-32: #{$radius-32}; // xxl
+  --radius-128: #{$radius-128}; // 3xl
+}
+
+html {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+#root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
-  display: flex;
-}
-
-.layout {
-  height: 100%;
-  width: 100%;
-  margin: auto;
-  overflow: hidden;
+  flex: 1;
   display: flex;
   flex-direction: column;
-}
-
-.page {
-  position: relative;
-  display: flex;
-  flex: 1 1 auto;
-  height: 100vh;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  max-width: var(--page-width);
-  margin: auto;
-}
-
-.page-actions {
-  position: absolute;
-  inset: 0;
-  top: auto;
-  bottom: 0;
-  pointer-events: none;
-
-  & > * {
-    pointer-events: auto;
-  }
-}
-
-.page-container {
-  flex: 1 1 auto;
-  width: calc(100% - 16px);
-  margin: 8px;
-}
-
-.home {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.home > div {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
 }
 
 .fixfood-logo {
