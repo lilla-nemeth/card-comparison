@@ -43,6 +43,7 @@ export type Meal = {
     id: string;
     title: string;
     elo: number;
+    image: string;
   };
 
 const K = 32;  

@@ -31,6 +31,9 @@ services:
     environment:
       VITE_FFAPI_PORT: "7702"
       VITE_FFAPI_BASE_URL: "/"
+      MONGO_URI: "mongodb://mongo:27017/FixFoodDB"
+    depends_on:
+      - mongo # Ensure that ff.api waits for mongo to start
   #########################################
   # Vuo Storybook, local.vuo.ai/storybook
   ff.storybook:
@@ -45,3 +48,15 @@ services:
       - ./ff.web/:/app/ # Mount the current directory to the container's /app directory
     environment:
       STORYBOOK_BASE_PATH: "/"
+
+  #########################################
+  # MongoDB Service
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+      
+volumes:
+  mongo_data:
