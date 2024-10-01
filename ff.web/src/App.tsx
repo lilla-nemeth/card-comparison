@@ -17,11 +17,13 @@ import Quest from "./components/pages/Quest";
 import FlavourFlowPage from './components/pages/FlavourFlowPage';
 import FlavourFlowResultPage from './components/pages/FlavourFlowResultPage';
 import OnboardingFlow from './components/organisms/Onboarding';
+import { AppContextProvider } from './context/AppContext';
 
 
 const App = () => {
   return (
     <>
+    <AppContextProvider>
       <ThemeProvider>
         <SafeArea position="top" />
           <Router>
@@ -47,6 +49,7 @@ const App = () => {
           </Router>
           <SafeArea position="bottom" />
         </ThemeProvider>
+      </AppContextProvider>
     </>
   );
 };

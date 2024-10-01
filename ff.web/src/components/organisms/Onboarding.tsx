@@ -9,10 +9,11 @@ import Button from "../atoms/Button"
 import Slider from "../atoms/Slider"
 import ProgressBar from '../atoms/ProgressBar'
 import ToggleSwitch from '../molecules/ToggleSwitch'
+import useStackNavigator from '@vuo/utils/StackNavigator'
+import { useAppContext } from '@vuo/context/AppContext'
 
 enum OnboardingStatus {
   notStarted = 'notStarted',
-  inProgress = 'inProgress',
   completed = 'completed',
 }
 
@@ -41,10 +42,14 @@ const steps = [
 const allergies = ['Shellfish', 'Fish', 'Dairy', 'Peanut', 'Tree nut', 'Egg', 'Gluten', 'Soy', 'Sesame']
 const commonDislikes = ['beef', 'beets', 'bell peppers', 'broccoli', 'brussels sprouts', 'cilantro', 'eggplant', 'eggs', 'fish', 'ginger', 'kale', 'mayonnaise', 'mushrooms', 'okra', 'olives', 'peas']
 const cuisines = ['American', 'Italian', 'Mexican', 'Asian', 'Chinese', 'Japanese', 'Thai', 'Indian']
-
+// TODO add the status of the steps to the formData object, (you may need to modify the rendering of the steps)
 export default function OnboardingFlow() {
+  const { navigateWithState } = useStackNavigator()
+
   const [currentStep, setCurrentStep] = useState(0)
   const [progress, setProgress] = useState(0)
+  const { setIsOnboardingComplete } = useAppContext()
+
   const [formData, setFormData] = useState({
     goals: [],
     sex: '',
@@ -120,13 +125,20 @@ export default function OnboardingFlow() {
     }
   }
 
+  const handleFinish = () => {
+    localStorage.setItem('profileData', JSON.stringify(formData))
+    localStorage.removeItem('onboardingData')
+    setIsOnboardingComplete(true)
+    navigateWithState("/home")
+  }
+
   const renderStep = () => {
     const step = steps[currentStep]
     switch (step.id) {
       case 'intro':
         return (
           <div className="space-y-4">
-            <img src="/placeholder.svg?height=200&width=200" alt="Lemons" className="mx-auto" />
+            {/* <img src="/placeholder.svg?height=200&width=200" alt="Lemons" className="mx-auto" /> */}
             <h2 className="text-2xl font-bold text-center">{step.title}</h2>
             <p className="text-center text-gray-600">
               We'll learn about your goals and preferences to help build your first custom meal plan.
@@ -717,7 +729,7 @@ export default function OnboardingFlow() {
         <Button onClick={handleNext}>Next</Button>
       )}
       {currentStep === steps.length - 1 && (
-        <Button onClick={() => console.log(formData)}>Finish</Button>
+        <Button onClick={handleFinish}>Finish</Button>
       )}
     </div>
   )
