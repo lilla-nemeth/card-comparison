@@ -1,0 +1,13 @@
+.progressBar {
+    background-color: var(--surface-secondary); // Use CSS variable for background color
+    border-radius: var(--radius-16); // Use CSS variable for border radius
+    height: var(--space-8); // Use CSS variable for height
+    width: 100%;
+    overflow: hidden;
+}
+
+.progress {
+    background-color: var(--surface-brand-blue); // Use CSS variable for progress color
+    height: 100%;
+    transition: width 0.3s ease;
+}

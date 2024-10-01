@@ -1,0 +1,20 @@
+.radioGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  
+  .radioLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .radioInput {
+    margin-right: var(--space-8);
+  }
+  
+  .radioText {
+    font-size: var(--font-size-16);
+    color: var(--text-primary);
+  }

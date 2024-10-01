@@ -16,11 +16,14 @@ import NotFoundPage from "./components/pages/NotFoundPage";
 import Quest from "./components/pages/Quest";
 import FlavourFlowPage from './components/pages/FlavourFlowPage';
 import FlavourFlowResultPage from './components/pages/FlavourFlowResultPage';
+import OnboardingFlow from './components/organisms/Onboarding';
+import { AppContextProvider } from './context/AppContext';
 
 
 const App = () => {
   return (
     <>
+    <AppContextProvider>
       <ThemeProvider>
         <SafeArea position="top" />
           <Router>
@@ -35,6 +38,7 @@ const App = () => {
                 <Route path='/profile' element={<ProfilePage />} />
                 <Route path='/flavour-flow' element={<FlavourFlowPage />} />
                 <Route path='/flavour-flow/results' element={<FlavourFlowResultPage />} />
+                <Route path='/onboarding' element={<OnboardingFlow />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
               {/* <Route>
@@ -45,6 +49,7 @@ const App = () => {
           </Router>
           <SafeArea position="bottom" />
         </ThemeProvider>
+      </AppContextProvider>
     </>
   );
 };
