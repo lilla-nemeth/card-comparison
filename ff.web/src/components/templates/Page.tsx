@@ -1,11 +1,6 @@
-import { motion } from 'framer-motion';
-import module from './Page.module.scss';
-
-interface PageProps {
-  children?: React.ReactNode;
-  containerClass?: string;
-  className?: string;
-}
+import { motion } from "framer-motion";
+import module from "@vuo/scss/components/templates/Page.module.scss";
+import { PageProps } from "@vuo/types/pageProps";
 
 // function Container(props: PageProps) {
 //   const { children, containerClass, className } = props;
@@ -31,9 +26,10 @@ interface PageProps {
 
 // export default Page;
 
-export default function Page({children}: PageProps) { // TODO rename it to my version
+export default function Page({ children }: PageProps) {
+  // TODO rename it to my version
   return (
-    <motion.div 
+    <motion.div
       className={module.container}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -42,5 +38,5 @@ export default function Page({children}: PageProps) { // TODO rename it to my ve
     >
       {children}
     </motion.div>
-  ) 
+  );
 }

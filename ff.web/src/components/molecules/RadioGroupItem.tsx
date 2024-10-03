@@ -1,14 +1,13 @@
-import React from 'react';
-import styles from './RadioGroupItem.module.scss';
+import React from "react";
+import styles from "@vuo/scss/components/molecules/RadioGroupItem.module.scss";
+import { RadioGroupItemProps } from "@vuo/types/moleculeProps";
 
-interface RadioGroupItemProps {
-  value: string;
-  label: string;
-  checked: boolean;
-  onChange: (value: string) => void;
-}
-
-const RadioGroupItem: React.FC<RadioGroupItemProps> = ({ value, label, checked, onChange }) => {
+const RadioGroupItem: React.FC<RadioGroupItemProps> = ({
+  value,
+  label,
+  checked,
+  onChange,
+}) => {
   return (
     <label className={styles.radioLabel}>
       <input

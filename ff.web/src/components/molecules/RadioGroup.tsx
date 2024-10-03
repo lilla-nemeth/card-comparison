@@ -1,13 +1,12 @@
-import React from 'react';
-import styles from './RadioGroup.module.scss';
+import React from "react";
+import styles from "@vuo/scss/components/molecules/RadioGroup.module.scss";
+import { RadioGroupProps } from "@vuo/types/moleculeProps";
 
-interface RadioGroupProps {
-  options: { value: string; label: string }[];
-  selectedValue: string;
-  onChange: (value: string) => void;
-}
-
-const RadioGroup: React.FC<RadioGroupProps> = ({ options, selectedValue, onChange }) => {
+const RadioGroup: React.FC<RadioGroupProps> = ({
+  options,
+  selectedValue,
+  onChange,
+}) => {
   return (
     <div className={styles.radioGroup}>
       {options.map((option) => (

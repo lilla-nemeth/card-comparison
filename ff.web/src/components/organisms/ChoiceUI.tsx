@@ -1,13 +1,8 @@
-
-import { useState } from 'react';
+import { useState } from "react";
 import { Meal } from "../pages/FlavourFlowPage";
-import module from './ChoiceUI.module.scss'; 
-import Page from '../templates/Page';
-
-interface ChoiceUIProps {
-  handleChoice: (winner: Meal, loser: Meal) => void;
-  meals: Meal[]; 
-}
+import module from "@vuo/scss/components/molecules/ChoiceUI.module.scss";
+import Page from "../templates/Page";
+import { ChoiceUIProps } from "@vuo/types/organismProps";
 
 const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
   const [selectedMeal, setSelectedMeal] = useState<string | null>(null);
@@ -18,7 +13,8 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
     setSelectedMeal(null);
   };
 
-  const containerClass = meals?.length > 2 ? module.scrollableContainer : module.staticContainer;
+  const containerClass =
+    meals?.length > 2 ? module.scrollableContainer : module.staticContainer;
 
   return (
     <Page>
@@ -29,10 +25,13 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
           return (
             <div
               key={meal.id}
-              onClick={() => handleCardClick(meal, meals.find(m => m.id !== meal.id)!)}
-              className={`${module.card}`} 
+              onClick={() =>
+                handleCardClick(meal, meals.find((m) => m.id !== meal.id)!)
+              }
+              className={`${module.card}`}
             >
-              {isSelected && <h4 className={module.overlay}> chosen!</h4>}  {/* Add overlay for selected card */}
+              {isSelected && <h4 className={module.overlay}> chosen!</h4>}{" "}
+              {/* Add overlay for selected card */}
               <img src={meal.image} alt={meal.title} />
               <p>{meal.title}</p>
             </div>
