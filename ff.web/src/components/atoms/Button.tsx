@@ -8,8 +8,8 @@ interface CustomButtonProps {
   onClick?: () => void;
   children: React.ReactNode;
   tabIndex?: Number;
-  block: any;
-  type: "button" | "submit" | "reset";
+  block?: any;
+  type?: "button" | "submit" | "reset";
 }
 
 const Button: React.FC<CustomButtonProps> = ({
