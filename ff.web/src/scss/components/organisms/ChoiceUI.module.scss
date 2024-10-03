@@ -21,24 +21,38 @@
 .card {
   flex: 0 0 50%;
   cursor: pointer;
-  padding: var(--space-16);
-  border-radius: var(--radius-16);
+  width: 5em;
+  height: 25em;
+  // padding: var(--space-16);
+  // margin: var(--space-16);
+  border-radius: var(--radius-8);
   background-color: var(--surface-primary);
 
-  img {
-    // width: 100px;
-    height: auto;
-    object-fit: cover;
+  .cardTitle {
+    position: absolute;
+    z-index: 50;
+    padding: 0.25em 1em 0.25em;
+    background-color: var(--surface-secondary-light);
+    border-radius: 0 var(--radius-32) var(--radius-32) 0;
+
+    p {
+      font-size: 16px;
+      color: var(--text-primary-light);
+    }
   }
 
-  p {
-    margin: 8px 0 0 0;
-    font-size: 16px;
-    color: var(--text-primary);
+  .cardImage {
+    height: 25em;
+    img {
+      // width: 15em;
+      border-radius: var(--radius-8);
+      height: 25em;
+      object-fit: cover;
+    }
   }
 }
 
-.overlay {
+.cardSelected {
   position: absolute;
   top: 0;
   left: 0;
