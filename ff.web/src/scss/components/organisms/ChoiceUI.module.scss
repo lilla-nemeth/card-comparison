@@ -1,3 +1,6 @@
+// TODO: use this background color for the page or as a new theme
+// background-color: var(--surface-brand-orange-light);
+
 .scrollableContainer {
   display: flex;
   flex-direction: row;
@@ -63,7 +66,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--surface-brand-orange-light-transparent);
   border: 2px solid var(--text-primary);
   border-radius: var(--radius-16);
   display: flex;
@@ -76,5 +79,5 @@
 }
 
 .cardOverlay {
-  background-color: var(--surface-brand-orange);
+  background-color: rgba(0, 0, 0, 0.5);
 }
