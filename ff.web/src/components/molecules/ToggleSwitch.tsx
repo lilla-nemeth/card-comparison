@@ -1,10 +1,6 @@
 import React from "react";
 import styles from "@vuo/scss/components/molecules/ToggleSwitch.module.scss";
-
-interface ToggleSwitchProps {
-  checked: boolean;
-  onCheckedChange: (checked: boolean) => void;
-}
+import { ToggleSwitchProps } from "@vuo/types/moleculeProps";
 
 const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
   checked,

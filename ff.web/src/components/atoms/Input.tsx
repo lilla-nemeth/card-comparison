@@ -1,12 +1,6 @@
 import React from "react";
 import styles from "@vuo/scss/components/atoms/Input.module.scss";
-
-interface InputProps {
-  type?: string;
-  value: string;
-  placeholder?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
+import { InputProps } from "@vuo/types/atomProps";
 
 const Input: React.FC<InputProps> = ({
   type = "text",

@@ -1,12 +1,6 @@
 import React from "react";
 import styles from "@vuo/scss/components/molecules/RadioGroupItem.module.scss";
-
-interface RadioGroupItemProps {
-  value: string;
-  label: string;
-  checked: boolean;
-  onChange: (value: string) => void;
-}
+import { RadioGroupItemProps } from "@vuo/types/moleculeProps";
 
 const RadioGroupItem: React.FC<RadioGroupItemProps> = ({
   value,

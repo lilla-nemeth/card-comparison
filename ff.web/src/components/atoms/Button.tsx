@@ -1,16 +1,7 @@
 import React from "react";
 import { Button as AntDButton } from "antd-mobile";
 import styles from "@vuo/scss/components/atoms/Button.module.scss"; // Import SCSS module
-
-interface CustomButtonProps {
-  color?: "primary" | "secondary"; // Custom variants
-  variant?: "large" | "heavy" | "medium" | "small"; // Custom sizes
-  onClick?: () => void;
-  children: React.ReactNode;
-  tabIndex?: Number;
-  block?: any;
-  type?: "button" | "submit" | "reset";
-}
+import { CustomButtonProps } from "@vuo/types/atomProps";
 
 const Button: React.FC<CustomButtonProps> = ({
   variant = "large", // Default variant

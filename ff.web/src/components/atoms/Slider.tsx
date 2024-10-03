@@ -1,14 +1,6 @@
 import React from "react";
 import styles from "@vuo/scss/components/atoms/Slider.module.scss";
-
-interface SliderProps {
-  value?: number;
-  defaultValue: number[];
-  min?: number;
-  max: number;
-  step?: number;
-  onChange: (value: number) => void;
-}
+import { SliderProps } from "@vuo/types/atomProps";
 
 const Slider: React.FC<SliderProps> = ({
   value,

@@ -2,11 +2,7 @@ import { useState } from "react";
 import { Meal } from "../pages/FlavourFlowPage";
 import module from "@vuo/scss/components/molecules/ChoiceUI.module.scss";
 import Page from "../templates/Page";
-
-interface ChoiceUIProps {
-  handleChoice: (winner: Meal, loser: Meal) => void;
-  meals: Meal[];
-}
+import { ChoiceUIProps } from "@vuo/types/organismProps";
 
 const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
   const [selectedMeal, setSelectedMeal] = useState<string | null>(null);
