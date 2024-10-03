@@ -1,9 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { AppContextValue } from "@vuo/types/contextProps";
-
-type PropTypes = {
-  children: React.ReactNode;
-};
+import { AppContextValue, AppContextPropTypes } from "@vuo/types/contextProps";
 
 // Create the AppContext
 export const AppContext = createContext<AppContextValue | undefined>(undefined);
@@ -17,9 +13,9 @@ export const useAppContext = () => {
 };
 
 // Create the AppContextProvider component
-export const AppContextProvider: React.FC<PropTypes> = ({
+export const AppContextProvider: React.FC<AppContextPropTypes> = ({
   children,
-}: PropTypes) => {
+}: AppContextPropTypes) => {
   useEffect(() => {
     if (localStorage.getItem("profileData")) {
       setIsOnboardingComplete(true);
