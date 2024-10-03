@@ -1,16 +1,6 @@
 import "../scss/app.scss";
-
-interface ThemeContextProps {
-  theme: "light-theme" | "dark-theme";
-  toggleTheme: () => void;
-}
-
-import { createContext, ReactNode, useEffect, useState } from "react";
-
-interface ThemeProviderProps {
-  children: ReactNode;
-  initialTheme?: "light-theme" | "dark-theme";
-}
+import { createContext, useEffect, useState } from "react";
+import { ThemeContextProps, ThemeProviderProps } from "@vuo/types/themeProps";
 
 export const ThemeContext = createContext<ThemeContextProps | undefined>(
   undefined,

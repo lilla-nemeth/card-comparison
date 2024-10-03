@@ -18,6 +18,7 @@
     "paths": {
       "@vuo/*": ["./src/*", "./src/components/*"],
       "@assets/*": ["./src/assets/*"],
+      "@types/*": ["./src/types/*"],
       "@static/*": ["./public/static/*"]
     },
     "useDefineForClassFields": true,
@@ -32,6 +33,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/custom.d.ts", "../shared-components/src/QuestLineOnboardingHero.tsx", ".storybook/"],
+  "include": [
+    "src",
+    "src/custom.d.ts",
+    "../shared-components/src/QuestLineOnboardingHero.tsx",
+    ".storybook/"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
