@@ -14,9 +14,9 @@ export default meta;
 type Story = StoryObj<typeof ChoiceUI>;
 
 const sampleMeals: Meal[] = [
-  { id: "1", title: "Meal 1", elo: 1200, image: CauliflowerImage},
-  { id: "2", title: "Meal 2", elo: 1200, image: Day1BaconImage},
-  { id: "3", title: "Meal 3", elo: 1200, image: Day2KetoImage},
+  { id: "1", title: "Meal 1", elo: 1200, image: CauliflowerImage },
+  { id: "2", title: "Meal 2", elo: 1200, image: Day1BaconImage },
+  { id: "3", title: "Meal 3", elo: 1200, image: Day2KetoImage },
 ];
 
 export const DefaultChoiceUI: Story = {
