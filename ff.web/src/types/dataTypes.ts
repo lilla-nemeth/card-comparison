@@ -1,5 +1,5 @@
 interface FormData {
-  goals: FormDataGoals["goal"];
+  goals: string[];
   sex: string;
   age: string;
   height: string;
@@ -12,33 +12,15 @@ interface FormData {
   dietPlan: string;
   pastExperience: string;
   format: string;
-  allergies: FormDataAllergies[];
-  dislikes: FormDataDislikes[];
+  allergies: string[];
+  dislikes: string[];
   cuisinePreferences: FormDataCuisinePreferences;
   pantry: string;
   cookingSkills: string;
-}
-
-interface FormDataGoals {
-  goal: string[];
-}
-
-interface FormDataAllergies {
-  allergies: string;
-}
-
-interface FormDataDislikes {
-  dislike: string[];
 }
 
 interface FormDataCuisinePreferences {
   [key: string]: unknown;
 }
 
-export type {
-  FormData,
-  FormDataGoals,
-  FormDataAllergies,
-  FormDataDislikes,
-  FormDataCuisinePreferences,
-};
+export type { FormData, FormDataCuisinePreferences };
