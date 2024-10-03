@@ -10,6 +10,7 @@ import Slider from "../atoms/Slider";
 import ProgressBar from "../atoms/ProgressBar";
 import ToggleSwitch from "../molecules/ToggleSwitch";
 import useStackNavigator from "@vuo/utils/StackNavigator";
+import { FormData } from "@vuo/types/dataTypes";
 import { useAppContext } from "@vuo/context/AppContext";
 
 enum OnboardingStatus {
@@ -113,7 +114,7 @@ export default function OnboardingFlow() {
   const [progress, setProgress] = useState(0);
   const { setIsOnboardingComplete } = useAppContext();
   const onboardingData: string | null = localStorage.getItem("onboardingData");
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     goals: [],
     sex: "",
     age: "",
@@ -584,12 +585,14 @@ export default function OnboardingFlow() {
                 defaultValue={[1]}
                 max={3}
                 step={1}
-                onValueChange={(value) => {
+                onChange={(value) => {
                   const speedMap = ["slow", "moderate", "fast"];
-                  setFormData((prev) => ({
-                    ...prev,
-                    speed: speedMap[value[0] - 1],
-                  }));
+                  if (Array.isArray(value)) {
+                    setFormData((prev) => ({
+                      ...prev,
+                      speed: speedMap[value[0] - 1],
+                    }));
+                  }
                 }}
               />
               <span>⚡</span>
@@ -1100,6 +1103,7 @@ export default function OnboardingFlow() {
     }
   };
 
+  console.log("formData", formData);
   return (
     <div>
       <ProgressBar value={progress} />
