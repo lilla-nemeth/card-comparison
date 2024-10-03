@@ -33,6 +33,7 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
                 {isSelected && (
                   <h4 className={module.cardSelected}> chosen!</h4>
                 )}
+                <div className={module.cardButton}></div>
                 <div className={module.cardOverlay}></div>
                 <div className={module.cardTitle}>
                   <p>{meal.title}</p>
