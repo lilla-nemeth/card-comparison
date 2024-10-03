@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './RadioGroup.module.scss';
+import styles from "@vuo/scss/components/molecules/RadioGroup.module.scss";
 
 interface RadioGroupProps {
   options: { value: string; label: string }[];
