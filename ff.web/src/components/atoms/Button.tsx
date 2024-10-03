@@ -1,6 +1,6 @@
 import React from "react";
 import { Button as AntDButton } from "antd-mobile";
-import styles from "./Button.module.scss"; // Import SCSS module
+import styles from "@vuo/scss/components/atoms/Button.module.scss"; // Import SCSS module
 
 interface CustomButtonProps {
   color?: "primary" | "secondary"; // Custom variants
