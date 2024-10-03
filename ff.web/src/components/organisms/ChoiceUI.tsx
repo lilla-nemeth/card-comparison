@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Meal } from "../pages/FlavourFlowPage";
-import module from "@vuo/scss/components/molecules/ChoiceUI.module.scss";
+import module from "@vuo/scss/components/organisms/ChoiceUI.module.scss";
 import Page from "../templates/Page";
 import { ChoiceUIProps } from "@vuo/types/organismProps";
 
