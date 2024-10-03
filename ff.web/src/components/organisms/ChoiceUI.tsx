@@ -21,17 +21,16 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
       <div className={containerClass}>
         {meals?.map((meal: Meal) => {
           const isSelected = selectedMeal === meal.id;
-
           return (
             <div
               key={meal.id}
-              onClick={() =>
-                handleCardClick(meal, meals.find((m) => m.id !== meal.id)!)
-              }
+              onClick={() => {
+                handleCardClick(meal, meals.find((m) => m.id !== meal.id)!);
+              }}
               className={`${module.card}`}
             >
-              {isSelected && <h4 className={module.overlay}> chosen!</h4>}{" "}
-              {/* Add overlay for selected card */}
+              {isSelected && <h4 className={module.overlay}> chosen!</h4>}
+              <div className={module.cardOverlay}></div>
               <img src={meal.image} alt={meal.title} />
               <p>{meal.title}</p>
             </div>
