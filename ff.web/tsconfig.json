@@ -35,7 +35,7 @@
   },
   "include": [
     "src",
-    "src/custom.d.ts",
+    "src/types/custom.d.ts",
     "../shared-components/src/QuestLineOnboardingHero.tsx",
     ".storybook/"
   ],
