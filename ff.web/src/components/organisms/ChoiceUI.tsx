@@ -22,22 +22,29 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
         {meals?.map((meal: Meal) => {
           const isSelected = selectedMeal === meal.id;
           return (
-            <div
-              key={meal.id}
-              onClick={() => {
-                handleCardClick(meal, meals.find((m) => m.id !== meal.id)!);
-              }}
-              className={`${module.card}`}
-            >
-              {isSelected && <h4 className={module.cardSelected}> chosen!</h4>}
-              <div className={module.cardOverlay}></div>
-              <div className={module.cardTitle}>
-                <p>{meal.title}</p>
+            <>
+              <div
+                key={meal.id}
+                onClick={() => {
+                  handleCardClick(meal, meals.find((m) => m.id !== meal.id)!);
+                }}
+                className={module.card}
+              >
+                {isSelected && (
+                  <h4 className={module.cardSelected}> chosen!</h4>
+                )}
+                <div className={module.cardOverlay}></div>
+                <div className={module.cardTitle}>
+                  <p>{meal.title}</p>
+                </div>
+                <div className={module.cardImage}>
+                  <img src={meal.image} alt={meal.title} />
+                </div>
+                <div>
+                  {meals.length > 1 && <div className={module.cardStack}></div>}
+                </div>
               </div>
-              <div className={module.cardImage}>
-                <img src={meal.image} alt={meal.title} />
-              </div>
-            </div>
+            </>
           );
         })}
       </div>
