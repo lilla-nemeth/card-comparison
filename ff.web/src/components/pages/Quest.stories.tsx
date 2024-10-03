@@ -8,11 +8,11 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <MemoryRouter initialEntries={['/quest']}>
+      <MemoryRouter initialEntries={["/quest"]}>
         <Story />
       </MemoryRouter>
-    )
-  ]
+    ),
+  ],
 } satisfies Meta<typeof Quest>;
 
 export default meta;

@@ -31,6 +31,3 @@ const ProfilePage = function () {
 };
 
 export default ProfilePage;
-function useTheme(): { theme: any; toggleTheme: any } {
-  throw new Error("Function not implemented.");
-}

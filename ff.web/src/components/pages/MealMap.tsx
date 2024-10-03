@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Page from "../templates/Page";
-import styles from "./MealMap.module.scss";
+import styles from "@vuo/scss/components/pages/MealMap.module.scss";
 
 const fetchRecipes = async () => {
   const response = await fetch("http://localhost:7702/api/mealmap/recipes"); //TODO function goes to api.ts, url to .env

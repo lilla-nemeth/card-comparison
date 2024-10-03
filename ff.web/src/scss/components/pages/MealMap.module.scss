@@ -1,0 +1,26 @@
+.mealMap {
+  padding: var(--space-16);
+  overflow-y: scroll;
+  height: 80vh;
+  width: 100%;
+  color: var(--color-text);
+}
+
+.dayPlan {
+  margin-bottom: 20px;
+}
+
+.mealsGrid {
+  display: flex;
+  gap: 10px;
+}
+
+.mealBox {
+  flex: 1 1 calc(33.333% - 10px); /* 3 boxes per row with a gap */
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: var(--space-16);
+  text-align: center;
+  background-color: var(--surface-primary);
+  border-radius: var(--radius-16);
+}
