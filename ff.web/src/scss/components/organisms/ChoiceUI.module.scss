@@ -25,7 +25,7 @@
 .cardOverlay,
 .cardSelectedOverlayActive,
 .cardImage,
-.cardStack {
+.cardDeck {
   border-radius: var(--radius-8);
   height: 23em;
 }
@@ -37,6 +37,17 @@
   background-color: var(--color-black);
   flex: 0 0 48%;
   width: 3em;
+}
+
+.cardDeck {
+  width: 13em;
+  position: absolute;
+  z-index: -10;
+  top: 6%;
+  background-color: var(--color-white);
+  -webkit-transform: translate(-50%, 0%);
+  -ms-transform: translate(-50%, 0%);
+  transform: translate(-102%, 0%);
 }
 
 .cardTitle {
@@ -74,7 +85,7 @@
 }
 
 .cardButtonActive {
-  background-color: var(--surface-brand-orange);
+  background-color: var(--surface-brand-orange-medium);
 }
 
 .cardButtonIcon,
@@ -116,7 +127,7 @@
   width: 100%;
   opacity: 0.5;
   transition: 0.5s ease;
-  background-color: var(--surface-brand-orange);
+  background-color: var(--surface-brand-orange-medium);
 }
 
 .cardSelectedTextActive {
@@ -142,12 +153,8 @@
   line-height: 1.4;
 }
 
-.cardStack {
-  background-color: var(--color-white);
-}
-
 /* Active styles */
 .card:active {
   filter: unset;
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
