@@ -34,19 +34,20 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
                 <div className={module.cardTitle}>
                   <p>{meal.title}</p>
                 </div>
+
                 <div className={module.cardButton}>
                   <HeartIcon className={module.cardButtonIcon} />
                 </div>
+                {/* {isSelected && ( */}
+                <div className={module.cardSelectedOverlay}>
+                  <div className={module.cardSelectedText}>chosen!</div>
+                </div>
+                {/* )} */}
                 <img
                   src={meal.image}
                   alt={meal.title}
                   className={module.cardImage}
                 />
-                {/* {isSelected && ( */}
-                <div className={module.cardSelectedOverlay}>
-                  <div className={module.cardSelectedText}> chosen!</div>
-                </div>
-                {/* )} */}
               </div>
               <div>
                 {meals.length > 1 && <div className={module.cardStack}></div>}

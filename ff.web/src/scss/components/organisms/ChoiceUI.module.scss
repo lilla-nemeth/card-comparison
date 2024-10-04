@@ -34,16 +34,9 @@
   position: relative;
   width: 50%;
   cursor: pointer;
-  background-color: var(--surface-primary);
+  background-color: var(--color-black);
   flex: 0 0 48%;
-  // flex: 0 0 50%;
-
-  // display: flex;
-  // flex-direction: column;
-  // padding: var(--space-16);
-  // margin: var(--space-16);
   width: 5em;
-  // height: 25em;
 }
 
 .cardTitle {
@@ -51,17 +44,18 @@
   top: 5%;
   z-index: 100;
   padding: 0.25em 1em 0.25em;
-  background-color: var(--surface-secondary-light);
+  background-color: var(--color-white);
   border-radius: 0 var(--radius-32) var(--radius-32) 0;
 
   p {
     font-size: 16px;
-    color: var(--text-primary-light);
+    color: var(--color-black);
   }
 }
 
 .cardButton {
   position: absolute;
+  z-index: 100;
   bottom: 10%;
   left: 50%;
   -webkit-transform: translate(-50%, -5%);
@@ -69,14 +63,16 @@
   transform: translate(-50%, -5%);
   width: 4rem;
   height: 4rem;
-  z-index: 100;
   border-radius: var(--radius-32);
-  background-color: var(--button-text);
+  background-color: var(--color-white);
 }
 
 .cardButtonIcon {
+  stroke-width: 1.5;
+  stroke: var(--color-black);
+  fill: transparent;
   width: auto;
-  height: 2rem;
+  height: 2.25rem;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -93,6 +89,7 @@
 
 .cardSelectedOverlay {
   position: absolute;
+  z-index: 70;
   top: 0;
   bottom: 0;
   left: 0;
@@ -116,24 +113,20 @@
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
-  color: var(--button-text);
-  border: 0.3rem solid var(--button-text);
+  color: var(--color-white);
+  border: 0.3rem solid var(--color-white);
   border-radius: var(--radius-8);
   padding: 0.15rem 0.3rem;
   rotate: -15deg;
   text-transform: uppercase;
-  // display: flex;
-  // justify-content: center;
-
   font-family: "Omnes", sans-serif;
-  /* h3 styles */
   font-weight: 500;
   font-size: 2rem;
   line-height: 1.4;
 }
 
 .cardStack {
-  background-color: var(--text-primary);
+  background-color: var(--color-white);
 }
 
 /* Active styles */
@@ -145,8 +138,12 @@
   opacity: 0.5;
 }
 
+.card:active .cardSelectedText {
+  opacity: 1;
+}
+
 .card:active .cardButtonIcon {
-  fill: var(--button-text);
+  stroke: var(--color-white);
 }
 
 .card:active .cardButton {

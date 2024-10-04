@@ -43,6 +43,8 @@ interface IconProps {
   height?: string;
   width?: string;
   fill?: string;
+  stroke?: string;
+  strokeWidth?: string;
   className?: string;
 }
 
