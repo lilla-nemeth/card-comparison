@@ -74,6 +74,17 @@
   background-color: var(--button-text);
 }
 
+.cardButtonIcon {
+  width: auto;
+  height: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
 .cardImage {
   display: block;
   object-fit: cover;

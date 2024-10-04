@@ -39,6 +39,13 @@ interface SliderProps {
   onChange: (value: number) => void;
 }
 
+interface IconProps {
+  height?: string;
+  width?: string;
+  fill?: string;
+  className?: string;
+}
+
 export type {
   CustomButtonProps,
   LogoProps,
@@ -46,4 +53,5 @@ export type {
   ProgressBarProps,
   SectionProps,
   SliderProps,
+  IconProps,
 };

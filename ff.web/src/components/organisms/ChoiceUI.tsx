@@ -1,8 +1,9 @@
+import module from "@vuo/scss/components/organisms/ChoiceUI.module.scss";
 import { useState } from "react";
 import { Meal } from "../pages/FlavourFlowPage";
-import module from "@vuo/scss/components/organisms/ChoiceUI.module.scss";
 import Page from "../templates/Page";
 import { ChoiceUIProps } from "@vuo/types/organismProps";
+import HeartIcon from "../atoms/HeartIcon";
 
 const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
   const [selectedMeal, setSelectedMeal] = useState<string | null>(null);
@@ -33,7 +34,9 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
                 <div className={module.cardTitle}>
                   <p>{meal.title}</p>
                 </div>
-                <div className={module.cardButton}></div>
+                <div className={module.cardButton}>
+                  <HeartIcon className={module.cardButtonIcon} />
+                </div>
                 <img
                   src={meal.image}
                   alt={meal.title}
