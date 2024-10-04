@@ -1,22 +1,22 @@
 // TODO: use this background color for the page or as a new theme
 // background-color: var(--surface-brand-orange-light);
 
-.scrollableContainer {
+.scrollableContainer,
+.staticContainer {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   width: 100%;
+  // padding: var(--space-16);
+  // gap: var(--space-16);
+}
+
+.scrollableContainer {
   overflow-x: auto;
-  gap: var(--space-16);
-  padding: var(--space-16);
   scrollbar-width: thin;
 }
 
 .staticContainer {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: var(--space-16);
-  padding: var(--space-16);
   overflow-x: hidden;
   margin: 0 10em;
 }
@@ -27,7 +27,7 @@
 .cardImage,
 .cardStack {
   border-radius: var(--radius-8);
-  height: 25em;
+  height: 23em;
 }
 
 .card {
@@ -36,7 +36,7 @@
   cursor: pointer;
   background-color: var(--color-black);
   flex: 0 0 48%;
-  width: 5em;
+  width: 3em;
 }
 
 .cardTitle {
@@ -65,6 +65,9 @@
   height: 4rem;
   border-radius: var(--radius-32);
   background-color: var(--color-white);
+
+  transition: transform 0.3s ease;
+  transform-origin: top;
 }
 
 .cardButtonIcon {
@@ -132,6 +135,7 @@
 /* Active styles */
 .card:active {
   filter: unset;
+  transform: scale(1.1);
 }
 
 .card:active .cardSelectedOverlay {
