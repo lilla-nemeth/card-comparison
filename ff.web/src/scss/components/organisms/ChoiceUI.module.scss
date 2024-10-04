@@ -23,7 +23,7 @@
 
 .card,
 .cardOverlay,
-.cardSelectedOverlay,
+.cardSelectedOverlayActive,
 .cardImage,
 .cardStack {
   border-radius: var(--radius-8);
@@ -53,7 +53,8 @@
   }
 }
 
-.cardButton {
+.cardButton,
+.cardButtonActive {
   position: absolute;
   z-index: 100;
   bottom: 10%;
@@ -64,15 +65,21 @@
   width: 4rem;
   height: 4rem;
   border-radius: var(--radius-32);
-  background-color: var(--color-white);
+}
 
+.cardButton {
+  background-color: var(--color-white);
   transition: transform 0.3s ease;
   transform-origin: top;
 }
 
-.cardButtonIcon {
+.cardButtonActive {
+  background-color: var(--surface-brand-orange);
+}
+
+.cardButtonIcon,
+.cardButtonIconActive {
   stroke-width: 1.5;
-  stroke: var(--color-black);
   fill: transparent;
   width: auto;
   height: 2.25rem;
@@ -84,13 +91,21 @@
   transform: translate(-50%, -50%);
 }
 
+.cardButtonIcon {
+  stroke: var(--color-black);
+}
+
+.cardButtonIconActive {
+  stroke: var(--color-white);
+}
+
 .cardImage {
   display: block;
   object-fit: cover;
   filter: brightness(60%);
 }
 
-.cardSelectedOverlay {
+.cardSelectedOverlayActive {
   position: absolute;
   z-index: 70;
   top: 0;
@@ -99,13 +114,12 @@
   right: 0;
   height: 100%;
   width: 100%;
-  // opacity: 0;
-  opacity: 1;
+  opacity: 0.5;
   transition: 0.5s ease;
   background-color: var(--surface-brand-orange);
 }
 
-.cardSelectedText {
+.cardSelectedTextActive {
   display: flex;
   align-items: center;
   position: absolute;
@@ -136,20 +150,4 @@
 .card:active {
   filter: unset;
   transform: scale(1.1);
-}
-
-.card:active .cardSelectedOverlay {
-  opacity: 0.5;
-}
-
-.card:active .cardSelectedText {
-  opacity: 1;
-}
-
-.card:active .cardButtonIcon {
-  stroke: var(--color-white);
-}
-
-.card:active .cardButton {
-  background-color: var(--surface-brand-orange);
 }
