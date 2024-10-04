@@ -105,19 +105,9 @@
   background-color: var(--surface-brand-orange);
 }
 
-.card:active {
-  filter: unset;
-}
-
-.card:active .cardSelectedOverlay {
-  opacity: 0.5;
-}
-
 .cardSelectedText {
   display: flex;
   align-items: center;
-
-  // margin: 0;
   position: absolute;
   z-index: 100;
   top: 42%;
@@ -144,4 +134,21 @@
 
 .cardStack {
   background-color: var(--text-primary);
+}
+
+/* Active styles */
+.card:active {
+  filter: unset;
+}
+
+.card:active .cardSelectedOverlay {
+  opacity: 0.5;
+}
+
+.card:active .cardButtonIcon {
+  fill: var(--button-text);
+}
+
+.card:active .cardButton {
+  background-color: var(--surface-brand-orange);
 }
