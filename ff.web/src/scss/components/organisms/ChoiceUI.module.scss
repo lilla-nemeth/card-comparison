@@ -5,10 +5,10 @@
 .staticContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
-  // padding: var(--space-16);
-  // gap: var(--space-16);
+  padding: var(--space-16) 0;
+  gap: var(--space-16);
 }
 
 .scrollableContainer {
@@ -17,7 +17,7 @@
 }
 
 .staticContainer {
-  overflow-x: hidden;
+  // overflow-x: hidden;
   margin: 0 10em;
 }
 
