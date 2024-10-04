@@ -1,6 +1,12 @@
 :root {
+  --surface-primary-light: #{$surface-primary-light};
+  --surface-secondary-light: #{$surface-secondary-light};
+  --surface-primary-light: #{$surface-primary-light};
+  --surface-secondary-light: #{$surface-secondary-light};
   --surface-brand-red: #{$surface-brand-red};
   --surface-brand-orange: #{$surface-brand-orange};
+  --surface-brand-orange-light: #{$surface-brand-orange-light};
+  --surface-brand-orange-medium: #{$surface-brand-orange-medium};
   --surface-brand-green: #{$surface-brand-green};
   --surface-brand-mint: #{$surface-brand-mint};
   --surface-brand-cyan: #{$surface-brand-cyan};
@@ -10,4 +16,12 @@
   --surface-brand-pink: #{$surface-brand-pink};
   --surface-brand-brown: #{$surface-brand-brown};
   --color-grey-systemGrayAccessibleLight: #{$color-grey-systemGrayAccessibleLight};
+
+  --text-primary-dark: #{$text-primary-dark};
+  --text-secondary-dark: #{$text-secondary-dark};
+  --text-primary-light: #{$text-primary-light};
+  --text-secondary-light: #{$text-secondary-light};
+
+  --color-white: #{$color-white};
+  --color-black: #{$color-black};
 }

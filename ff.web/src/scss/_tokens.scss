@@ -2,38 +2,40 @@
 $surface-primary-dark: #242426;
 $surface-secondary-dark: #1c1c1e;
 //Light
-$surface-primary-light: #EBEBF0;
-$surface-secondary-light: #F2F2F7;
+$surface-primary-light: #ebebf0;
+$surface-secondary-light: #f2f2f7;
 
 //universal
 $surface-brand-red: #ff3b2f;
-$surface-brand-orange: #FF9500;
-$surface-brand-green: #34C759;
-$surface-brand-mint: #00C7BE;
-$surface-brand-cyan: #32ADE6;
-$surface-brand-blue: #0070FF;
-$surface-brand-indigo: #5856D6;
-$surface-brand-purple: #AF52DE;
-$surface-brand-pink: #FF2D55;
-$surface-brand-brown: #A2845E;
-$color-grey-systemGrayAccessibleLight: #6C6C70;
-
+$surface-brand-orange: #ff9500;
+$surface-brand-orange-medium: #ffa654;
+$surface-brand-orange-light: #ffc794;
+$surface-brand-green: #34c759;
+$surface-brand-mint: #00c7be;
+$surface-brand-cyan: #32ade6;
+$surface-brand-blue: #0070ff;
+$surface-brand-indigo: #5856d6;
+$surface-brand-purple: #af52de;
+$surface-brand-pink: #ff2d55;
+$surface-brand-brown: #a2845e;
+$color-grey-systemGrayAccessibleLight: #6c6c70;
 
 // TEXT COLORS
 // Dark
-$text-primary-dark: #FFFFFF;
-$text-secondary-dark: #AEAFB2;
+$text-primary-dark: #ffffff;
+$text-secondary-dark: #aeafb2;
 //light
 $text-primary-light: #242426;
-$text-secondary-light: #6C6C70;
+$text-secondary-light: #6c6c70;
 
 //Universal
-$text-act-highlight: #FF9F0B;
-$text-actor-highlight: #409CFF;
-$text-skill-label: #FFFFFF;
-$button-text: #FFFFFF;
+$text-act-highlight: #ff9f0b;
+$text-actor-highlight: #409cff;
+$text-skill-label: #ffffff;
+$button-text: #ffffff;
 
-
+$color-black: #000000;
+$color-white: #ffffff;
 //SPACING TOKENS
 
 $space-2: 2px; // xxs
