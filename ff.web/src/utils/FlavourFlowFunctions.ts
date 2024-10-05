@@ -1,39 +1,44 @@
 import { Dispatch } from "react";
 import { FlavourFlowDataset, FlavourFlowMeal } from "@vuo/types/dataTypes";
 
-const createDataForRanking = (dataset: FlavourFlowDataset) => {
-  let flattened: any = [];
-
-  // Iterate over the object values (which are arrays of questions)
-  Object.values(dataset).forEach((questionSet: any) => {
-    questionSet.forEach((question: any) => {
-      // Iterate over each "choice" in the question object
-      Object.values(question).forEach((choice: any) => {
-        flattened.push({
-          ...choice,
-          id: Math.random().toString(36).slice(2, 9), // Generate random ID
-          elo: 1200, // Starting ELO score
-        });
-      });
-    });
-  });
-
-  return flattened;
+// Function that updates id and returns array
+const createDataForRanking = (
+  dataset: FlavourFlowDataset,
+): FlavourFlowMeal[] => {
+  return Object.values(dataset).flatMap((questionSet) =>
+    questionSet.flatMap((question) =>
+      Object.values(question).map((choice) => ({
+        ...choice,
+        id: Math.random().toString(36).slice(2, 9), // Generate random ID
+      })),
+    ),
+  );
 };
 
-// K = 32
+const probability = (
+  rating1: FlavourFlowMeal["elo"],
+  rating2: FlavourFlowMeal["elo"],
+): number => {
+  return 1 / (1 + Math.pow(10, (rating1 - rating2) / 400));
+};
+
 const calculateElo = (
   winner: FlavourFlowMeal,
   loser: FlavourFlowMeal,
-  K: number,
+  probability: (
+    rating1: FlavourFlowMeal["elo"],
+    rating2: FlavourFlowMeal["elo"],
+  ) => number,
 ): { newWinnerElo: number; newLoserElo: number } => {
-  const expectedScoreWinner =
-    1 / (1 + Math.pow(10, (loser.elo - winner.elo) / 400));
-  const expectedScoreLoser =
-    1 / (1 + Math.pow(10, (winner.elo - loser.elo) / 400));
+  const K = 32;
+  const winnerElo = winner.elo;
+  const loserElo = loser.elo;
 
-  const newWinnerElo = winner.elo + K * (1 - expectedScoreWinner);
-  const newLoserElo = loser.elo + K * (0 - expectedScoreLoser);
+  const expectedScoreWinner = probability(loserElo, winnerElo);
+  const expectedScoreLoser = probability(winnerElo, loserElo);
+
+  let newWinnerElo = winnerElo + K * (1 - expectedScoreWinner);
+  let newLoserElo = loserElo + K * (0 - expectedScoreLoser);
 
   return {
     newWinnerElo: Math.round(newWinnerElo),
@@ -70,4 +75,10 @@ const drawNewPair = (
   stateSetter([shuffledMeals[0], shuffledMeals[1]]);
 };
 
-export { calculateElo, updateElo, createDataForRanking, drawNewPair };
+export {
+  calculateElo,
+  probability,
+  updateElo,
+  createDataForRanking,
+  drawNewPair,
+};
