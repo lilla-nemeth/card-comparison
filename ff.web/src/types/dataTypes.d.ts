@@ -37,7 +37,6 @@ interface FlavourFlowMeal {
   title: string;
   elo: number;
   image: string;
-  category?: string;
   name?: string;
 }
 
