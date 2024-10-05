@@ -11,7 +11,7 @@ const createDataForRanking = (dataset: FlavourFlowDataset) => {
       Object.values(question).forEach((choice: any) => {
         flattened.push({
           ...choice,
-          id: Math.random().toString(36).substr(2, 9), // Generate random ID
+          id: Math.random().toString(36).slice(2, 9), // Generate random ID
           elo: 1200, // Starting ELO score
         });
       });
