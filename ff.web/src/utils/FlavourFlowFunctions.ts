@@ -119,6 +119,18 @@ const drawNewPair = (
   }
 };
 
+const getWinners = (meals: FlavourFlowMeal[]) => {
+  const winners = [];
+
+  for (let meal of meals) {
+    if (meal.elo > 1200) {
+      winners.push(meal);
+    }
+  }
+
+  return winners;
+};
+
 export {
   calculateElo,
   probability,
@@ -126,4 +138,5 @@ export {
   createDataForRanking,
   findPairsByQuestionset,
   drawNewPair,
+  getWinners,
 };
