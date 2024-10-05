@@ -21,6 +21,7 @@ const createDataForRanking = (dataset: FlavourFlowDataset) => {
   return flattened;
 };
 
+// K = 32
 const calculateElo = (
   winner: Meal,
   loser: Meal,

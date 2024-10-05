@@ -32,16 +32,12 @@ interface FlavourFlowChoices {
   [key: string]: FlavourFlowChoice;
 }
 
-interface FlavourFlowChoice {
-  title: string;
-  image: string;
-}
-
-interface Meal {
+interface FlavourFlowMeal {
   id: string;
   title: string;
   elo: number;
   image: string;
+  category?: string;
   name?: string;
 }
 
@@ -50,6 +46,5 @@ export type {
   FormDataCuisinePreferences,
   FlavourFlowDataset,
   FlavourFlowChoices,
-  FlavourFlowChoice,
-  Meal,
+  FlavourFlowMeal,
 };

@@ -12,28 +12,84 @@ import { FlavourFlowDataset } from "@vuo/types/dataTypes";
 const dataset: FlavourFlowDataset = {
   questionset: [
     {
-      choice: { title: "Sweet", image: CauliflowerImage },
-      choice1: { title: "Savory", image: Day1BaconImage },
+      choice: {
+        id: "1",
+        title: "Sweet",
+        elo: 0,
+        image: CauliflowerImage,
+        category: "Taste",
+        name: "Meal 1",
+      },
+      choice1: {
+        id: "2",
+        title: "Savory",
+        elo: 0,
+        image: Day1BaconImage,
+        category: "Taste",
+        name: "Meal 2",
+      },
     },
   ],
   questionset1: [
     {
-      choice2: { title: "Quick and easy", image: Day2KetoImage },
-      choice3: { title: "Requires more time", image: Day3ChickenImage },
+      choice2: {
+        id: "3",
+        title: "Quick and easy",
+        elo: 0,
+        image: Day2KetoImage,
+        category: "Time & Complexity",
+        name: "Meal 3",
+      },
+      choice3: {
+        id: "4",
+        title: "Requires more time",
+        elo: 0,
+        image: Day3ChickenImage,
+        category: "Time & Complexity",
+        name: "Meal 4",
+      },
     },
   ],
   questionset2: [
     {
-      choice4: { title: "Traditional breakfast", image: Day4SalmonImage },
-      choice5: { title: "Unique twist", image: Day5MexicanImage },
+      choice4: {
+        id: "5",
+        title: "Traditional breakfast",
+        elo: 0,
+        image: Day4SalmonImage,
+        category: "Traditionality",
+        name: "Meal 5",
+      },
+      choice5: {
+        id: "6",
+        title: "Unique twist",
+        elo: 0,
+        image: Day5MexicanImage,
+        category: "Traditionality",
+        name: "Meal 6",
+      },
     },
   ],
   questionset3: [
     {
-      choice6: { title: "Simple ingredients", image: Day6StuffedImage },
-      choice7: { title: "Variety of ingredients", image: Day7BoneImage },
+      choice6: {
+        id: "7",
+        title: "Simple ingredients",
+        elo: 0,
+        image: Day6StuffedImage,
+        category: "Type of Ingredients",
+        name: "Meal 7",
+      },
+      choice7: {
+        id: "8",
+        title: "Variety of ingredients",
+        elo: 0,
+        image: Day7BoneImage,
+        category: "Type of Ingredients",
+        name: "Meal 8",
+      },
     },
   ],
 };
 
-export default dataset;
+export { dataset };

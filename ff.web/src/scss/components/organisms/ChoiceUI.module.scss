@@ -9,16 +9,12 @@
   width: 100%;
   padding: var(--space-16) 0;
   gap: var(--space-16);
+  margin: 0 10em;
 }
 
 .scrollableContainer {
   overflow-x: auto;
   scrollbar-width: thin;
-}
-
-.staticContainer {
-  // overflow-x: hidden;
-  margin: 0 10em;
 }
 
 .card,
@@ -37,6 +33,10 @@
   background-color: var(--color-black);
   flex: 0 0 48%;
   width: 3em;
+}
+
+.cardDeckContainer {
+  position: relative;
 }
 
 .cardDeck {
