@@ -15,7 +15,7 @@ const dataset: FlavourFlowDataset = {
       choice: {
         id: "1",
         title: "Sweet",
-        elo: 0,
+        elo: 1200,
         image: CauliflowerImage,
         category: "Taste",
         name: "Meal 1",
@@ -23,7 +23,7 @@ const dataset: FlavourFlowDataset = {
       choice1: {
         id: "2",
         title: "Savory",
-        elo: 0,
+        elo: 1200,
         image: Day1BaconImage,
         category: "Taste",
         name: "Meal 2",
@@ -35,7 +35,7 @@ const dataset: FlavourFlowDataset = {
       choice2: {
         id: "3",
         title: "Quick and easy",
-        elo: 0,
+        elo: 1200,
         image: Day2KetoImage,
         category: "Time & Complexity",
         name: "Meal 3",
@@ -43,7 +43,7 @@ const dataset: FlavourFlowDataset = {
       choice3: {
         id: "4",
         title: "Requires more time",
-        elo: 0,
+        elo: 1200,
         image: Day3ChickenImage,
         category: "Time & Complexity",
         name: "Meal 4",
@@ -55,7 +55,7 @@ const dataset: FlavourFlowDataset = {
       choice4: {
         id: "5",
         title: "Traditional breakfast",
-        elo: 0,
+        elo: 1200,
         image: Day4SalmonImage,
         category: "Traditionality",
         name: "Meal 5",
@@ -63,7 +63,7 @@ const dataset: FlavourFlowDataset = {
       choice5: {
         id: "6",
         title: "Unique twist",
-        elo: 0,
+        elo: 1200,
         image: Day5MexicanImage,
         category: "Traditionality",
         name: "Meal 6",
@@ -75,7 +75,7 @@ const dataset: FlavourFlowDataset = {
       choice6: {
         id: "7",
         title: "Simple ingredients",
-        elo: 0,
+        elo: 1200,
         image: Day6StuffedImage,
         category: "Type of Ingredients",
         name: "Meal 7",
@@ -83,7 +83,7 @@ const dataset: FlavourFlowDataset = {
       choice7: {
         id: "8",
         title: "Variety of ingredients",
-        elo: 0,
+        elo: 1200,
         image: Day7BoneImage,
         category: "Type of Ingredients",
         name: "Meal 8",

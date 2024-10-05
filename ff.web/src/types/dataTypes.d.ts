@@ -29,7 +29,7 @@ interface FlavourFlowDataset {
 }
 
 interface FlavourFlowChoices {
-  [key: string]: FlavourFlowChoice;
+  [key: string]: FlavourFlowMeal;
 }
 
 interface FlavourFlowMeal {

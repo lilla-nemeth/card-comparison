@@ -4,6 +4,7 @@ import { dataset } from "@vuo/utils/FlavourFlowData";
 import { FlavourFlowMeal } from "@vuo/types/dataTypes";
 import ChoiceUI from "../organisms/ChoiceUI";
 import {
+  probability,
   calculateElo,
   createDataForRanking,
   drawNewPair,
@@ -15,14 +16,17 @@ export default function FlavourFlowPage() {
     createDataForRanking(dataset),
   );
   const [currentPair, setCurrentPair] = useState<FlavourFlowMeal[]>([]);
-  const K = 32;
 
   useEffect(() => {
     drawNewPair(setCurrentPair, meals);
   }, []);
 
   const handleChoice = (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => {
-    const { newWinnerElo, newLoserElo } = calculateElo(winner, loser, K);
+    const { newWinnerElo, newLoserElo } = calculateElo(
+      winner,
+      loser,
+      probability,
+    );
 
     // Update meals' ELOs
     setMeals((prevMeals) =>
