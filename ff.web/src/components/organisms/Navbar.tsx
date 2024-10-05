@@ -1,16 +1,8 @@
 import useStackNavigator from "@vuo/utils/StackNavigator";
 import { NavBar } from "antd-mobile";
-import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function Navbar({ hideBackButton = false }) {
-  useEffect(() => {
-    console.log("navbar mounted");
-    return () => {
-      console.log("navbar unmounted");
-    };
-  }, []);
-
   const location = useLocation();
   const { pathname } = location;
   const hideOnRoutes = ["/"];
