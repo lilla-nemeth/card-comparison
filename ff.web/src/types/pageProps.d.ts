@@ -5,4 +5,12 @@ interface PageProps {
   className?: string;
 }
 
-export type { PageProps };
+interface Meal {
+  id: string;
+  title: string;
+  elo: number;
+  image: string;
+  name?: string;
+};
+
+export type { PageProps, Meal };

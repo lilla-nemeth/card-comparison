@@ -11,6 +11,8 @@ import Day7BoneImage from "../../../public/images/7.webp";
 import ChoiceUI from "../organisms/ChoiceUI";
 import Page from "../templates/Page";
 
+import { Meal } from "@vuo/types/pageProps";
+
 // Dataset
 const dataset = {
   questionset: [
@@ -37,14 +39,6 @@ const dataset = {
       choice7: { title: "Variety of ingredients", image: Day7BoneImage },
     },
   ],
-};
-
-export type Meal = {
-  id: string;
-  title: string;
-  elo: number;
-  image: string;
-  name?: string;
 };
 
 const K = 32;

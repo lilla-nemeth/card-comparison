@@ -1,6 +1,6 @@
 import module from "@vuo/scss/components/organisms/ChoiceUI.module.scss";
 import { useState } from "react";
-import { Meal } from "../pages/FlavourFlowPage";
+import { Meal } from "@vuo/types/pageProps";
 import Page from "../templates/Page";
 import { ChoiceUIProps } from "@vuo/types/organismProps";
 import HeartIcon from "../atoms/HeartIcon";
