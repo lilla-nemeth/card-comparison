@@ -7,7 +7,7 @@ import {
   calculateElo,
   createDataForRanking,
   drawNewPair,
-  updateMealElo,
+  updateElo,
 } from "@vuo/utils/FlavourFlowFunctions";
 
 export default function FlavourFlowPage() {
@@ -24,7 +24,7 @@ export default function FlavourFlowPage() {
 
     // Update meals' ELOs
     setMeals((prevMeals) =>
-      updateMealElo(prevMeals, winner, loser, newWinnerElo, newLoserElo),
+      updateElo(prevMeals, winner, loser, newWinnerElo, newLoserElo),
     );
 
     // Draw a new pair of meals

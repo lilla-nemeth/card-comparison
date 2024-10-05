@@ -1,44 +1,6 @@
 import { Dispatch } from "react";
 import { FlavourFlowDataset, Meal } from "@vuo/types/dataTypes";
 
-const calculateElo = (
-  winner: Meal,
-  loser: Meal,
-  K: number,
-): { newWinnerElo: number; newLoserElo: number } => {
-  const expectedScoreWinner =
-    1 / (1 + Math.pow(10, (loser.elo - winner.elo) / 400));
-  const expectedScoreLoser =
-    1 / (1 + Math.pow(10, (winner.elo - loser.elo) / 400));
-
-  const newWinnerElo = winner.elo + K * (1 - expectedScoreWinner);
-  const newLoserElo = loser.elo + K * (0 - expectedScoreLoser);
-
-  return {
-    newWinnerElo: Math.round(newWinnerElo),
-    newLoserElo: Math.round(newLoserElo),
-  };
-};
-
-// Update meals' ELOs
-const updateMealElo = (
-  prevMeals: Meal[],
-  winner: Meal,
-  loser: Meal,
-  newWinnerElo: number,
-  newLoserElo: number,
-) => {
-  return prevMeals.map((meal) => {
-    if (meal.id === winner.id) {
-      return { ...meal, elo: newWinnerElo };
-    } else if (meal.id === loser.id) {
-      return { ...meal, elo: newLoserElo };
-    } else {
-      return meal;
-    }
-  });
-};
-
 const createDataForRanking = (dataset: FlavourFlowDataset) => {
   let flattened: any = [];
 
@@ -59,6 +21,44 @@ const createDataForRanking = (dataset: FlavourFlowDataset) => {
   return flattened;
 };
 
+const calculateElo = (
+  winner: Meal,
+  loser: Meal,
+  K: number,
+): { newWinnerElo: number; newLoserElo: number } => {
+  const expectedScoreWinner =
+    1 / (1 + Math.pow(10, (loser.elo - winner.elo) / 400));
+  const expectedScoreLoser =
+    1 / (1 + Math.pow(10, (winner.elo - loser.elo) / 400));
+
+  const newWinnerElo = winner.elo + K * (1 - expectedScoreWinner);
+  const newLoserElo = loser.elo + K * (0 - expectedScoreLoser);
+
+  return {
+    newWinnerElo: Math.round(newWinnerElo),
+    newLoserElo: Math.round(newLoserElo),
+  };
+};
+
+// Update meals' ELOs
+const updateElo = (
+  prevMeals: Meal[],
+  winner: Meal,
+  loser: Meal,
+  newWinnerElo: number,
+  newLoserElo: number,
+) => {
+  return prevMeals.map((meal) => {
+    if (meal.id === winner.id) {
+      return { ...meal, elo: newWinnerElo };
+    } else if (meal.id === loser.id) {
+      return { ...meal, elo: newLoserElo };
+    } else {
+      return meal;
+    }
+  });
+};
+
 const drawNewPair = (
   stateSetter: Dispatch<React.SetStateAction<Meal[]>>,
   meals: Meal[],
@@ -69,4 +69,4 @@ const drawNewPair = (
   stateSetter([shuffledMeals[0], shuffledMeals[1]]);
 };
 
-export { calculateElo, updateMealElo, createDataForRanking, drawNewPair };
+export { calculateElo, updateElo, createDataForRanking, drawNewPair };
