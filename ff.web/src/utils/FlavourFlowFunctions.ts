@@ -105,10 +105,15 @@ const findPairsByQuestionset = (
 const drawNewPair = (
   stateSetter: Dispatch<React.SetStateAction<FlavourFlowMeal[]>>,
   pairs: FlavourFlowMeal[][],
+  clickedMeals: Set<string>,
 ) => {
-  if (pairs.length > 0) {
-    const randomIndex = Math.floor(Math.random() * pairs.length);
-    stateSetter(pairs[randomIndex]);
+  const availablePairs = pairs.filter(
+    (pair) => !clickedMeals.has(pair[0].id) && !clickedMeals.has(pair[1].id),
+  );
+
+  if (availablePairs.length > 0) {
+    const randomIndex = Math.floor(Math.random() * availablePairs.length);
+    stateSetter(availablePairs[randomIndex]);
   } else {
     stateSetter([]);
   }

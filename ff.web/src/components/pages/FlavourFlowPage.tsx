@@ -17,14 +17,15 @@ export default function FlavourFlowPage() {
     createDataForRanking(dataset),
   );
   const [currentPair, setCurrentPair] = useState<FlavourFlowMeal[]>([]);
+  const [clickedMeals, setClickedMeals] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const pairs = findPairsByQuestionset(meals);
     if (pairs.length > 0) {
       // Initial pair
-      drawNewPair(setCurrentPair, pairs);
+      drawNewPair(setCurrentPair, pairs, clickedMeals);
     }
-  }, []);
+  }, [meals, clickedMeals]);
 
   const handleChoice = (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => {
     const { newWinnerElo, newLoserElo } = calculateElo(
@@ -38,8 +39,10 @@ export default function FlavourFlowPage() {
       updateElo(prevMeals, winner, loser, newWinnerElo, newLoserElo),
     );
 
+    setClickedMeals((prev) => new Set(prev).add(winner.id).add(loser.id));
+
     // Draw a new pair of meals
-    drawNewPair(setCurrentPair, findPairsByQuestionset(meals));
+    drawNewPair(setCurrentPair, findPairsByQuestionset(meals), clickedMeals);
   };
 
   return (
