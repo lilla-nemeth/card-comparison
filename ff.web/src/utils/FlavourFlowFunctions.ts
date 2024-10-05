@@ -1,11 +1,11 @@
 import { Dispatch } from "react";
 import { FlavourFlowDataset, FlavourFlowMeal } from "@vuo/types/dataTypes";
 
-// Function that updates id and returns array
+// Function that updates id and returns the meals
 const createDataForRanking = (
   dataset: FlavourFlowDataset,
 ): FlavourFlowMeal[] => {
-  return Object.values(dataset).flatMap((questionSet) =>
+  const meals = Object.values(dataset).flatMap((questionSet) =>
     questionSet.flatMap((question) =>
       Object.values(question).map((choice) => ({
         ...choice,
@@ -13,6 +13,8 @@ const createDataForRanking = (
       })),
     ),
   );
+
+  return meals;
 };
 
 const probability = (
