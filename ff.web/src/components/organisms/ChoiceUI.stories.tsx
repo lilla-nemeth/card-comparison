@@ -20,21 +20,21 @@ const sampleMeals: FlavourFlowMeal[] = [
     title: "Sweet",
     elo: 0,
     image: CauliflowerImage,
-    name: "Meal 1",
+    name: "Cauliflower",
   },
   {
     id: "2",
     title: "Savory",
     elo: 0,
     image: Day1BaconImage,
-    name: "Meal 2",
+    name: "Bacon",
   },
   {
     id: "3",
     title: "Quick and easy",
     elo: 0,
     image: Day2KetoImage,
-    name: "Meal 3",
+    name: "Keto",
   },
 ];
 
