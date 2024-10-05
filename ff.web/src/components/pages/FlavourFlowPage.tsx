@@ -11,6 +11,8 @@ import {
   updateElo,
   findPairsByQuestionset,
 } from "@vuo/utils/FlavourFlowFunctions";
+import Button from "../atoms/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function FlavourFlowPage() {
   const [meals, setMeals] = useState<FlavourFlowMeal[]>(
@@ -18,6 +20,7 @@ export default function FlavourFlowPage() {
   );
   const [currentPair, setCurrentPair] = useState<FlavourFlowMeal[]>([]);
   const [clickedMeals, setClickedMeals] = useState<Set<string>>(new Set());
+  const navigate = useNavigate();
 
   useEffect(() => {
     const pairs = findPairsByQuestionset(meals);
@@ -26,6 +29,10 @@ export default function FlavourFlowPage() {
       drawNewPair(setCurrentPair, pairs, clickedMeals);
     }
   }, [meals, clickedMeals]);
+
+  const handleNavigate = () => {
+    navigate("/flavour-flow/results", { state: { meals } });
+  };
 
   const handleChoice = (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => {
     const { newWinnerElo, newLoserElo } = calculateElo(
@@ -48,6 +55,9 @@ export default function FlavourFlowPage() {
   return (
     <Page>
       <ChoiceUI meals={currentPair} handleChoice={handleChoice} />
+      {currentPair.length === 0 && (
+        <Button onClick={handleNavigate}>See the Results</Button>
+      )}
     </Page>
   );
 }

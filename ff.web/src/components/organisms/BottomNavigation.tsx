@@ -53,11 +53,6 @@ const BottomNavigation = () => {
         icon: <QuestionOutlined />,
       },
       {
-        key: "/flavour-flow/results",
-        title: "FlavourFlow Results",
-        icon: <BookOutlined />,
-      },
-      {
         key: "/profile",
         title: "Profile",
         icon: <UserOutlined />,
