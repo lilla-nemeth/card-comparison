@@ -6,6 +6,7 @@ import {
   UserOutlined,
   CoffeeOutlined,
   QuestionOutlined,
+  BookOutlined,
 } from "@ant-design/icons";
 import useStackNavigator from "@vuo/utils/StackNavigator";
 
@@ -50,6 +51,11 @@ const BottomNavigation = () => {
         key: "/flavour-flow",
         title: "FlavourFlow",
         icon: <QuestionOutlined />,
+      },
+      {
+        key: "/flavour-flow/results",
+        title: "FlavourFlow Results",
+        icon: <BookOutlined />,
       },
       {
         key: "/profile",
