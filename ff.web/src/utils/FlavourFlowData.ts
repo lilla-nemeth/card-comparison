@@ -18,6 +18,7 @@ const dataset: FlavourFlowDataset = {
         elo: 1200,
         image: CauliflowerImage,
         name: "Cauliflower",
+        category: "Taste",
       },
       choice1: {
         id: "2",
@@ -25,6 +26,7 @@ const dataset: FlavourFlowDataset = {
         elo: 1200,
         image: Day1BaconImage,
         name: "Bacon",
+        category: "Taste",
       },
     },
   ],
@@ -36,6 +38,7 @@ const dataset: FlavourFlowDataset = {
         elo: 1200,
         image: Day2KetoImage,
         name: "Keto",
+        category: "Time & Complexity",
       },
       choice3: {
         id: "4",
@@ -43,6 +46,7 @@ const dataset: FlavourFlowDataset = {
         elo: 1200,
         image: Day3ChickenImage,
         name: "Chicken",
+        category: "Time & Complexity",
       },
     },
   ],
@@ -54,6 +58,7 @@ const dataset: FlavourFlowDataset = {
         elo: 1200,
         image: Day4SalmonImage,
         name: "Salmon",
+        category: "Traditionality",
       },
       choice5: {
         id: "6",
@@ -61,6 +66,7 @@ const dataset: FlavourFlowDataset = {
         elo: 1200,
         image: Day5MexicanImage,
         name: "Mexican",
+        category: "Traditionality",
       },
     },
   ],
@@ -72,6 +78,7 @@ const dataset: FlavourFlowDataset = {
         elo: 1200,
         image: Day6StuffedImage,
         name: "Stuffed",
+        category: "Type of Ingredients",
       },
       choice7: {
         id: "8",
@@ -79,6 +86,7 @@ const dataset: FlavourFlowDataset = {
         elo: 1200,
         image: Day7BoneImage,
         name: "Bone",
+        category: "Type of Ingredients",
       },
     },
   ],

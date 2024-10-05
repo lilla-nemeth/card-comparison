@@ -21,6 +21,7 @@ const sampleMeals: FlavourFlowMeal[] = [
     elo: 0,
     image: CauliflowerImage,
     name: "Cauliflower",
+    category: "Taste",
   },
   {
     id: "2",
@@ -28,13 +29,14 @@ const sampleMeals: FlavourFlowMeal[] = [
     elo: 0,
     image: Day1BaconImage,
     name: "Bacon",
+    category: "Taste",
   },
   {
     id: "3",
     title: "Quick and easy",
     elo: 0,
     image: Day2KetoImage,
-    name: "Keto",
+    category: "Time & Complexity",
   },
 ];
 

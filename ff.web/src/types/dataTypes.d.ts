@@ -38,6 +38,7 @@ interface FlavourFlowMeal {
   elo: number;
   image: string;
   name?: string;
+  category?: string;
 }
 
 export type {
