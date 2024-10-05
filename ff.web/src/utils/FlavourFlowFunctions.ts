@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { FlavourFlowDataset, Meal } from "@vuo/types/dataTypes";
+import { FlavourFlowDataset, FlavourFlowMeal } from "@vuo/types/dataTypes";
 
 const createDataForRanking = (dataset: FlavourFlowDataset) => {
   let flattened: any = [];
@@ -23,8 +23,8 @@ const createDataForRanking = (dataset: FlavourFlowDataset) => {
 
 // K = 32
 const calculateElo = (
-  winner: Meal,
-  loser: Meal,
+  winner: FlavourFlowMeal,
+  loser: FlavourFlowMeal,
   K: number,
 ): { newWinnerElo: number; newLoserElo: number } => {
   const expectedScoreWinner =
@@ -43,9 +43,9 @@ const calculateElo = (
 
 // Update meals' ELOs
 const updateElo = (
-  prevMeals: Meal[],
-  winner: Meal,
-  loser: Meal,
+  prevMeals: FlavourFlowMeal[],
+  winner: FlavourFlowMeal,
+  loser: FlavourFlowMeal,
   newWinnerElo: number,
   newLoserElo: number,
 ) => {
@@ -61,8 +61,8 @@ const updateElo = (
 };
 
 const drawNewPair = (
-  stateSetter: Dispatch<React.SetStateAction<Meal[]>>,
-  meals: Meal[],
+  stateSetter: Dispatch<React.SetStateAction<FlavourFlowMeal[]>>,
+  meals: FlavourFlowMeal[],
 ): void => {
   const shuffledMeals = [...meals].sort(() => Math.random() - 0.5);
 
