@@ -67,14 +67,51 @@ const updateElo = (
   });
 };
 
+const findPairsByQuestionset = (
+  meals: FlavourFlowMeal[],
+): FlavourFlowMeal[][] => {
+  const groupedMeals: Record<string, FlavourFlowMeal[]> = {};
+
+  meals.forEach((meal) => {
+    const questionset = meal.category as string;
+    if (!groupedMeals[questionset]) {
+      groupedMeals[questionset] = [];
+    }
+    groupedMeals[questionset].push(meal);
+  });
+
+  const pairs: FlavourFlowMeal[][] = [];
+
+  for (const questionset in groupedMeals) {
+    const mealsInQuestionset = groupedMeals[questionset];
+
+    while (mealsInQuestionset.length > 1) {
+      const meal1 = mealsInQuestionset.splice(
+        Math.floor(Math.random() * mealsInQuestionset.length),
+        1,
+      )[0];
+      const meal2 = mealsInQuestionset.splice(
+        Math.floor(Math.random() * mealsInQuestionset.length),
+        1,
+      )[0];
+
+      pairs.push([meal1, meal2]);
+    }
+  }
+
+  return pairs;
+};
+
 const drawNewPair = (
   stateSetter: Dispatch<React.SetStateAction<FlavourFlowMeal[]>>,
-  meals: FlavourFlowMeal[],
-): void => {
-  const shuffledMeals = [...meals].sort(() => Math.random() - 0.5);
-
-  // setCurrentPair
-  stateSetter([shuffledMeals[0], shuffledMeals[1]]);
+  pairs: FlavourFlowMeal[][],
+) => {
+  if (pairs.length > 0) {
+    const randomIndex = Math.floor(Math.random() * pairs.length);
+    stateSetter(pairs[randomIndex]);
+  } else {
+    stateSetter([]);
+  }
 };
 
 export {
@@ -82,5 +119,6 @@ export {
   probability,
   updateElo,
   createDataForRanking,
+  findPairsByQuestionset,
   drawNewPair,
 };

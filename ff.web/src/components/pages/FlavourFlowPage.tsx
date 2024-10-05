@@ -9,6 +9,7 @@ import {
   createDataForRanking,
   drawNewPair,
   updateElo,
+  findPairsByQuestionset,
 } from "@vuo/utils/FlavourFlowFunctions";
 
 export default function FlavourFlowPage() {
@@ -18,7 +19,11 @@ export default function FlavourFlowPage() {
   const [currentPair, setCurrentPair] = useState<FlavourFlowMeal[]>([]);
 
   useEffect(() => {
-    drawNewPair(setCurrentPair, meals);
+    const pairs = findPairsByQuestionset(meals);
+    if (pairs.length > 0) {
+      // Initial pair
+      drawNewPair(setCurrentPair, pairs);
+    }
   }, []);
 
   const handleChoice = (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => {
@@ -34,7 +39,7 @@ export default function FlavourFlowPage() {
     );
 
     // Draw a new pair of meals
-    drawNewPair(setCurrentPair, meals);
+    drawNewPair(setCurrentPair, findPairsByQuestionset(meals));
   };
 
   return (
