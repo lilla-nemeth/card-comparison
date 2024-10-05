@@ -8,10 +8,17 @@ import HeartIcon from "../atoms/HeartIcon";
 const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
   const [selectedMeal, setSelectedMeal] = useState<string | null>(null);
 
-  const handleCardClick = (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => {
-    setSelectedMeal(winner.id);
-    handleChoice(winner, loser);
-    setSelectedMeal(null);
+  const handleCardClick = (
+    meals: FlavourFlowMeal[],
+    winner: FlavourFlowMeal,
+  ) => {
+    const loser = meals.find((m) => m.id !== winner.id) as FlavourFlowMeal;
+
+    if (loser) {
+      setSelectedMeal(winner.id);
+      handleChoice(winner, loser);
+      setSelectedMeal(null);
+    }
   };
 
   const containerClass =
@@ -27,7 +34,7 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
               <div
                 key={meal.id}
                 onClick={() => {
-                  handleCardClick(meal, meals.find((m) => m.id !== meal.id)!);
+                  handleCardClick(meals, meal);
                 }}
                 className={module.card}
               >
