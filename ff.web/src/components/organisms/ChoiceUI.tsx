@@ -1,5 +1,5 @@
 import module from "@vuo/scss/components/organisms/ChoiceUI.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlavourFlowMeal } from "@vuo/types/dataTypes";
 import Page from "../templates/Page";
 import { ChoiceUIProps } from "@vuo/types/organismProps";
@@ -8,17 +8,20 @@ import Card from "@vuo/components/atoms/Card";
 const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
   const [selectedMealId, setSelectedMealId] = useState<string | null>(null);
   const [unselectedMealId, setUnselectedMealId] = useState<string | null>(null);
+  const [isSelected, setIsSelected] = useState<boolean>(false);
+  const [isLoser, setIsLoser] = useState<boolean>(false);
 
   const handleCardClick = (
     meals: FlavourFlowMeal[],
     winnerMeal: FlavourFlowMeal,
   ) => {
-    const loser = meals.find((m) => m.id !== winner.id) as FlavourFlowMeal;
-    const winner = meals.find((m) => m.id === winner.id) as FlavourFlowMeal;
+    const loser = meals.find((m) => m.id !== winnerMeal.id) as FlavourFlowMeal;
+    // const winner = meals.find((m) => m.id === winner.id) as FlavourFlowMeal;
 
     if (loser) {
       setUnselectedMealId(loser.id);
-      setSelectedMealId(winner.id);
+      setSelectedMealId(winnerMeal.id);
+
       handleChoice(winnerMeal, loser);
     }
 
@@ -28,6 +31,13 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
     }, 300);
   };
 
+  useEffect(() => {
+    // Log or handle actions here based on the most up-to-date selectedMealId
+    console.log("Selected meal ID changed:", selectedMealId);
+    setIsSelected(selectedMealId !== null);
+    // setIsLoser(selectedMealId !== null);
+  }, [selectedMealId]);
+
   const containerClass =
     meals?.length > 2 ? module.scrollableContainer : module.staticContainer;
 
@@ -35,8 +45,6 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
     <Page>
       <div className={containerClass}>
         {meals?.map((meal: FlavourFlowMeal) => {
-          const isSelected = selectedMealId && selectedMealId === meal.id;
-          const isLoser = selectedMealId && selectedMealId !== meal.id;
           return (
             <Card
               key={meal.id}
@@ -44,11 +52,17 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
               meal={meal}
               onClick={() => {
                 handleCardClick(meals, meal);
+                // if (selectedMealId !== null) {
+                // }
+                setIsSelected(selectedMealId === meal.id);
+                setIsLoser(selectedMealId !== meal.id);
               }}
               isSelected={isSelected}
               selectedMealId={selectedMealId}
               isLoser={isLoser}
-              isActive={selectedMealId === meal.id}
+              setIsSelected={setIsSelected}
+              setIsLoser={setIsLoser}
+              // isActive={selectedMealId === meal.id}
               // animate={{
               //   y: isSelected ? -300 : isLoser ? 300 : 0,
               // }}

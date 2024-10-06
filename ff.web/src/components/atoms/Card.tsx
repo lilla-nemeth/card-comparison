@@ -2,15 +2,19 @@
 import { CardProps } from "@vuo/types/atomProps";
 import HeartIcon from "./HeartIcon";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Card: React.FC<CardProps> = ({
   meals,
   meal,
   onClick,
   isSelected,
+  selectedMealId,
+  isLoser,
+  setIsSelected,
+  setIsLoser,
   isActive,
-  //   animate,
+  animate,
   transition,
   cardClass,
   titleClass,
@@ -30,8 +34,25 @@ const Card: React.FC<CardProps> = ({
     setClicked(true);
     onClick();
 
-    setTimeout(() => setClicked(false), 300);
+    if (selectedMealId !== null) {
+      setIsSelected(selectedMealId === meal.id);
+    }
+
+    setIsLoser(selectedMealId !== meal.id);
+    console.log(selectedMealId);
   };
+
+  useEffect(() => {
+    // Log or handle actions here based on the most up-to-date selectedMealId
+    // console.log("Selected meal ID changed:", selectedMealId);
+    setIsSelected(selectedMealId !== null);
+    // setIsLoser(selectedMealId !== null);
+
+    setTimeout(() => {
+      setIsSelected(null);
+      setIsLoser(null);
+    }, 300);
+  }, [selectedMealId]);
 
   return (
     <>
@@ -40,7 +61,10 @@ const Card: React.FC<CardProps> = ({
         onClick={handleClick}
         className={cardClass}
         // animate={animate}
-        animate={{ y: clicked ? (!isActive ? -300 : 300) : 0 }}
+        // animate={{ y: clicked ? (!isActive ? -300 : 300) : 0 }}
+        animate={{
+          y: selectedMealId !== null ? -300 : isLoser ? 300 : 0,
+        }}
         transition={transition}
       >
         <div className={titleClass}>

@@ -113,7 +113,9 @@ interface CardProps extends CardClassNameProps, DragProps, MotionProps {
   onClick: () => void;
   isSelected: string | boolean | null;
   isLoser: string | boolean | null;
-  isActive: boolean;
+  isActive?: boolean;
+  setIsSelected: any;
+  setIsLoser: any;
 }
 
 export type {
