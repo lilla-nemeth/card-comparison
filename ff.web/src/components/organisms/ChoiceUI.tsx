@@ -6,24 +6,25 @@ import { ChoiceUIProps } from "@vuo/types/organismProps";
 import Card from "@vuo/components/atoms/Card";
 
 const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
-  const [selectedMeal, setSelectedMeal] = useState<string | null>(null);
-  const [loserMeal, setLoserMeal] = useState<string | null>(null);
+  const [selectedMealId, setSelectedMealId] = useState<string | null>(null);
+  const [unselectedMealId, setUnselectedMealId] = useState<string | null>(null);
 
   const handleCardClick = (
     meals: FlavourFlowMeal[],
-    winner: FlavourFlowMeal,
+    winnerMeal: FlavourFlowMeal,
   ) => {
     const loser = meals.find((m) => m.id !== winner.id) as FlavourFlowMeal;
+    const winner = meals.find((m) => m.id === winner.id) as FlavourFlowMeal;
 
     if (loser) {
-      setSelectedMeal(winner.id);
-      setLoserMeal(loser.id);
-      handleChoice(winner, loser);
+      setUnselectedMealId(loser.id);
+      setSelectedMealId(winner.id);
+      handleChoice(winnerMeal, loser);
     }
 
     setTimeout(() => {
-      setSelectedMeal(null);
-      setLoserMeal(null);
+      setSelectedMealId(null);
+      setUnselectedMealId(null);
     }, 300);
   };
 
@@ -34,8 +35,8 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
     <Page>
       <div className={containerClass}>
         {meals?.map((meal: FlavourFlowMeal) => {
-          const isSelected = selectedMeal === meal.id;
-          const isLoser = selectedMeal && selectedMeal !== meal.id;
+          const isSelected = selectedMealId && selectedMealId === meal.id;
+          const isLoser = selectedMealId && selectedMealId !== meal.id;
           return (
             <Card
               key={meal.id}
@@ -45,11 +46,12 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
                 handleCardClick(meals, meal);
               }}
               isSelected={isSelected}
-              selectedMeal={selectedMeal}
+              selectedMealId={selectedMealId}
               isLoser={isLoser}
-              animate={{
-                y: isLoser ? 300 : isSelected ? -300 : 0,
-              }}
+              isActive={selectedMealId === meal.id}
+              // animate={{
+              //   y: isSelected ? -300 : isLoser ? 300 : 0,
+              // }}
               transition={{ type: "spring", stiffness: 300 }}
               cardClass={module.card}
               titleClass={module.cardTitle}

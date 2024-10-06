@@ -102,16 +102,18 @@ interface MotionProps {
   whileTap?: Variants;
   animate?: AnimateType;
   transition?: Transition | undefined;
-  selectedMeal: string | null;
+  selectedMealId: string | null;
   style?: MotionValues;
 }
 
 interface CardProps extends CardClassNameProps, DragProps, MotionProps {
   meals: FlavourFlowMeal[];
   meal: FlavourFlowMeal;
-  onClick: MouseEventHandler<HTMLDivElement>;
-  isSelected: boolean;
-  isLoser: boolean | "" | null;
+  // onClick: MouseEventHandler<HTMLDivElement>;
+  onClick: () => void;
+  isSelected: string | boolean | null;
+  isLoser: string | boolean | null;
+  isActive: boolean;
 }
 
 export type {

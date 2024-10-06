@@ -2,13 +2,15 @@
 import { CardProps } from "@vuo/types/atomProps";
 import HeartIcon from "./HeartIcon";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const Card: React.FC<CardProps> = ({
   meals,
   meal,
   onClick,
   isSelected,
-  animate,
+  isActive,
+  //   animate,
   transition,
   cardClass,
   titleClass,
@@ -22,13 +24,23 @@ const Card: React.FC<CardProps> = ({
   deckContainerClass,
   deckClass,
 }) => {
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    setClicked(true);
+    onClick();
+
+    setTimeout(() => setClicked(false), 300);
+  };
+
   return (
     <>
       <motion.div
         key={meal.id}
-        onClick={onClick}
+        onClick={handleClick}
         className={cardClass}
-        animate={animate}
+        // animate={animate}
+        animate={{ y: clicked ? (!isActive ? -300 : 300) : 0 }}
         transition={transition}
       >
         <div className={titleClass}>
@@ -56,5 +68,3 @@ const Card: React.FC<CardProps> = ({
   );
 };
 export default Card;
-
-import React from "react";
