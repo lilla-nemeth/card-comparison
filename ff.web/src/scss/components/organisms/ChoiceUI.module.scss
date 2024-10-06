@@ -19,7 +19,7 @@
 
 .card,
 .cardOverlay,
-.cardSelectedOverlayActive,
+.cardOverlayActive,
 .cardImage,
 .cardDeck {
   border-radius: var(--radius-8);
@@ -116,7 +116,7 @@
   filter: brightness(60%);
 }
 
-.cardSelectedOverlayActive {
+.cardOverlayActive {
   position: absolute;
   z-index: 70;
   top: 0;
@@ -130,7 +130,7 @@
   background-color: var(--surface-brand-orange-medium);
 }
 
-.cardSelectedTextActive {
+.cardTextActive {
   display: flex;
   align-items: center;
   position: absolute;

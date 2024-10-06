@@ -40,8 +40,8 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
               titleClass={module.cardTitle}
               btnActiveClass={module.cardButtonActive}
               btnIconActiveClass={module.cardButtonIconActive}
-              textActiveClass={module.cardSelectedTextActive}
-              overlayActiveClass={module.cardSelectedOverlayActive}
+              textActiveClass={module.cardTextActive}
+              overlayActiveClass={module.cardOverlayActive}
               btnClass={module.cardButton}
               btnIconClass={module.cardButtonIcon}
               imageClass={module.cardImage}
@@ -56,39 +56,3 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
 };
 
 export default ChoiceUI;
-
-// return (
-//   <>
-//     <div
-//       key={meal.id}
-//       onClick={() => {
-//         handleCardClick(meals, meal);
-//       }}
-//       className={module.card}
-//     >
-//       <div className={module.cardTitle}>
-//         <p>{meal.title}</p>
-//       </div>
-//       {isSelected && (
-//         <>
-//           <div className={module.cardButtonActive}>
-//             <HeartIcon className={module.cardButtonIconActive} />
-//           </div>
-//           <div className={module.cardSelectedTextActive}>chosen!</div>
-//           <div className={module.cardSelectedOverlayActive}></div>
-//         </>
-//       )}
-//       <div className={module.cardButton}>
-//         <HeartIcon className={module.cardButtonIcon} />
-//       </div>
-//       <img
-//         src={meal.image}
-//         alt={meal.title}
-//         className={module.cardImage}
-//       />
-//     </div>
-//     <div className={module.cardDeckContainer}>
-//       {meals.length > 1 && <div className={module.cardDeck}></div>}
-//     </div>
-//   </>
-// );
