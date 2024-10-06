@@ -1,5 +1,7 @@
 import React from "react";
 
+type className = string;
+
 interface CustomButtonProps {
   color?: "primary" | "secondary"; // Custom variants
   variant?: "large" | "heavy" | "medium" | "small"; // Custom sizes
@@ -11,7 +13,7 @@ interface CustomButtonProps {
 }
 
 interface LogoProps {
-  className?: string;
+  className?: className;
   variant: LogoVariants;
 }
 
@@ -45,7 +47,25 @@ interface IconProps {
   fill?: string;
   stroke?: string;
   strokeWidth?: string;
-  className?: string;
+  className?: className;
+}
+
+interface CardProps {
+  meals: FlavourFlowMeal[];
+  meal: FlavourFlowMeal;
+  onClick: MouseEventHandler<HTMLDivElement>;
+  isSelected: boolean;
+  cardClass?: className;
+  titleClass?: className;
+  btnActiveClass?: className;
+  btnIconActiveClass?: className;
+  textActiveClass?: className;
+  overlayActiveClass?: className;
+  btnClass?: className;
+  btnIconClass?: className;
+  imageClass?: className;
+  deckContainerClass?: className;
+  deckClass?: className;
 }
 
 export type {
@@ -56,4 +76,5 @@ export type {
   SectionProps,
   SliderProps,
   IconProps,
+  CardProps,
 };

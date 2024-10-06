@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FlavourFlowMeal } from "@vuo/types/dataTypes";
 import Page from "../templates/Page";
 import { ChoiceUIProps } from "@vuo/types/organismProps";
-import HeartIcon from "../atoms/HeartIcon";
+import Card from "@vuo/atoms/Card";
 
 const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
   const [selectedMeal, setSelectedMeal] = useState<string | null>(null);
@@ -30,39 +30,24 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
         {meals?.map((meal: FlavourFlowMeal) => {
           const isSelected = selectedMeal === meal.id;
           return (
-            <>
-              <div
-                key={meal.id}
-                onClick={() => {
-                  handleCardClick(meals, meal);
-                }}
-                className={module.card}
-              >
-                <div className={module.cardTitle}>
-                  <p>{meal.title}</p>
-                </div>
-                {isSelected && (
-                  <>
-                    <div className={module.cardButtonActive}>
-                      <HeartIcon className={module.cardButtonIconActive} />
-                    </div>
-                    <div className={module.cardSelectedTextActive}>chosen!</div>
-                    <div className={module.cardSelectedOverlayActive}></div>
-                  </>
-                )}
-                <div className={module.cardButton}>
-                  <HeartIcon className={module.cardButtonIcon} />
-                </div>
-                <img
-                  src={meal.image}
-                  alt={meal.title}
-                  className={module.cardImage}
-                />
-              </div>
-              <div className={module.cardDeckContainer}>
-                {meals.length > 1 && <div className={module.cardDeck}></div>}
-              </div>
-            </>
+            <Card
+              key={meal.id}
+              meals={meals}
+              meal={meal}
+              onClick={() => handleCardClick(meals, meal)}
+              isSelected={isSelected}
+              cardClass={module.card}
+              titleClass={module.cardTitle}
+              btnActiveClass={module.cardButtonActive}
+              btnIconActiveClass={module.cardButtonIconActive}
+              textActiveClass={module.cardSelectedTextActive}
+              overlayActiveClass={module.cardSelectedOverlayActive}
+              btnClass={module.cardButton}
+              btnIconClass={module.cardButtonIcon}
+              imageClass={module.cardImage}
+              deckContainerClass={module.cardDeckContainer}
+              deckClass={module.cardDeck}
+            />
           );
         })}
       </div>
@@ -71,3 +56,39 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
 };
 
 export default ChoiceUI;
+
+// return (
+//   <>
+//     <div
+//       key={meal.id}
+//       onClick={() => {
+//         handleCardClick(meals, meal);
+//       }}
+//       className={module.card}
+//     >
+//       <div className={module.cardTitle}>
+//         <p>{meal.title}</p>
+//       </div>
+//       {isSelected && (
+//         <>
+//           <div className={module.cardButtonActive}>
+//             <HeartIcon className={module.cardButtonIconActive} />
+//           </div>
+//           <div className={module.cardSelectedTextActive}>chosen!</div>
+//           <div className={module.cardSelectedOverlayActive}></div>
+//         </>
+//       )}
+//       <div className={module.cardButton}>
+//         <HeartIcon className={module.cardButtonIcon} />
+//       </div>
+//       <img
+//         src={meal.image}
+//         alt={meal.title}
+//         className={module.cardImage}
+//       />
+//     </div>
+//     <div className={module.cardDeckContainer}>
+//       {meals.length > 1 && <div className={module.cardDeck}></div>}
+//     </div>
+//   </>
+// );
