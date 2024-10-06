@@ -10,7 +10,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
   initialTheme,
 }) => {
-  console.log("initialTheme", initialTheme);
   const [theme, setTheme] = useState<"light-theme" | "dark-theme">(
     initialTheme || "dark-theme",
   );
@@ -18,7 +17,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   // Update theme when initialTheme prop changes, only can be changed through storybook
   useEffect(() => {
     if (initialTheme !== undefined && initialTheme != theme) {
-      console.log("CHANGING THEME");
       setTheme(initialTheme);
     }
   }, [initialTheme]);

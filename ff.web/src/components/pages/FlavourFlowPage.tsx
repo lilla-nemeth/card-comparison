@@ -1,127 +1,63 @@
 import { useEffect, useState } from "react";
-
-import CauliflowerImage from "../../../public/images/CauliflowerRice.webp";
-import Day1BaconImage from "../../../public/images/1.webp";
-import Day2KetoImage from "../../../public/images/2.webp";
-import Day3ChickenImage from "../../../public/images/3.webp";
-import Day4SalmonImage from "../../../public/images/4.webp";
-import Day5MexicanImage from "../../../public/images/5.webp";
-import Day6StuffedImage from "../../../public/images/6.webp";
-import Day7BoneImage from "../../../public/images/7.webp";
-import ChoiceUI from "../organisms/ChoiceUI";
 import Page from "../templates/Page";
-
-// Dataset
-const dataset = {
-  questionset: [
-    {
-      choice: { title: "Sweet", image: CauliflowerImage },
-      choice1: { title: "Savory", image: Day1BaconImage },
-    },
-  ],
-  questionset1: [
-    {
-      choice2: { title: "Quick and easy", image: Day2KetoImage },
-      choice3: { title: "Requires more time", image: Day3ChickenImage },
-    },
-  ],
-  questionset2: [
-    {
-      choice4: { title: "Traditional breakfast", image: Day4SalmonImage },
-      choice5: { title: "Unique twist", image: Day5MexicanImage },
-    },
-  ],
-  questionset3: [
-    {
-      choice6: { title: "Simple ingredients", image: Day6StuffedImage },
-      choice7: { title: "Variety of ingredients", image: Day7BoneImage },
-    },
-  ],
-};
-
-export type Meal = {
-  id: string;
-  title: string;
-  elo: number;
-  image: string;
-  name?: string;
-};
-
-const K = 32;
-
-const calculateElo = (
-  winner: Meal,
-  loser: Meal,
-): { newWinnerElo: number; newLoserElo: number } => {
-  const expectedScoreWinner =
-    1 / (1 + Math.pow(10, (loser.elo - winner.elo) / 400));
-  const expectedScoreLoser =
-    1 / (1 + Math.pow(10, (winner.elo - loser.elo) / 400));
-
-  const newWinnerElo = winner.elo + K * (1 - expectedScoreWinner);
-  const newLoserElo = loser.elo + K * (0 - expectedScoreLoser);
-
-  return {
-    newWinnerElo: Math.round(newWinnerElo),
-    newLoserElo: Math.round(newLoserElo),
-  };
-};
+import { dataset } from "@vuo/utils/FlavourFlowData";
+import { FlavourFlowMeal } from "@vuo/types/dataTypes";
+import ChoiceUI from "../organisms/ChoiceUI";
+import {
+  probability,
+  calculateElo,
+  createDataForRanking,
+  drawNewPair,
+  updateElo,
+  findPairsByQuestionset,
+} from "@vuo/utils/FlavourFlowFunctions";
+import Button from "../atoms/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function FlavourFlowPage() {
-  const createDataForRanking = (dataset: any) => {
-    let flattened: any = [];
-
-    // Iterate over the object values (which are arrays of questions)
-    Object.values(dataset).forEach((questionSet: any) => {
-      questionSet.forEach((question: any) => {
-        // Iterate over each "choice" in the question object
-        Object.values(question).forEach((choice: any) => {
-          flattened.push({
-            ...choice,
-            id: Math.random().toString(36).substr(2, 9), // Generate random ID
-            elo: 1200, // Starting ELO score
-          });
-        });
-      });
-    });
-
-    return flattened;
-  };
-
-  const [meals, setMeals] = useState<Meal[]>(createDataForRanking(dataset));
-  const [currentPair, setCurrentPair] = useState<Meal[]>([]);
+  const [meals, setMeals] = useState<FlavourFlowMeal[]>(
+    createDataForRanking(dataset),
+  );
+  const [currentPair, setCurrentPair] = useState<FlavourFlowMeal[]>([]);
+  const [clickedMeals, setClickedMeals] = useState<Set<string>>(new Set());
+  const navigate = useNavigate();
 
   useEffect(() => {
-    drawNewPair();
-  }, []);
+    const pairs = findPairsByQuestionset(meals);
+    if (pairs.length > 0) {
+      // Initial pair
+      drawNewPair(setCurrentPair, pairs, clickedMeals);
+    }
+  }, [meals, clickedMeals]);
 
-  const drawNewPair = () => {
-    const shuffledMeals = [...meals].sort(() => Math.random() - 0.5);
-
-    setCurrentPair([shuffledMeals[0], shuffledMeals[1]]);
+  const handleNavigate = () => {
+    navigate("/flavour-flow/results", { state: { meals } });
   };
 
-  const handleChoice = (winner: Meal, loser: Meal) => {
-    const { newWinnerElo, newLoserElo } = calculateElo(winner, loser);
+  const handleChoice = (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => {
+    const { newWinnerElo, newLoserElo } = calculateElo(
+      winner,
+      loser,
+      probability,
+    );
 
     // Update meals' ELOs
     setMeals((prevMeals) =>
-      prevMeals.map((meal) =>
-        meal.id === winner.id
-          ? { ...meal, elo: newWinnerElo }
-          : meal.id === loser.id
-            ? { ...meal, elo: newLoserElo }
-            : meal,
-      ),
+      updateElo(prevMeals, winner, loser, newWinnerElo, newLoserElo),
     );
 
+    setClickedMeals((prev) => new Set(prev).add(winner.id).add(loser.id));
+
     // Draw a new pair of meals
-    drawNewPair();
+    drawNewPair(setCurrentPair, findPairsByQuestionset(meals), clickedMeals);
   };
 
   return (
     <Page>
       <ChoiceUI meals={currentPair} handleChoice={handleChoice} />
+      {currentPair.length === 0 && (
+        <Button onClick={handleNavigate}>See the Results</Button>
+      )}
     </Page>
   );
 }

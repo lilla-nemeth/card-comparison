@@ -22,7 +22,6 @@ const organizeMeals = (recipes: any) => {
     const meals = recipes
       .slice(day * 3, day * 3 + 3)
       .map((recipe: any, index: any) => {
-        console.log(recipe.media);
         return {
           id: recipe._id,
           name: recipe.name || `Meal ${index + 1}`,
@@ -48,7 +47,6 @@ export default function MealMap() {
   useEffect(() => {
     fetchRecipes()
       .then((data) => {
-        console.log("data from MealMap", data);
         const organizedMeals: any = organizeMeals(data);
         setMealPlan(organizedMeals);
       })

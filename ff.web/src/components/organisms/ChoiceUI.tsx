@@ -1,6 +1,6 @@
 import module from "@vuo/scss/components/organisms/ChoiceUI.module.scss";
 import { useState } from "react";
-import { Meal } from "../pages/FlavourFlowPage";
+import { FlavourFlowMeal } from "@vuo/types/dataTypes";
 import Page from "../templates/Page";
 import { ChoiceUIProps } from "@vuo/types/organismProps";
 import HeartIcon from "../atoms/HeartIcon";
@@ -8,10 +8,17 @@ import HeartIcon from "../atoms/HeartIcon";
 const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
   const [selectedMeal, setSelectedMeal] = useState<string | null>(null);
 
-  const handleCardClick = (winner: Meal, loser: Meal) => {
-    setSelectedMeal(winner.id);
-    handleChoice(winner, loser);
-    setSelectedMeal(null);
+  const handleCardClick = (
+    meals: FlavourFlowMeal[],
+    winner: FlavourFlowMeal,
+  ) => {
+    const loser = meals.find((m) => m.id !== winner.id) as FlavourFlowMeal;
+
+    if (loser) {
+      setSelectedMeal(winner.id);
+      handleChoice(winner, loser);
+      setSelectedMeal(null);
+    }
   };
 
   const containerClass =
@@ -20,14 +27,14 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
   return (
     <Page>
       <div className={containerClass}>
-        {meals?.map((meal: Meal) => {
+        {meals?.map((meal: FlavourFlowMeal) => {
           const isSelected = selectedMeal === meal.id;
           return (
             <>
               <div
                 key={meal.id}
                 onClick={() => {
-                  handleCardClick(meal, meals.find((m) => m.id !== meal.id)!);
+                  handleCardClick(meals, meal);
                 }}
                 className={module.card}
               >
@@ -52,7 +59,7 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
                   className={module.cardImage}
                 />
               </div>
-              <div>
+              <div className={module.cardDeckContainer}>
                 {meals.length > 1 && <div className={module.cardDeck}></div>}
               </div>
             </>

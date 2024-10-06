@@ -23,4 +23,28 @@ interface FormDataCuisinePreferences {
   [key: string]: unknown;
 }
 
-export type { FormData, FormDataCuisinePreferences };
+/* Flavour Flow */
+interface FlavourFlowDataset {
+  [key: string]: FlavourFlowChoices[];
+}
+
+interface FlavourFlowChoices {
+  [key: string]: FlavourFlowMeal;
+}
+
+interface FlavourFlowMeal {
+  id: string;
+  title: string;
+  elo: number;
+  image: string;
+  name?: string;
+  category?: string;
+}
+
+export type {
+  FormData,
+  FormDataCuisinePreferences,
+  FlavourFlowDataset,
+  FlavourFlowChoices,
+  FlavourFlowMeal,
+};

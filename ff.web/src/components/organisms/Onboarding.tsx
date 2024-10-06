@@ -143,8 +143,7 @@ export default function OnboardingFlow() {
 
       let stepsDone = Object.entries(data).filter(([_, value]) => value).length;
       let allSteps = Object.keys(data).length;
-      console.log("stepsDone:", stepsDone);
-      console.log("allSteps:", allSteps);
+
       setProgress((stepsDone / allSteps) * 100);
     } else {
       setProgress((currentStep / (steps.length - 1)) * 100);
@@ -1103,7 +1102,6 @@ export default function OnboardingFlow() {
     }
   };
 
-  console.log("formData", formData);
   return (
     <div>
       <ProgressBar value={progress} />

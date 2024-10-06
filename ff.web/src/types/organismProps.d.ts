@@ -1,6 +1,8 @@
+import { FlavourFlowMeal } from "./dataTypes";
+
 interface ChoiceUIProps {
-  handleChoice: (winner: Meal, loser: Meal) => void;
-  meals: Meal[];
+  handleChoice: (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => void;
+  meals: FlavourFlowMeal[];
 }
 
 export type { ChoiceUIProps };

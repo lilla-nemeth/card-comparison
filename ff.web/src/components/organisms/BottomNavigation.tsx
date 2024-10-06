@@ -6,6 +6,7 @@ import {
   UserOutlined,
   CoffeeOutlined,
   QuestionOutlined,
+  BookOutlined,
 } from "@ant-design/icons";
 import useStackNavigator from "@vuo/utils/StackNavigator";
 
