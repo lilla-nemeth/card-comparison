@@ -1,4 +1,5 @@
 import React from "react";
+import { Variants, Transition, MotionValue } from "framer-motion";
 
 type className = string;
 
@@ -50,11 +51,8 @@ interface IconProps {
   className?: className;
 }
 
-interface CardProps {
-  meals: FlavourFlowMeal[];
-  meal: FlavourFlowMeal;
-  onClick: MouseEventHandler<HTMLDivElement>;
-  isSelected: boolean;
+/* Card */
+interface CardClassNameProps {
   cardClass?: className;
   titleClass?: className;
   btnActiveClass?: className;
@@ -66,6 +64,54 @@ interface CardProps {
   imageClass?: className;
   deckContainerClass?: className;
   deckClass?: className;
+}
+
+// Framer Motion
+interface DragConstraints {
+  left?: number;
+  right?: number;
+  top?: number;
+  bottom?: number;
+}
+
+interface DragProps {
+  drag?: boolean | "x" | "y" | undefined;
+  dragConstraints?: DragConstraints;
+  onDragEnd?: (event: MouseEvent | TouchEvent, info: any) => void;
+}
+
+type Variants = {
+  [key: string]: Variant;
+};
+
+type AnimateType =
+  | {
+      [key: string]: number | string;
+    }
+  | string;
+
+interface MotionValues {
+  x: MotionValue<number>;
+  rotate: MotionValue<number>;
+  opacity: MotionValue<number>;
+}
+
+interface MotionProps {
+  initial?: Variants;
+  whileHover?: Variants;
+  whileTap?: Variants;
+  animate?: AnimateType;
+  transition?: Transition | undefined;
+  selectedMeal: string | null;
+  style?: MotionValues;
+}
+
+interface CardProps extends CardClassNameProps, DragProps, MotionProps {
+  meals: FlavourFlowMeal[];
+  meal: FlavourFlowMeal;
+  onClick: MouseEventHandler<HTMLDivElement>;
+  isSelected: boolean;
+  isLoser: boolean | "" | null;
 }
 
 export type {
