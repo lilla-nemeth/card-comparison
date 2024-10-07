@@ -14,9 +14,6 @@ import {
 
 const ChoiceUI = ({ meals, setMeals, handleChoice }: ChoiceUIProps) => {
   const [selectedMealId, setSelectedMealId] = useState<string | null>(null);
-  const [unselectedMealId, setUnselectedMealId] = useState<string | null>(null);
-  const [isSelected, setIsSelected] = useState<boolean>(false);
-  const [isLoser, setIsLoser] = useState<boolean>(false);
 
   // swiping and dragging cards
   const [direction, setDirection] = useState<CardSwipeDirection | "">("");
@@ -26,7 +23,11 @@ const ChoiceUI = ({ meals, setMeals, handleChoice }: ChoiceUIProps) => {
 
   const cardVariants = {
     current: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, y: direction === "up" ? -300 : 300 },
+    exit: {
+      opacity: 0,
+      y: direction === "up" ? -300 : 300,
+      transition: { duration: 0.7 },
+    }, // Slower exit animation
   };
 
   const handleCardClick = (
@@ -36,20 +37,21 @@ const ChoiceUI = ({ meals, setMeals, handleChoice }: ChoiceUIProps) => {
     const loser = meals.find((m) => m.id !== winnerMeal.id) as FlavourFlowMeal;
 
     if (loser) {
-      setUnselectedMealId(loser.id);
       setSelectedMealId(winnerMeal.id);
-
       handleChoice(winnerMeal, loser);
     }
 
     setTimeout(() => {
       setSelectedMealId(null);
-      setUnselectedMealId(null);
     }, 300);
+
+    return winnerMeal.id;
   };
 
-  const handleDirectionChange = (newDirection: "up" | "down") => {
+  const handleDirectionChange = (isSelected: boolean) => {
+    const newDirection = isSelected ? "up" : "down";
     setDirection(newDirection);
+
     setMeals((prev) => prev.slice(1));
 
     setTimeout(() => {
@@ -57,18 +59,15 @@ const ChoiceUI = ({ meals, setMeals, handleChoice }: ChoiceUIProps) => {
     }, 100);
   };
 
-  useEffect(() => {
-    setIsSelected(selectedMealId !== null);
-  }, [selectedMealId]);
-
-  // const containerClass =
-  //   meals?.length > 2 ? module.scrollableContainer : module.staticContainer;
+  const containerClass =
+    meals?.length > 2 ? module.scrollableContainer : module.staticContainer;
 
   return (
     <Page>
-      <div className={module.staticContainer}>
+      <div className={containerClass}>
         <AnimatePresence>
-          {meals.map((meal: FlavourFlowMeal) => {
+          {meals.map((meal: FlavourFlowMeal, index: number) => {
+            const isSelected = meal.id === selectedMealId;
             return (
               <motion.div
                 key={meal.id}
@@ -80,16 +79,14 @@ const ChoiceUI = ({ meals, setMeals, handleChoice }: ChoiceUIProps) => {
                   id={meal.id}
                   meal={meal}
                   onClick={() => {
-                    handleDirectionChange("up");
-                    handleCardClick(meals, meal);
-                    setIsSelected(selectedMealId === meal.id);
-                    setIsLoser(selectedMealId !== meal.id);
+                    const clickedMealId = handleCardClick(meals, meal);
+                    handleDirectionChange(clickedMealId === meal.id);
                   }}
                   isSelected={isSelected}
                   drag={"y"}
                   setIsDragging={setIsDragging}
                   setIsDragOffBoundary={setIsDragOffBoundary}
-                  setDirection={handleDirectionChange}
+                  handleDirectionChange={handleDirectionChange}
                   cardContainerClass={module.cardContainer}
                   cardClass={module.card}
                   titleClass={module.cardTitle}
@@ -102,6 +99,13 @@ const ChoiceUI = ({ meals, setMeals, handleChoice }: ChoiceUIProps) => {
                   imageClass={module.cardImage}
                   deckContainerClass={module.cardDeckContainer}
                   deckClass={module.cardDeck}
+                  style={{
+                    position: "absolute",
+                    left: index === 1 ? "50%" : "calc(0% + 10%)",
+                    transform:
+                      index === 1 ? "translateX(10%)" : "translateX(0)",
+                    zIndex: 500,
+                  }}
                 />
               </motion.div>
             );

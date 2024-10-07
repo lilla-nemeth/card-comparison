@@ -3,12 +3,11 @@ import HeartIcon from "./HeartIcon";
 import { CardProps } from "@vuo/types/atomProps";
 
 const Card = ({
-  id,
   meal,
   onClick,
   drag,
   isSelected,
-  setDirection,
+  handleDirectionChange,
   setIsDragging,
   setIsDragOffBoundary,
   cardClass,
@@ -23,6 +22,7 @@ const Card = ({
   deckContainerClass,
   deckClass,
   cardContainerClass,
+  style,
 }: CardProps) => {
   const y = useMotionValue(0);
   const offsetBoundary = 150;
@@ -47,10 +47,9 @@ const Card = ({
     setIsDragOffBoundary(null);
     const isOffBoundary =
       info.offset.y > offsetBoundary || info.offset.y < -offsetBoundary;
-    const direction = info.offset.y > 0 ? "down" : "up";
 
     if (isOffBoundary) {
-      setDirection(direction);
+      handleDirectionChange(isSelected as boolean); // Use the current selection state
     }
   };
   return (
@@ -66,19 +65,19 @@ const Card = ({
       onDragStart={() => setIsDragging(true)}
       className={cardContainerClass}
     >
-      <div key={meal.id} onClick={onClick} className={cardClass}>
+      <div key={meal.id} onClick={onClick} className={cardClass} style={style}>
         <div className={titleClass}>
           <p>{meal.title}</p>
         </div>
-        {/* {isSelected && (
-        <>
-          <div className={btnActiveClass}>
-            <HeartIcon className={btnIconActiveClass} />
-          </div>
-          <div className={textActiveClass}>chosen!</div>
-          <div className={overlayActiveClass}></div>
-        </>
-      )} */}
+        {isSelected && (
+          <>
+            <div className={btnActiveClass}>
+              <HeartIcon className={btnIconActiveClass} />
+            </div>
+            <div className={textActiveClass}>chosen!</div>
+            <div className={overlayActiveClass}></div>
+          </>
+        )}
         <div className={btnClass}>
           <HeartIcon className={btnIconClass} />
         </div>
