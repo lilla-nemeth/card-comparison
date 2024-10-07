@@ -55,6 +55,7 @@ interface IconProps {
 type className = string;
 
 interface CardClassNameProps {
+  cardContainerClass?: className;
   cardClass?: className;
   cardDraggedClass?: className;
   titleClass?: className;

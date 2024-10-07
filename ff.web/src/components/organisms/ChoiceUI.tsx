@@ -52,64 +52,70 @@ const ChoiceUI = ({ meals, setMeals, handleChoice }: ChoiceUIProps) => {
     setDirection(newDirection);
     setMeals((prev) => prev.slice(1));
 
-    // setTimeout(() => {
-    //   setDirection(null);
-    // }, 100);
+    setTimeout(() => {
+      setDirection("");
+    }, 100);
   };
 
   useEffect(() => {
     setIsSelected(selectedMealId !== null);
   }, [selectedMealId]);
 
-  const containerClass =
-    meals?.length > 2 ? module.scrollableContainer : module.staticContainer;
+  // const containerClass =
+  //   meals?.length > 2 ? module.scrollableContainer : module.staticContainer;
 
   return (
     <Page>
-      <div className={containerClass}>
-        <div>
-          <AnimatePresence>
-            {meals.map((meal: FlavourFlowMeal) => {
-              return (
-                <motion.div
-                  key={meal.id}
-                  variants={cardVariants}
-                  initial="current"
-                  exit="exit"
-                >
-                  <Card
-                    id={meal.id}
-                    meal={meal}
-                    onClick={() => {
-                      handleDirectionChange("up");
-                      handleCardClick(meals, meal);
-                      setIsSelected(selectedMealId === meal.id);
-                      setIsLoser(selectedMealId !== meal.id);
-                    }}
-                    isSelected={isSelected}
-                    drag={"y"}
-                    setIsDragging={setIsDragging}
-                    setIsDragOffBoundary={setIsDragOffBoundary}
-                    setDirection={handleDirectionChange}
-                    cardClass={module.card}
-                    titleClass={module.cardTitle}
-                    btnActiveClass={module.cardButtonActive}
-                    btnIconActiveClass={module.cardButtonIconActive}
-                    textActiveClass={module.cardTextActive}
-                    overlayActiveClass={module.cardOverlayActive}
-                    btnClass={module.cardButton}
-                    btnIconClass={module.cardButtonIcon}
-                    imageClass={module.cardImage}
-                    deckContainerClass={module.cardDeckContainer}
-                    deckClass={module.cardDeck}
-                  />
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </div>
-        <div>
-          {/* Temporary buttons for card animation */}
+      <div className={module.staticContainer}>
+        <AnimatePresence>
+          {meals.map((meal: FlavourFlowMeal) => {
+            return (
+              <motion.div
+                key={meal.id}
+                variants={cardVariants}
+                initial="current"
+                exit="exit"
+              >
+                <Card
+                  id={meal.id}
+                  meal={meal}
+                  onClick={() => {
+                    handleDirectionChange("up");
+                    handleCardClick(meals, meal);
+                    setIsSelected(selectedMealId === meal.id);
+                    setIsLoser(selectedMealId !== meal.id);
+                  }}
+                  isSelected={isSelected}
+                  drag={"y"}
+                  setIsDragging={setIsDragging}
+                  setIsDragOffBoundary={setIsDragOffBoundary}
+                  setDirection={handleDirectionChange}
+                  cardContainerClass={module.cardContainer}
+                  cardClass={module.card}
+                  titleClass={module.cardTitle}
+                  btnActiveClass={module.cardButtonActive}
+                  btnIconActiveClass={module.cardButtonIconActive}
+                  textActiveClass={module.cardTextActive}
+                  overlayActiveClass={module.cardOverlayActive}
+                  btnClass={module.cardButton}
+                  btnIconClass={module.cardButtonIcon}
+                  imageClass={module.cardImage}
+                  deckContainerClass={module.cardDeckContainer}
+                  deckClass={module.cardDeck}
+                />
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+      </div>
+    </Page>
+  );
+};
+
+export default ChoiceUI;
+
+{
+  /* <div>
           <CardActionBtn
             direction="up"
             onClick={() => handleDirectionChange("up")}
@@ -118,10 +124,5 @@ const ChoiceUI = ({ meals, setMeals, handleChoice }: ChoiceUIProps) => {
             direction="down"
             onClick={() => handleDirectionChange("down")}
           />
-        </div>
-      </div>
-    </Page>
-  );
-};
-
-export default ChoiceUI;
+        </div> */
+}

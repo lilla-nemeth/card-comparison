@@ -4,12 +4,13 @@
 .scrollableContainer,
 .staticContainer {
   display: flex;
-  flex-direction: row;
   justify-content: center;
+  position: relative;
   width: 100%;
-  padding: var(--space-16) 0;
-  gap: var(--space-16);
-  margin: 0 10em;
+  max-width: 30rem;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  height: 100%;
 }
 
 .scrollableContainer {
@@ -26,15 +27,24 @@
   height: 23em;
 }
 
+.cardContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: var(--space-16);
+}
+
 .card {
   position: absolute;
-  // position: relative;
-  width: 50%;
   cursor: pointer;
   background-color: var(--color-black);
-  flex: 0 0 48%;
-  width: 3em;
+  width: 13em;
   display: inline-block;
+  transition: transform 0.3s ease;
+  z-index: 500;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .cardDeckContainer {
@@ -158,5 +168,5 @@
 /* Active styles */
 .card:active {
   filter: unset;
-  transform: scale(1.15);
+  // transform: scale(1.15);
 }
