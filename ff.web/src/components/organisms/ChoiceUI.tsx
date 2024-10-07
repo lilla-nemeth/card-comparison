@@ -48,8 +48,7 @@ const ChoiceUI = ({ meals, setMeals, handleChoice }: ChoiceUIProps) => {
     return winnerMeal.id;
   };
 
-  const handleDirectionChange = (isSelected: boolean) => {
-    const newDirection = isSelected ? "up" : "down";
+  const handleDirectionChange = (newDirection: "up" | "down") => {
     setDirection(newDirection);
 
     setMeals((prev) => prev.slice(1));
@@ -79,17 +78,16 @@ const ChoiceUI = ({ meals, setMeals, handleChoice }: ChoiceUIProps) => {
                   id={meal.id}
                   meal={meal}
                   onClick={() => {
-                    const clickedMealId = handleCardClick(meals, meal);
-                    handleDirectionChange(clickedMealId === meal.id);
-                    console.log(direction);
+                    handleCardClick(meals, meal);
+                    handleDirectionChange("up");
                   }}
                   index={index}
                   isSelected={isSelected}
                   drag={"y"}
                   setIsDragging={setIsDragging}
-                  setDirection={setDirection}
+                  setDirection={handleDirectionChange}
                   setIsDragOffBoundary={setIsDragOffBoundary}
-                  handleDirectionChange={handleDirectionChange}
+                  // handleDirectionChange={handleDirectionChange}
                   cardContainerClass={module.cardContainer}
                   cardClass={module.card}
                   titleClass={module.cardTitle}

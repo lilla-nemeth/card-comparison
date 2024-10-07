@@ -52,7 +52,6 @@ const Card = ({
 
     if (isOffBoundary) {
       const direction = info.offset.y > 0 ? "down" : "up";
-      handleDirectionChange(isSelected as boolean);
       setDirection(direction);
     }
   };
