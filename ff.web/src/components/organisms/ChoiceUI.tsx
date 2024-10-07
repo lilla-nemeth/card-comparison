@@ -56,7 +56,7 @@ const ChoiceUI = ({ meals, setMeals, handleChoice }: ChoiceUIProps) => {
 
     setTimeout(() => {
       setDirection("");
-    }, 100);
+    }, 700);
   };
 
   const containerClass =
@@ -81,10 +81,13 @@ const ChoiceUI = ({ meals, setMeals, handleChoice }: ChoiceUIProps) => {
                   onClick={() => {
                     const clickedMealId = handleCardClick(meals, meal);
                     handleDirectionChange(clickedMealId === meal.id);
+                    console.log(direction);
                   }}
+                  index={index}
                   isSelected={isSelected}
                   drag={"y"}
                   setIsDragging={setIsDragging}
+                  setDirection={setDirection}
                   setIsDragOffBoundary={setIsDragOffBoundary}
                   handleDirectionChange={handleDirectionChange}
                   cardContainerClass={module.cardContainer}
@@ -101,9 +104,9 @@ const ChoiceUI = ({ meals, setMeals, handleChoice }: ChoiceUIProps) => {
                   deckClass={module.cardDeck}
                   style={{
                     position: "absolute",
-                    left: index === 1 ? "50%" : "calc(0% + 10%)",
+                    left: index === 0 ? "calc(0% + 10%)" : "50%",
                     transform:
-                      index === 1 ? "translateX(10%)" : "translateX(0)",
+                      index === 0 ? "translateX(0)" : "translateX(-10%)",
                     zIndex: 500,
                   }}
                 />

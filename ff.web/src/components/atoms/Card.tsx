@@ -3,11 +3,13 @@ import HeartIcon from "./HeartIcon";
 import { CardProps } from "@vuo/types/atomProps";
 
 const Card = ({
+  index,
   meal,
   onClick,
   drag,
   isSelected,
   handleDirectionChange,
+  setDirection,
   setIsDragging,
   setIsDragOffBoundary,
   cardClass,
@@ -49,7 +51,9 @@ const Card = ({
       info.offset.y > offsetBoundary || info.offset.y < -offsetBoundary;
 
     if (isOffBoundary) {
-      handleDirectionChange(isSelected as boolean); // Use the current selection state
+      const direction = info.offset.y > 0 ? "down" : "up";
+      handleDirectionChange(isSelected as boolean);
+      setDirection(direction);
     }
   };
   return (
@@ -65,7 +69,7 @@ const Card = ({
       onDragStart={() => setIsDragging(true)}
       className={cardContainerClass}
     >
-      <div key={meal.id} onClick={onClick} className={cardClass} style={style}>
+      <div key={meal.id} onClick={onClick} className={cardClass}>
         <div className={titleClass}>
           <p>{meal.title}</p>
         </div>
