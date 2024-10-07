@@ -78,13 +78,13 @@ interface CardProps extends CardClassNameProps {
 
   // Setting direction and dragging the card
   // handleDirectionChange: (direction: "up" | "down") => void;
-  handleDirectionChange(isSelected: boolean): void;
-  setDirection(direction: "up" | "down"): void;
-  setIsDragging: Dispatch<SetStateAction<any>>;
-  setIsDragOffBoundary: Dispatch<SetStateAction<any>>;
+  // handleDirectionChange(isSelected: boolean): void;
+  setDirection?(direction: "up" | "down"): void;
+  setIsDragging?: Dispatch<SetStateAction<any>>;
+  setIsDragOffBoundary?: Dispatch<SetStateAction<any>>;
   drag?: boolean | "x" | "y" | undefined;
   style?: any;
-  index: number;
+  index?: number;
 }
 
 // interface DragConstraints {

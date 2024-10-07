@@ -20,13 +20,14 @@ export default function FlavourFlowPage() {
   );
   const [currentPair, setCurrentPair] = useState<FlavourFlowMeal[]>([]);
   const [clickedMeals, setClickedMeals] = useState<Set<string>>(new Set());
+  const [isAnimating, setIsAnimating] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const pairs = findPairsByQuestionset(meals);
     if (pairs.length > 0) {
       // Initial pair
-      drawNewPair(setCurrentPair, pairs, clickedMeals);
+      drawNewPair(setCurrentPair, pairs, clickedMeals, setIsAnimating);
     }
   }, [meals, clickedMeals]);
 
@@ -49,7 +50,12 @@ export default function FlavourFlowPage() {
     setClickedMeals((prev) => new Set(prev).add(winner.id).add(loser.id));
 
     // Draw a new pair of meals
-    drawNewPair(setCurrentPair, findPairsByQuestionset(meals), clickedMeals);
+    drawNewPair(
+      setCurrentPair,
+      findPairsByQuestionset(meals),
+      clickedMeals,
+      setIsAnimating,
+    );
   };
 
   return (
@@ -57,6 +63,7 @@ export default function FlavourFlowPage() {
       <ChoiceUI
         meals={currentPair}
         setMeals={setMeals}
+        isAnimating={isAnimating}
         handleChoice={handleChoice}
       />
       {currentPair.length === 0 && (

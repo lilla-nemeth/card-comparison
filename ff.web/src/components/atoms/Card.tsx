@@ -8,7 +8,6 @@ const Card = ({
   onClick,
   drag,
   isSelected,
-  handleDirectionChange,
   setDirection,
   setIsDragging,
   setIsDragOffBoundary,
@@ -32,47 +31,49 @@ const Card = ({
   const outputY = [-200, 0, 200];
   const drivenY = useTransform(y, inputY, outputY);
 
-  const handleDrag = (_: any, info: any) => {
-    const offset = info.offset.y;
+  // const handleDrag = (_: any, info: any) => {
+  //   const offset = info.offset.y;
 
-    if (offset < 0 && offset < offsetBoundary * -1) {
-      setIsDragOffBoundary("up");
-    } else if (offset > 0 && offset > offsetBoundary) {
-      setIsDragOffBoundary("down");
-    } else {
-      setIsDragOffBoundary(null);
-    }
-  };
+  //   if (offset < 0 && offset < offsetBoundary * -1) {
+  //     setIsDragOffBoundary("up");
+  //   } else if (offset > 0 && offset > offsetBoundary) {
+  //     setIsDragOffBoundary("down");
+  //   } else {
+  //     setIsDragOffBoundary(null);
+  //   }
+  // };
 
-  const handleDragEnd = (_: any, info: any) => {
-    setIsDragging(false);
-    setIsDragOffBoundary(null);
-    const isOffBoundary =
-      info.offset.y > offsetBoundary || info.offset.y < -offsetBoundary;
+  // const handleDragEnd = (_: any, info: any) => {
+  //   setIsDragging(false);
+  //   setIsDragOffBoundary(null);
+  //   const isOffBoundary =
+  //     info.offset.y > offsetBoundary || info.offset.y < -offsetBoundary;
 
-    if (isOffBoundary) {
-      const direction = info.offset.y > 0 ? "down" : "up";
-      setDirection(direction);
-    }
-  };
+  //   if (isOffBoundary) {
+  //     const direction = info.offset.y > 0 ? "down" : "up";
+  //     setDirection(direction);
+  //     onClick();
+  //   }
+  // };
+
   return (
     <motion.div
-      drag={drag}
-      onDrag={handleDrag}
-      onDragEnd={handleDragEnd}
-      dragConstraints={{ top: 0, bottom: 0 }}
-      dragElastic={0.2}
-      dragSnapToOrigin
-      dragTransition={{ bounceStiffness: 1000, bounceDamping: 50 }}
-      style={{ y: drivenY }}
-      onDragStart={() => setIsDragging(true)}
-      className={cardContainerClass}
+      // drag={drag}
+      // onDrag={handleDrag}
+      // onDragEnd={handleDragEnd}
+      // dragConstraints={{ top: 0, bottom: 0 }}
+      // dragElastic={0.2}
+      // dragTransition={{ bounceStiffness: 1000, bounceDamping: 50 }}
+      // style={{ y: drivenY }}
+      // onDragStart={() => setIsDragging(true)}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
     >
-      <div key={meal.id} onClick={onClick} className={cardClass}>
+      <div key={meal.id} onClick={onClick} className={cardClass} style={style}>
         <div className={titleClass}>
           <p>{meal.title}</p>
         </div>
-        {isSelected && (
+        {/* {isSelected && (
           <>
             <div className={btnActiveClass}>
               <HeartIcon className={btnIconActiveClass} />
@@ -80,7 +81,7 @@ const Card = ({
             <div className={textActiveClass}>chosen!</div>
             <div className={overlayActiveClass}></div>
           </>
-        )}
+        )} */}
         <div className={btnClass}>
           <HeartIcon className={btnIconClass} />
         </div>
