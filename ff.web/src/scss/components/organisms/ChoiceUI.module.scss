@@ -36,16 +36,16 @@
 }
 
 .card {
-  // position: absolute;
+  position: absolute;
   cursor: pointer;
   background-color: var(--color-black);
   width: 13em;
   display: inline-block;
   transition: transform 0.3s ease;
   z-index: 500;
-  // top: 25%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .cardDeckContainer {
@@ -89,6 +89,9 @@
   width: 4rem;
   height: 4rem;
   border-radius: var(--radius-32);
+  transition:
+    transform 0.2s ease-in-out,
+    opacity 0.2s ease-in-out;
 }
 
 .cardButton {

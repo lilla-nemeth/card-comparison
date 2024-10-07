@@ -24,6 +24,7 @@ const Card = ({
   deckClass,
   cardContainerClass,
   style,
+  isAnimating,
 }: CardProps) => {
   const y = useMotionValue(0);
   const offsetBoundary = 150;
@@ -73,7 +74,7 @@ const Card = ({
         <div className={titleClass}>
           <p>{meal.title}</p>
         </div>
-        {/* {isSelected && (
+        {isSelected && (
           <>
             <div className={btnActiveClass}>
               <HeartIcon className={btnIconActiveClass} />
@@ -81,7 +82,7 @@ const Card = ({
             <div className={textActiveClass}>chosen!</div>
             <div className={overlayActiveClass}></div>
           </>
-        )} */}
+        )}
         <div className={btnClass}>
           <HeartIcon className={btnIconClass} />
         </div>

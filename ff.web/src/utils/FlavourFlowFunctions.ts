@@ -119,7 +119,7 @@ const drawNewPair = (
 
     setTimeout(() => {
       setIsAnimating(false);
-    }, 20);
+    }, 50);
   } else {
     setCurrentPair([]);
   }

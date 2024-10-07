@@ -85,6 +85,7 @@ interface CardProps extends CardClassNameProps {
   drag?: boolean | "x" | "y" | undefined;
   style?: any;
   index?: number;
+  isAnimating?: boolean;
 }
 
 // interface DragConstraints {

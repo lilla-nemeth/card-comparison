@@ -12,8 +12,8 @@ import {
 } from "@vuo/types/moleculeProps";
 
 const ChoiceUI = ({
-  meals,
-  setMeals,
+  meals = [],
+  setMeals = () => {},
   isAnimating,
   handleChoice,
 }: ChoiceUIProps) => {
@@ -96,6 +96,7 @@ const ChoiceUI = ({
                     imageClass={module.cardImage}
                     deckContainerClass={module.cardDeckContainer}
                     deckClass={module.cardDeck}
+                    isAnimating={isAnimating}
                     // style={{
                     //   position: "absolute",
                     //   left: index === 0 ? "calc(0% + 10%)" : "50%",
