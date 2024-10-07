@@ -1,22 +1,39 @@
-import module from "@vuo/scss/components/organisms/ChoiceUI.module.scss";
 import { useEffect, useState } from "react";
-import { FlavourFlowMeal } from "@vuo/types/dataTypes";
 import Page from "../templates/Page";
 import { ChoiceUIProps } from "@vuo/types/organismProps";
-import Card from "@vuo/components/atoms/Card";
 
-const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
+import { motion, AnimatePresence } from "framer-motion";
+import Card from "@vuo/components/atoms/Card";
+import CardActionBtn from "../atoms/CardActionBtn";
+import { FlavourFlowMeal } from "@vuo/types/dataTypes";
+import module from "@vuo/scss/components/organisms/ChoiceUI.module.scss";
+import {
+  IsDragOffBoundary,
+  CardSwipeDirection,
+} from "@vuo/types/moleculeProps";
+
+const ChoiceUI = ({ meals, setMeals, handleChoice }: ChoiceUIProps) => {
   const [selectedMealId, setSelectedMealId] = useState<string | null>(null);
   const [unselectedMealId, setUnselectedMealId] = useState<string | null>(null);
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [isLoser, setIsLoser] = useState<boolean>(false);
+
+  // swiping and dragging cards
+  const [direction, setDirection] = useState<CardSwipeDirection | "">("");
+  const [isDragging, setIsDragging] = useState(false);
+  const [isDragOffBoundary, setIsDragOffBoundary] =
+    useState<IsDragOffBoundary>(null);
+
+  const cardVariants = {
+    current: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, y: direction === "up" ? -300 : 300 },
+  };
 
   const handleCardClick = (
     meals: FlavourFlowMeal[],
     winnerMeal: FlavourFlowMeal,
   ) => {
     const loser = meals.find((m) => m.id !== winnerMeal.id) as FlavourFlowMeal;
-    // const winner = meals.find((m) => m.id === winner.id) as FlavourFlowMeal;
 
     if (loser) {
       setUnselectedMealId(loser.id);
@@ -31,11 +48,17 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
     }, 300);
   };
 
+  const handleDirectionChange = (newDirection: "up" | "down") => {
+    setDirection(newDirection);
+    setMeals((prev) => prev.slice(1));
+
+    // setTimeout(() => {
+    //   setDirection(null);
+    // }, 100);
+  };
+
   useEffect(() => {
-    // Log or handle actions here based on the most up-to-date selectedMealId
-    console.log("Selected meal ID changed:", selectedMealId);
     setIsSelected(selectedMealId !== null);
-    // setIsLoser(selectedMealId !== null);
   }, [selectedMealId]);
 
   const containerClass =
@@ -44,43 +67,58 @@ const ChoiceUI = ({ meals, handleChoice }: ChoiceUIProps) => {
   return (
     <Page>
       <div className={containerClass}>
-        {meals?.map((meal: FlavourFlowMeal) => {
-          return (
-            <Card
-              key={meal.id}
-              meals={meals}
-              meal={meal}
-              onClick={() => {
-                handleCardClick(meals, meal);
-                // if (selectedMealId !== null) {
-                // }
-                setIsSelected(selectedMealId === meal.id);
-                setIsLoser(selectedMealId !== meal.id);
-              }}
-              isSelected={isSelected}
-              selectedMealId={selectedMealId}
-              isLoser={isLoser}
-              setIsSelected={setIsSelected}
-              setIsLoser={setIsLoser}
-              // isActive={selectedMealId === meal.id}
-              // animate={{
-              //   y: isSelected ? -300 : isLoser ? 300 : 0,
-              // }}
-              transition={{ type: "spring", stiffness: 300 }}
-              cardClass={module.card}
-              titleClass={module.cardTitle}
-              btnActiveClass={module.cardButtonActive}
-              btnIconActiveClass={module.cardButtonIconActive}
-              textActiveClass={module.cardTextActive}
-              overlayActiveClass={module.cardOverlayActive}
-              btnClass={module.cardButton}
-              btnIconClass={module.cardButtonIcon}
-              imageClass={module.cardImage}
-              deckContainerClass={module.cardDeckContainer}
-              deckClass={module.cardDeck}
-            />
-          );
-        })}
+        <div>
+          <AnimatePresence>
+            {meals.map((meal: FlavourFlowMeal) => {
+              return (
+                <motion.div
+                  key={meal.id}
+                  variants={cardVariants}
+                  initial="current"
+                  exit="exit"
+                >
+                  <Card
+                    id={meal.id}
+                    meal={meal}
+                    onClick={() => {
+                      handleDirectionChange("up");
+                      handleCardClick(meals, meal);
+                      setIsSelected(selectedMealId === meal.id);
+                      setIsLoser(selectedMealId !== meal.id);
+                    }}
+                    isSelected={isSelected}
+                    drag={"y"}
+                    setIsDragging={setIsDragging}
+                    setIsDragOffBoundary={setIsDragOffBoundary}
+                    setDirection={handleDirectionChange}
+                    cardClass={module.card}
+                    titleClass={module.cardTitle}
+                    btnActiveClass={module.cardButtonActive}
+                    btnIconActiveClass={module.cardButtonIconActive}
+                    textActiveClass={module.cardTextActive}
+                    overlayActiveClass={module.cardOverlayActive}
+                    btnClass={module.cardButton}
+                    btnIconClass={module.cardButtonIcon}
+                    imageClass={module.cardImage}
+                    deckContainerClass={module.cardDeckContainer}
+                    deckClass={module.cardDeck}
+                  />
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+        <div>
+          {/* Temporary buttons for card animation */}
+          <CardActionBtn
+            direction="up"
+            onClick={() => handleDirectionChange("up")}
+          />
+          <CardActionBtn
+            direction="down"
+            onClick={() => handleDirectionChange("down")}
+          />
+        </div>
       </div>
     </Page>
   );

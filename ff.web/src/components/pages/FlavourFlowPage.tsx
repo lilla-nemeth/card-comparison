@@ -54,7 +54,11 @@ export default function FlavourFlowPage() {
 
   return (
     <Page>
-      <ChoiceUI meals={currentPair} handleChoice={handleChoice} />
+      <ChoiceUI
+        meals={currentPair}
+        setMeals={setMeals}
+        handleChoice={handleChoice}
+      />
       {currentPair.length === 0 && (
         <Button onClick={handleNavigate}>See the Results</Button>
       )}

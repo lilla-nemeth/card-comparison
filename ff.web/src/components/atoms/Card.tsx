@@ -1,21 +1,16 @@
-// import { Card as AntDCard } from "antd-mobile";
-import { CardProps } from "@vuo/types/atomProps";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import HeartIcon from "./HeartIcon";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { CardProps } from "@vuo/types/atomProps";
 
-const Card: React.FC<CardProps> = ({
-  meals,
+const Card = ({
+  id,
   meal,
   onClick,
+  drag,
   isSelected,
-  selectedMealId,
-  isLoser,
-  setIsSelected,
-  setIsLoser,
-  isActive,
-  animate,
-  transition,
+  setDirection,
+  setIsDragging,
+  setIsDragOffBoundary,
   cardClass,
   titleClass,
   btnActiveClass,
@@ -27,45 +22,50 @@ const Card: React.FC<CardProps> = ({
   imageClass,
   deckContainerClass,
   deckClass,
-}) => {
-  const [clicked, setClicked] = useState(false);
+}: CardProps) => {
+  const y = useMotionValue(0);
+  const offsetBoundary = 150;
+  const inputY = [-offsetBoundary, 0, offsetBoundary];
+  const outputY = [-200, 0, 200];
+  const drivenY = useTransform(y, inputY, outputY);
 
-  const handleClick = () => {
-    setClicked(true);
-    onClick();
+  const handleDrag = (_: any, info: any) => {
+    const offset = info.offset.x;
 
-    if (selectedMealId !== null) {
-      setIsSelected(selectedMealId === meal.id);
+    if (offset < 0 && offset < offsetBoundary * -1) {
+      setIsDragOffBoundary("left");
+    } else if (offset > 0 && offset > offsetBoundary) {
+      setIsDragOffBoundary("right");
+    } else {
+      setIsDragOffBoundary(null);
     }
-
-    setIsLoser(selectedMealId !== meal.id);
-    console.log(selectedMealId);
   };
 
-  useEffect(() => {
-    // Log or handle actions here based on the most up-to-date selectedMealId
-    // console.log("Selected meal ID changed:", selectedMealId);
-    setIsSelected(selectedMealId !== null);
-    // setIsLoser(selectedMealId !== null);
+  const handleDragEnd = (_: any, info: any) => {
+    setIsDragging(false);
+    setIsDragOffBoundary(null);
+    const isOffBoundary =
+      info.offset.y > offsetBoundary || info.offset.y < -offsetBoundary;
+    const direction = info.offset.y > 0 ? "down" : "up";
 
-    setTimeout(() => {
-      setIsSelected(null);
-      setIsLoser(null);
-    }, 300);
-  }, [selectedMealId]);
+    if (isOffBoundary) {
+      setDirection(direction);
+    }
+  };
 
   return (
     <>
       <motion.div
         key={meal.id}
-        onClick={handleClick}
         className={cardClass}
-        // animate={animate}
-        // animate={{ y: clicked ? (!isActive ? -300 : 300) : 0 }}
-        animate={{
-          y: selectedMealId !== null ? -300 : isLoser ? 300 : 0,
-        }}
-        transition={transition}
+        onClick={onClick}
+        drag={drag}
+        dragConstraints={{ top: 0, bottom: 0 }}
+        dragTransition={{ bounceStiffness: 1000, bounceDamping: 50 }}
+        onDragStart={() => setIsDragging(true)}
+        onDrag={handleDrag}
+        onDragEnd={handleDragEnd}
+        style={{ y: drivenY }}
       >
         <div className={titleClass}>
           <p>{meal.title}</p>
@@ -85,10 +85,11 @@ const Card: React.FC<CardProps> = ({
         <img src={meal.image} alt={meal.title} className={imageClass} />
       </motion.div>
 
-      <div className={deckContainerClass}>
+      {/* <div className={deckContainerClass}>
         {meals.length > 1 && <div className={deckClass}></div>}
-      </div>
+      </div> */}
     </>
   );
 };
+
 export default Card;
