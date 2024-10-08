@@ -74,7 +74,7 @@ interface CardProps extends CardClassNameProps {
   id?: string;
   meal: FlavourFlowMeal;
   meals?: FlavourFlowMeal[];
-  onClick: () => void;
+  onClick?: () => void;
   isSelected?: boolean;
 }
 
