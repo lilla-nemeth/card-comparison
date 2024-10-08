@@ -73,73 +73,10 @@ interface CardClassNameProps {
 interface CardProps extends CardClassNameProps {
   id?: string;
   meal: FlavourFlowMeal;
+  meals?: FlavourFlowMeal[];
   onClick: () => void;
   isSelected?: boolean;
-
-  // Setting direction and dragging the card
-  // handleDirectionChange: (direction: "up" | "down") => void;
-  // handleDirectionChange(isSelected: boolean): void;
-  setDirection?(direction: "up" | "down"): void;
-  setIsDragging?: Dispatch<SetStateAction<any>>;
-  setIsDragOffBoundary?: Dispatch<SetStateAction<any>>;
-  drag?: boolean | "x" | "y" | undefined;
-  style?: any;
-  index?: number;
-  isAnimating?: boolean;
-  variants?: any;
-  direction?: "up" | "down" | "";
 }
-
-// interface DragConstraints {
-//   left?: number;
-//   right?: number;
-//   top?: number;
-//   bottom?: number;
-// }
-
-// interface DragProps {
-//   drag?: boolean | "x" | "y" | undefined;
-//   dragConstraints?: DragConstraints;
-//   onDragEnd?: (event: MouseEvent | TouchEvent, info: any) => void;
-// }
-
-// type Variants = {
-//   [key: string]: Variant;
-// };
-
-// type AnimateType =
-//   | {
-//       [key: string]: number | string;
-//     }
-//   | string;
-
-// interface MotionValues {
-//   x: MotionValue<number>;
-//   rotate: MotionValue<number>;
-//   opacity: MotionValue<number>;
-// }
-
-// interface MotionProps {
-//   initial?: Variants;
-//   whileHover?: Variants;
-//   whileTap?: Variants;
-//   animate?: AnimateType;
-//   transition?: Transition | undefined;
-//   selectedMealId: string | null;
-//   style?: MotionValues;
-// }
-
-// interface CardProps extends CardClassNameProps, DragProps, MotionProps {
-//   meals: FlavourFlowMeal[];
-//   meal: FlavourFlowMeal;
-//   // onClick: MouseEventHandler<HTMLDivElement>;
-//   onClick: () => void;
-//   isSelected: string | boolean | null;
-//   isLoser: string | boolean | null;
-//   isActive?: boolean;
-//   setIsSelected: any;
-//   setIsLoser: any;
-// }
 
 export type {
   CustomButtonProps,

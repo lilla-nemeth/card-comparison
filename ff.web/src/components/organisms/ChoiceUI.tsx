@@ -3,13 +3,9 @@ import Page from "../templates/Page";
 import { ChoiceUIProps } from "@vuo/types/organismProps";
 import { motion, AnimatePresence } from "framer-motion";
 import Card from "@vuo/components/atoms/Card";
-// import CardActionBtn from "../atoms/CardActionBtn";
 import { FlavourFlowMeal } from "@vuo/types/dataTypes";
 import module from "@vuo/scss/components/organisms/ChoiceUI.module.scss";
-import {
-  IsDragOffBoundary,
-  CardSwipeDirection,
-} from "@vuo/types/moleculeProps";
+import { CardSwipeDirection } from "@vuo/types/moleculeProps";
 
 const ChoiceUI = ({
   meals = [],
@@ -20,9 +16,6 @@ const ChoiceUI = ({
 }: ChoiceUIProps) => {
   const [selectedMealId, setSelectedMealId] = useState<string | null>(null);
   const [direction, setDirection] = useState<CardSwipeDirection | "">("");
-  const [isDragging, setIsDragging] = useState(false);
-  const [isDragOffBoundary, setIsDragOffBoundary] =
-    useState<IsDragOffBoundary>(null);
   const [isSelected, setIsSelected] = useState<boolean>(false);
 
   const cardVariants = {
@@ -79,7 +72,6 @@ const ChoiceUI = ({
                   <motion.div
                     key={meal.id}
                     variants={cardVariants}
-                    // initial="current"
                     custom={{ direction }}
                     exit="exit"
                     tabIndex={index}
@@ -89,18 +81,13 @@ const ChoiceUI = ({
                     <Card
                       id={`card-${index}`}
                       meal={meal}
+                      meals={meals}
                       onClick={() => {
                         setIsSelected(selectedMealId === meal.id);
                         handleCardClick(meals, meal);
                         handleDirectionChange(isSelected ? "down" : "up");
                       }}
-                      index={index}
                       isSelected={isSelected}
-                      // drag={"y"}
-                      // setDirection={setDirection}
-                      // setIsDragging={setIsDragging}
-                      // setIsDragOffBoundary={setIsDragOffBoundary}
-                      // handleDirectionChange={handleDirectionChange}
                       cardContainerClass={module.cardContainer}
                       cardClass={
                         index === 0
@@ -116,8 +103,11 @@ const ChoiceUI = ({
                       btnIconClass={module.cardButtonIcon}
                       imageClass={module.cardImage}
                       deckContainerClass={module.cardDeckContainer}
-                      deckClass={module.cardDeck}
-                      isAnimating={isAnimating}
+                      deckClass={
+                        index === 0
+                          ? `${module.cardDeck} ${module.firstCardDeck}`
+                          : `${module.cardDeck} ${module.secondCardDeck}`
+                      }
                     />
                   </motion.div>
                 );
@@ -130,16 +120,3 @@ const ChoiceUI = ({
 };
 
 export default ChoiceUI;
-
-{
-  /* <div>
-          <CardActionBtn
-            direction="up"
-            onClick={() => handleDirectionChange("up")}
-          />
-          <CardActionBtn
-            direction="down"
-            onClick={() => handleDirectionChange("down")}
-          />
-        </div> */
-}

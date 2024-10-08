@@ -29,18 +29,19 @@
   height: 23em;
 }
 
-// .cardContainer {
-// }
-
-.card {
+.card,
+.cardDeck {
   position: absolute;
   cursor: pointer;
-  background-color: var(--color-black);
   width: 13em;
   display: inline-block;
-  z-index: 500;
   align-items: center;
   justify-content: center;
+}
+
+.card {
+  z-index: 500;
+  background-color: var(--color-black);
 }
 
 .firstCard {
@@ -53,23 +54,19 @@
   transform: translate(-110%, -50%);
 }
 
-.card.exiting {
-  z-index: -10; /* Ensure exiting card goes below */
-}
-
-.cardDeckContainer {
-  position: relative;
-}
-
 .cardDeck {
-  width: 13em;
-  position: absolute;
-  z-index: -10;
-  top: 6%;
   background-color: var(--color-white);
-  -webkit-transform: translate(-50%, 0%);
-  -ms-transform: translate(-50%, 0%);
-  transform: translate(-102%, 0%);
+  z-index: -10;
+}
+
+.firstCardDeck {
+  left: 50%;
+  transform: translate(15%, -47%);
+}
+
+.secondCardDeck {
+  left: 50%;
+  transform: translate(-105%, -47%);
 }
 
 .cardTitle {
@@ -180,8 +177,6 @@
   line-height: 1.4;
 }
 
-/* Active styles */
 .card:active {
   filter: unset;
-  // transform: scale(1.15);
 }
