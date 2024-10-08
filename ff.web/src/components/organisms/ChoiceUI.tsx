@@ -32,7 +32,7 @@ const ChoiceUI = ({
       y: custom.direction === "up" ? -300 : 300,
       zIndex: 0,
       transition: {
-        duration: 0.2,
+        duration: 0.25,
         delay: 0.5,
       },
     }),
