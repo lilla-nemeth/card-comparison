@@ -1,0 +1,18 @@
+.staticContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 30rem;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  height: 100%;
+  gap: var(--space-32);
+  align-items: center;
+  flex-direction: column;
+}
+
+.scrollableContainer {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}

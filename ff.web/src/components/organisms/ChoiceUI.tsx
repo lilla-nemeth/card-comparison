@@ -57,12 +57,9 @@ const ChoiceUI: React.FC<ChoiceUIProps> = ({
     setIsSelected(selectedMealId !== null);
   }, [selectedMealId]);
 
-  const containerClass =
-    meals?.length > 2 ? module.scrollableContainer : module.staticContainer;
-
   return (
     <Page>
-      <div className={containerClass}>
+      <div className={module.staticContainer}>
         <div className={module.cardContainer}>
           <AnimatePresence>
             {!isAnimating &&

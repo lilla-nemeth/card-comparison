@@ -1,7 +1,3 @@
-// TODO: use this background color for the page or as a new theme
-// background-color: var(--surface-brand-orange-light);
-
-.scrollableContainer,
 .staticContainer {
   display: flex;
   justify-content: center;
@@ -13,11 +9,6 @@
   height: 100%;
   gap: var(--space-32);
   align-items: center;
-}
-
-.scrollableContainer {
-  overflow-x: auto;
-  scrollbar-width: thin;
 }
 
 .card,
