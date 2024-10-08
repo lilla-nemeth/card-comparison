@@ -15,6 +15,9 @@ const ResultUI: React.FC<ResultUIProps> = ({ meals }) => {
   return (
     // <Page>
     <div className={containerClass}>
+      <div className={resultUIModules.flavourFlowLogo}>
+        Place for Flavour Flow Logo
+      </div>
       {getWinners(meals).map((meal: FlavourFlowMeal) => {
         return (
           <Card
