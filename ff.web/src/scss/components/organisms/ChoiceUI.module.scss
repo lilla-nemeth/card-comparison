@@ -127,7 +127,9 @@
 .cardImage {
   display: block;
   object-fit: cover;
-  filter: brightness(60%);
+  filter: brightness(70%);
+  // Filter for not chosen cards:
+  // filter: brightness(60%);
 }
 
 .cardOverlayActive {
