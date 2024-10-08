@@ -1,7 +1,6 @@
 .flavourFlowContainer {
   display: flex;
-  flex-direction: column;
-  background-color: var(--surface-brand-orange-light);
+  background-color: var(--surface-brand-orange-medium);
   height: 100%;
   width: 100%;
   justify-content: center;
@@ -10,4 +9,13 @@
 .resultButtonContainer {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+}
+
+.resultContainer {
+  display: flex;
+  max-width: 30rem;
+  aspect-ratio: 1 / 1;
+  align-items: center;
+  background-color: var(--surface-brand-orange-light);
 }

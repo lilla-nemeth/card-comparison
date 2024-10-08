@@ -10,7 +10,9 @@ const FlavourFlowResultPage = () => {
   return (
     <Page>
       <div className={module.flavourFlowContainer}>
-        <ResultUI meals={meals} />
+        <div className={module.resultContainer}>
+          <ResultUI meals={meals} />
+        </div>
       </div>
     </Page>
   );
