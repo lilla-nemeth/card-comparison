@@ -12,6 +12,7 @@
   overflow: hidden;
   height: 100%;
   gap: var(--space-32);
+  align-items: center;
 }
 
 .scrollableContainer {
@@ -28,24 +29,25 @@
   height: 23em;
 }
 
-.cardContainer {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: var(--space-16);
-}
-
 .card {
   position: absolute;
   cursor: pointer;
   background-color: var(--color-black);
   width: 13em;
   display: inline-block;
-  transition: transform 0.3s ease;
   z-index: 500;
-  top: 25%;
+  align-items: center;
+  justify-content: center;
+}
+
+.firstCard {
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(15%, -50%);
+}
+
+.secondCard {
+  left: 50%;
+  transform: translate(-115%, -50%);
 }
 
 .cardDeckContainer {
