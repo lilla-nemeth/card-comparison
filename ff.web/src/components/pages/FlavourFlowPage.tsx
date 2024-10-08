@@ -15,7 +15,7 @@ import {
 import Button from "../atoms/Button";
 import { useNavigate } from "react-router-dom";
 
-export default function FlavourFlowPage() {
+const FlavourFlowPage = () => {
   const [meals, setMeals] = useState<FlavourFlowMeal[]>(
     createDataForRanking(dataset),
   );
@@ -78,4 +78,6 @@ export default function FlavourFlowPage() {
       </div>
     </Page>
   );
-}
+};
+
+export default FlavourFlowPage;
