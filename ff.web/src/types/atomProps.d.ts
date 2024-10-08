@@ -1,4 +1,7 @@
 import React from "react";
+import { Variants, Transition, MotionValue } from "framer-motion";
+
+type className = string;
 
 interface CustomButtonProps {
   color?: "primary" | "secondary"; // Custom variants
@@ -11,7 +14,7 @@ interface CustomButtonProps {
 }
 
 interface LogoProps {
-  className?: string;
+  className?: className;
   variant: LogoVariants;
 }
 
@@ -45,7 +48,34 @@ interface IconProps {
   fill?: string;
   stroke?: string;
   strokeWidth?: string;
-  className?: string;
+  className?: className;
+}
+
+/* Card */
+type className = string;
+
+interface CardClassNameProps {
+  cardContainerClass?: className;
+  cardClass?: className;
+  cardDraggedClass?: className;
+  titleClass?: className;
+  btnActiveClass?: className;
+  btnIconActiveClass?: className;
+  textActiveClass?: className;
+  overlayActiveClass?: className;
+  btnClass?: className;
+  btnIconClass?: className;
+  imageClass?: className;
+  deckContainerClass?: className;
+  deckClass?: className;
+}
+
+interface CardProps extends CardClassNameProps {
+  id?: string;
+  meal: FlavourFlowMeal;
+  meals?: FlavourFlowMeal[];
+  onClick: () => void;
+  isSelected?: boolean;
 }
 
 export type {
@@ -56,4 +86,5 @@ export type {
   SectionProps,
   SliderProps,
   IconProps,
+  CardProps,
 };

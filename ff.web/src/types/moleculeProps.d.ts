@@ -16,4 +16,13 @@ interface ToggleSwitchProps {
   onCheckedChange: (checked: boolean) => void;
 }
 
-export type { RadioGroupProps, RadioGroupItemProps, ToggleSwitchProps };
+type IsDragOffBoundary = "up" | "down" | null;
+type CardSwipeDirection = "up" | "down";
+
+export type {
+  RadioGroupProps,
+  RadioGroupItemProps,
+  ToggleSwitchProps,
+  IsDragOffBoundary,
+  CardSwipeDirection,
+};

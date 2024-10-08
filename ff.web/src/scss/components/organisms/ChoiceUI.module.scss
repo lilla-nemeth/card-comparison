@@ -4,12 +4,15 @@
 .scrollableContainer,
 .staticContainer {
   display: flex;
-  flex-direction: row;
   justify-content: center;
+  position: relative;
   width: 100%;
-  padding: var(--space-16) 0;
-  gap: var(--space-16);
-  margin: 0 10em;
+  max-width: 30rem;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  height: 100%;
+  gap: var(--space-32);
+  align-items: center;
 }
 
 .scrollableContainer {
@@ -19,35 +22,51 @@
 
 .card,
 .cardOverlay,
-.cardSelectedOverlayActive,
+.cardOverlayActive,
 .cardImage,
 .cardDeck {
   border-radius: var(--radius-8);
   height: 23em;
 }
 
-.card {
-  position: relative;
-  width: 50%;
+.card,
+.cardDeck {
+  position: absolute;
   cursor: pointer;
-  background-color: var(--color-black);
-  flex: 0 0 48%;
-  width: 3em;
+  width: 14em;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
 }
 
-.cardDeckContainer {
-  position: relative;
+.card {
+  z-index: 500;
+  background-color: var(--color-black);
+}
+
+.firstCard {
+  left: 50%;
+  transform: translate(10%, -50%);
+}
+
+.secondCard {
+  left: 50%;
+  transform: translate(-110%, -50%);
 }
 
 .cardDeck {
-  width: 13em;
-  position: absolute;
-  z-index: -10;
-  top: 6%;
   background-color: var(--color-white);
-  -webkit-transform: translate(-50%, 0%);
-  -ms-transform: translate(-50%, 0%);
-  transform: translate(-102%, 0%);
+  z-index: -10;
+}
+
+.firstCardDeck {
+  left: 50%;
+  transform: translate(15%, -47%);
+}
+
+.secondCardDeck {
+  left: 50%;
+  transform: translate(-105%, -47%);
 }
 
 .cardTitle {
@@ -67,25 +86,29 @@
 .cardButton,
 .cardButtonActive {
   position: absolute;
-  z-index: 100;
   bottom: 10%;
   left: 50%;
   -webkit-transform: translate(-50%, -5%);
   -ms-transform: translate(-50%, -5%);
   transform: translate(-50%, -5%);
-  width: 4rem;
-  height: 4rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: var(--radius-32);
+  transition:
+    transform 0.2s ease-in-out,
+    opacity 0.2s ease-in-out;
 }
 
 .cardButton {
   background-color: var(--color-white);
   transition: transform 0.3s ease;
   transform-origin: top;
+  z-index: 100;
 }
 
 .cardButtonActive {
   background-color: var(--surface-brand-orange-medium);
+  z-index: 110;
 }
 
 .cardButtonIcon,
@@ -116,7 +139,7 @@
   filter: brightness(60%);
 }
 
-.cardSelectedOverlayActive {
+.cardOverlayActive {
   position: absolute;
   z-index: 70;
   top: 0;
@@ -125,18 +148,18 @@
   right: 0;
   height: 100%;
   width: 100%;
-  opacity: 0.5;
+  opacity: 0.5 !important;
   transition: 0.5s ease;
   background-color: var(--surface-brand-orange-medium);
 }
 
-.cardSelectedTextActive {
+.cardTextActive {
   display: flex;
   align-items: center;
   position: absolute;
   z-index: 100;
   top: 42%;
-  left: 50%;
+  left: 52%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -153,8 +176,6 @@
   line-height: 1.4;
 }
 
-/* Active styles */
 .card:active {
   filter: unset;
-  transform: scale(1.15);
 }
