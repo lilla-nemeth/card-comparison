@@ -22,6 +22,7 @@ const ChoiceUI = ({
   const [isDragging, setIsDragging] = useState(false);
   const [isDragOffBoundary, setIsDragOffBoundary] =
     useState<IsDragOffBoundary>(null);
+  const [isSelected, setIsSelected] = useState<boolean>(false);
 
   const cardVariants = {
     current: { opacity: 1, scale: 1 },
@@ -54,6 +55,10 @@ const ChoiceUI = ({
     }, 300);
   };
 
+  useEffect(() => {
+    setIsSelected(selectedMealId !== null);
+  }, [selectedMealId]);
+
   const containerClass =
     meals?.length > 2 ? module.scrollableContainer : module.staticContainer;
 
@@ -64,7 +69,7 @@ const ChoiceUI = ({
           <AnimatePresence>
             {!isAnimating &&
               meals.map((meal: FlavourFlowMeal, index: number) => {
-                const isSelected = meal.id === selectedMealId;
+                // const isSelected = meal.id === selectedMealId;
                 return (
                   <motion.div
                     key={meal.id}
@@ -80,6 +85,7 @@ const ChoiceUI = ({
                       id={`card-${index}`}
                       meal={meal}
                       onClick={() => {
+                        setIsSelected(selectedMealId === meal.id);
                         handleCardClick(meals, meal);
                         handleDirectionChange(isSelected ? "down" : "up");
                       }}
