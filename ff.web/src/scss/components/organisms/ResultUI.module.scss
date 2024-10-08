@@ -19,6 +19,16 @@
   scrollbar-width: thin;
 }
 
+.logoContainer {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+}
+
+.cardContainer {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+}
+
 .card,
 .cardImage,
 .cardDeck {
