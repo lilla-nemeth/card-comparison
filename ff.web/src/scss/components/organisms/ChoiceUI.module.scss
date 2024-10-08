@@ -89,7 +89,7 @@
 .cardButton,
 .cardButtonActive {
   position: absolute;
-  z-index: 100;
+
   bottom: 10%;
   left: 50%;
   -webkit-transform: translate(-50%, -5%);
@@ -107,10 +107,12 @@
   background-color: var(--color-white);
   transition: transform 0.3s ease;
   transform-origin: top;
+  z-index: 100;
 }
 
 .cardButtonActive {
   background-color: var(--surface-brand-orange-medium);
+  z-index: 110;
 }
 
 .cardButtonIcon,
@@ -161,7 +163,7 @@
   position: absolute;
   z-index: 100;
   top: 42%;
-  left: 50%;
+  left: 52%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
