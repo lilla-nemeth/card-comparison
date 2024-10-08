@@ -29,6 +29,9 @@
   height: 23em;
 }
 
+// .cardContainer {
+// }
+
 .card {
   position: absolute;
   cursor: pointer;
@@ -42,12 +45,16 @@
 
 .firstCard {
   left: 50%;
-  transform: translate(15%, -50%);
+  transform: translate(10%, -50%);
 }
 
 .secondCard {
   left: 50%;
-  transform: translate(-115%, -50%);
+  transform: translate(-110%, -50%);
+}
+
+.card.exiting {
+  z-index: -10; /* Ensure exiting card goes below */
 }
 
 .cardDeckContainer {

@@ -63,11 +63,12 @@ const Card = ({
       // drag={drag}
       // onDrag={handleDrag}
       // onDragEnd={handleDragEnd}
+
       // dragConstraints={{ top: 0, bottom: 0 }}
       // dragElastic={0.2}
       // dragTransition={{ bounceStiffness: 1000, bounceDamping: 50 }}
-      // style={{ y: drivenY }}
       // onDragStart={() => setIsDragging(true)}
+      style={{ y: drivenY }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
     >

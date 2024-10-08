@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Page from "../templates/Page";
 import { ChoiceUIProps } from "@vuo/types/organismProps";
 import { motion, AnimatePresence } from "framer-motion";
@@ -25,11 +25,12 @@ const ChoiceUI = ({
 
   const cardVariants = {
     current: { opacity: 1, scale: 1 },
-    exit: {
+    exit: (custom: { direction: string }) => ({
       opacity: 0,
-      y: direction === "up" ? -300 : 300,
+      y: custom.direction === "up" ? -300 : 300,
+      zIndex: 0,
       transition: { duration: 0.7 },
-    },
+    }),
   };
 
   const handleCardClick = (meals: FlavourFlowMeal[], meal: FlavourFlowMeal) => {
@@ -59,56 +60,59 @@ const ChoiceUI = ({
   return (
     <Page>
       <div className={containerClass}>
-        <AnimatePresence>
-          {!isAnimating &&
-            meals.map((meal: FlavourFlowMeal, index: number) => {
-              const isSelected = meal.id === selectedMealId;
-              return (
-                <motion.div
-                  key={meal.id}
-                  // variants={cardVariants}
-                  // initial="current"
-                  exit="exit"
-                  tabIndex={index}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1, transition: { duration: 0.5 } }}
-                >
-                  <Card
-                    id={`card-${index}`}
-                    meal={meal}
-                    onClick={() => {
-                      handleCardClick(meals, meal);
-                      // handleDirectionChange(isSelected ? "down" : "up");
-                    }}
-                    index={index}
-                    isSelected={isSelected}
-                    // drag={"y"}
-                    // setIsDragging={setIsDragging}
-                    // setDirection={handleDirectionChange}
-                    // setIsDragOffBoundary={setIsDragOffBoundary}
-                    // handleDirectionChange={handleDirectionChange}
-                    cardContainerClass={module.cardContainer}
-                    cardClass={
-                      index === 0
-                        ? `${module.card} ${module.firstCard}`
-                        : `${module.card} ${module.secondCard}`
-                    }
-                    titleClass={module.cardTitle}
-                    btnActiveClass={module.cardButtonActive}
-                    btnIconActiveClass={module.cardButtonIconActive}
-                    textActiveClass={module.cardTextActive}
-                    overlayActiveClass={module.cardOverlayActive}
-                    btnClass={module.cardButton}
-                    btnIconClass={module.cardButtonIcon}
-                    imageClass={module.cardImage}
-                    deckContainerClass={module.cardDeckContainer}
-                    deckClass={module.cardDeck}
-                    isAnimating={isAnimating}
-                  />
-                </motion.div>
-              );
-            })}
-        </AnimatePresence>
+        <div className={module.cardContainer}>
+          <AnimatePresence>
+            {!isAnimating &&
+              meals.map((meal: FlavourFlowMeal, index: number) => {
+                const isSelected = meal.id === selectedMealId;
+                return (
+                  <motion.div
+                    key={meal.id}
+                    variants={cardVariants}
+                    // initial="current"
+                    custom={{ direction }}
+                    exit="exit"
+                    tabIndex={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, transition: { duration: 0.5 } }}
+                  >
+                    <Card
+                      id={`card-${index}`}
+                      meal={meal}
+                      onClick={() => {
+                        handleCardClick(meals, meal);
+                        handleDirectionChange(isSelected ? "down" : "up");
+                      }}
+                      index={index}
+                      isSelected={isSelected}
+                      // drag={"y"}
+                      // setDirection={setDirection}
+                      // setIsDragging={setIsDragging}
+                      // setIsDragOffBoundary={setIsDragOffBoundary}
+                      // handleDirectionChange={handleDirectionChange}
+                      cardContainerClass={module.cardContainer}
+                      cardClass={
+                        index === 0
+                          ? `${module.card} ${module.firstCard}`
+                          : `${module.card} ${module.secondCard}`
+                      }
+                      titleClass={module.cardTitle}
+                      btnActiveClass={module.cardButtonActive}
+                      btnIconActiveClass={module.cardButtonIconActive}
+                      textActiveClass={module.cardTextActive}
+                      overlayActiveClass={module.cardOverlayActive}
+                      btnClass={module.cardButton}
+                      btnIconClass={module.cardButtonIcon}
+                      imageClass={module.cardImage}
+                      deckContainerClass={module.cardDeckContainer}
+                      deckClass={module.cardDeck}
+                      isAnimating={isAnimating}
+                    />
+                  </motion.div>
+                );
+              })}
+          </AnimatePresence>
+        </div>
       </div>
     </Page>
   );
