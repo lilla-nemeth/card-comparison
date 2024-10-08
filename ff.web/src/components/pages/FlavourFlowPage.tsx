@@ -72,7 +72,9 @@ const FlavourFlowPage = () => {
           />
         ) : (
           <div className={module.resultButtonContainer}>
-            <Button onClick={handleNavigate}>See the Results</Button>
+            <Button color="secondary" onClick={handleNavigate}>
+              See the Results
+            </Button>
           </div>
         )}
       </div>
