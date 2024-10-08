@@ -74,7 +74,7 @@ interface CardProps extends CardClassNameProps {
   id?: string;
   meal: FlavourFlowMeal;
   onClick: () => void;
-  isSelected?: string | boolean | null;
+  isSelected?: boolean;
 
   // Setting direction and dragging the card
   // handleDirectionChange: (direction: "up" | "down") => void;
@@ -86,6 +86,8 @@ interface CardProps extends CardClassNameProps {
   style?: any;
   index?: number;
   isAnimating?: boolean;
+  variants?: any;
+  direction?: "up" | "down" | "";
 }
 
 // interface DragConstraints {
