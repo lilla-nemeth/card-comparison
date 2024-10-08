@@ -3,6 +3,7 @@ import HeartIcon from "./HeartIcon";
 import { CardProps } from "@vuo/types/atomProps";
 
 const Card = ({
+  id,
   index,
   meal,
   onClick,
@@ -70,7 +71,13 @@ const Card = ({
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
     >
-      <div key={meal.id} onClick={onClick} className={cardClass} style={style}>
+      <div
+        key={meal.id}
+        id={id}
+        onClick={onClick}
+        className={cardClass}
+        style={style}
+      >
         <div className={titleClass}>
           <p>{meal.title}</p>
         </div>

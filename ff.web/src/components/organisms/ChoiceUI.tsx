@@ -67,11 +67,14 @@ const ChoiceUI = ({
                 <motion.div
                   key={meal.id}
                   // variants={cardVariants}
-                  initial="current"
+                  // initial="current"
                   exit="exit"
+                  tabIndex={index}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1, transition: { duration: 0.5 } }}
                 >
                   <Card
-                    id={meal.id}
+                    id={`card-${index}`}
                     meal={meal}
                     onClick={() => {
                       handleCardClick(meals, meal);
@@ -85,7 +88,11 @@ const ChoiceUI = ({
                     // setIsDragOffBoundary={setIsDragOffBoundary}
                     // handleDirectionChange={handleDirectionChange}
                     cardContainerClass={module.cardContainer}
-                    cardClass={module.card}
+                    cardClass={
+                      index === 0
+                        ? `${module.card} ${module.firstCard}`
+                        : `${module.card} ${module.secondCard}`
+                    }
                     titleClass={module.cardTitle}
                     btnActiveClass={module.cardButtonActive}
                     btnIconActiveClass={module.cardButtonIconActive}
@@ -97,13 +104,6 @@ const ChoiceUI = ({
                     deckContainerClass={module.cardDeckContainer}
                     deckClass={module.cardDeck}
                     isAnimating={isAnimating}
-                    // style={{
-                    //   position: "absolute",
-                    //   left: index === 0 ? "calc(0% + 10%)" : "50%",
-                    //   transform:
-                    //     index === 0 ? "translateX(0)" : "translateX(-10%)",
-                    //   zIndex: 500,
-                    // }}
                   />
                 </motion.div>
               );
