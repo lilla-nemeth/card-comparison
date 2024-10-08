@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import module from "@vuo/scss/components/pages/FlavourFlow.module.scss";
 import Page from "../templates/Page";
 import { dataset } from "@vuo/utils/FlavourFlowData";
 import { FlavourFlowMeal } from "@vuo/types/dataTypes";
@@ -60,16 +61,21 @@ export default function FlavourFlowPage() {
 
   return (
     <Page>
-      <ChoiceUI
-        meals={currentPair}
-        setMeals={setMeals}
-        isAnimating={isAnimating}
-        setIsAnimating={setIsAnimating}
-        handleChoice={handleChoice}
-      />
-      {currentPair.length === 0 && (
-        <Button onClick={handleNavigate}>See the Results</Button>
-      )}
+      <div className={module.flavourFlowContainer}>
+        {currentPair.length ? (
+          <ChoiceUI
+            meals={currentPair}
+            setMeals={setMeals}
+            isAnimating={isAnimating}
+            setIsAnimating={setIsAnimating}
+            handleChoice={handleChoice}
+          />
+        ) : (
+          <div className={module.resultButtonContainer}>
+            <Button onClick={handleNavigate}>See the Results</Button>
+          </div>
+        )}
+      </div>
     </Page>
   );
 }
