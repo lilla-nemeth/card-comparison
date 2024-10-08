@@ -5,6 +5,7 @@ interface ChoiceUIProps {
   setMeals?: React.Dispatch<React.SetStateAction<FlavourFlowMeal[]>>;
   isAnimating?: boolean;
   meals?: FlavourFlowMeal[];
+  setIsAnimating?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type { ChoiceUIProps };

@@ -15,6 +15,7 @@ const ChoiceUI = ({
   meals = [],
   setMeals = () => {},
   isAnimating,
+  setIsAnimating,
   handleChoice,
 }: ChoiceUIProps) => {
   const [selectedMealId, setSelectedMealId] = useState<string | null>(null);
@@ -35,12 +36,13 @@ const ChoiceUI = ({
   };
 
   const handleCardClick = (meals: FlavourFlowMeal[], meal: FlavourFlowMeal) => {
-    if (isAnimating) return;
+    setIsAnimating?.(true);
     setSelectedMealId(meal.id);
     const loser = meals.find((m) => m.id !== meal.id) as FlavourFlowMeal;
     handleChoice(meal, loser);
 
     setTimeout(() => {
+      setIsAnimating?.(false);
       setSelectedMealId(null);
     }, 300);
     return meal.id;

@@ -64,6 +64,7 @@ export default function FlavourFlowPage() {
         meals={currentPair}
         setMeals={setMeals}
         isAnimating={isAnimating}
+        setIsAnimating={setIsAnimating}
         handleChoice={handleChoice}
       />
       {currentPair.length === 0 && (
