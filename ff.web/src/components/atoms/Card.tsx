@@ -1,4 +1,9 @@
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
 import HeartIcon from "./HeartIcon";
 import { CardProps } from "@vuo/types/atomProps";
 
@@ -70,7 +75,7 @@ const Card = ({
       // onDragStart={() => setIsDragging(true)}
       style={{ y: drivenY }}
       whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
+      // whileTap={{ scale: 0.9 }}
     >
       <div
         key={meal.id}
@@ -82,7 +87,7 @@ const Card = ({
         <div className={titleClass}>
           <p>{meal.title}</p>
         </div>
-        {isSelected && (
+        {/* {isSelected && (
           <>
             <div className={btnActiveClass}>
               <HeartIcon className={btnIconActiveClass} />
@@ -90,7 +95,44 @@ const Card = ({
             <div className={textActiveClass}>chosen!</div>
             <div className={overlayActiveClass}></div>
           </>
-        )}
+        )} */}
+        <AnimatePresence>
+          {isSelected && (
+            <>
+              <motion.div
+                className={btnActiveClass}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { duration: 0.1 } }}
+                exit={{
+                  opacity: 1,
+                  transition: { duration: 0.5, ease: "easeInOut" },
+                }}
+              >
+                <HeartIcon className={btnIconActiveClass} />
+              </motion.div>
+              <motion.div
+                className={textActiveClass}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { duration: 0.1 } }}
+                exit={{
+                  opacity: 1,
+                  transition: { duration: 0.5, ease: "easeInOut" },
+                }}
+              >
+                chosen!
+              </motion.div>
+              <motion.div
+                className={overlayActiveClass}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { duration: 1 } }}
+                exit={{
+                  opacity: 0.5,
+                  transition: { duration: 0.5, ease: "easeInOut" },
+                }}
+              ></motion.div>
+            </>
+          )}
+        </AnimatePresence>
         <div className={btnClass}>
           <HeartIcon className={btnIconClass} />
         </div>
