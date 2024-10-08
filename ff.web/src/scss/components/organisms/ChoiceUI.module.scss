@@ -33,7 +33,7 @@
 .cardDeck {
   position: absolute;
   cursor: pointer;
-  width: 13em;
+  width: 14em;
   display: inline-block;
   align-items: center;
   justify-content: center;
@@ -86,14 +86,13 @@
 .cardButton,
 .cardButtonActive {
   position: absolute;
-
   bottom: 10%;
   left: 50%;
   -webkit-transform: translate(-50%, -5%);
   -ms-transform: translate(-50%, -5%);
   transform: translate(-50%, -5%);
-  width: 4rem;
-  height: 4rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: var(--radius-32);
   transition:
     transform 0.2s ease-in-out,
