@@ -6,14 +6,42 @@
   width: 100%;
   max-width: 30rem;
   aspect-ratio: 1 / 1;
-  overflow: hidden;
+  //   overflow: hidden;
   height: 100%;
   gap: var(--space-32);
   align-items: center;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .scrollableContainer {
   overflow-x: auto;
   scrollbar-width: thin;
+}
+
+.card,
+.cardImage,
+.cardDeck {
+  border-radius: var(--radius-8);
+  height: 23em;
+}
+
+.card,
+.cardDeck {
+  //   position: absolute;
+  cursor: pointer;
+  width: 14em;
+  //   display: inline-block;
+  //   align-items: center;
+  //   justify-content: center;
+}
+
+.card {
+  z-index: 500;
+  background-color: var(--color-black);
+}
+
+.cardDeck {
+  background-color: var(--color-white);
+  z-index: -10;
 }

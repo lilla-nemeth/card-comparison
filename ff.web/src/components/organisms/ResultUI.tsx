@@ -13,26 +13,26 @@ const ResultUI: React.FC<ResultUIProps> = ({ meals }) => {
       : resultUIModules.staticContainer;
 
   return (
-    <Page>
-      <div className={containerClass}>
-        {getWinners(meals).map((meal: FlavourFlowMeal) => {
-          return (
-            <Card
-              id={`card ${meal.id}`}
-              meal={meal}
-              cardClass={cardModules.card}
-              titleClass={cardModules.cardTitle}
-              btnClass={cardModules.cardButton}
-              btnIconClass={cardModules.cardButtonIcon}
-              imageClass={cardModules.cardImage}
-              deckContainerClass={cardModules.cardDeckContainer}
-              deckClass={cardModules.cardDeck}
-              meals={getWinners(meals)}
-            />
-          );
-        })}
-      </div>
-    </Page>
+    // <Page>
+    <div className={containerClass}>
+      {getWinners(meals).map((meal: FlavourFlowMeal) => {
+        return (
+          <Card
+            id={`card ${meal.id}`}
+            meal={meal}
+            cardClass={resultUIModules.card}
+            titleClass={cardModules.cardTitle}
+            btnClass={cardModules.cardButton}
+            btnIconClass={cardModules.cardButtonIcon}
+            imageClass={cardModules.cardImage}
+            deckContainerClass={cardModules.cardDeckContainer}
+            deckClass={cardModules.cardDeck}
+            meals={getWinners(meals)}
+          />
+        );
+      })}
+    </div>
+    // </Page>
   );
 };
 
