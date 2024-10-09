@@ -17,7 +17,7 @@ interface ToggleSwitchProps {
 }
 
 type IsDragOffBoundary = "up" | "down" | null;
-type CardSwipeDirection = "up" | "down";
+type CardSwipeDirection = Record<string, "up" | "down" | "">;
 
 export type {
   RadioGroupProps,
