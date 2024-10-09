@@ -25,21 +25,19 @@ const FlavourFlowPage = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // const pairs = findPairsByQuestionset(meals);
-
     if (pairs.length > 0 && clickedMeals.size < meals.length) {
       drawNewPair(setCurrentPair, pairs, clickedMeals);
     } else {
       setCurrentPair([]);
     }
-  }, [meals, clickedMeals, location.pathname]); // Re-run when path changes
+  }, [meals, clickedMeals, location.pathname]);
 
   useEffect(() => {
     if (isFirstLoad) {
-      setIsFirstLoad(false); // Mark first load as done
+      setIsFirstLoad(false);
       const pairs = findPairsByQuestionset(meals);
       if (pairs.length > 0) {
-        drawNewPair(setCurrentPair, pairs, clickedMeals); // Trigger only on first load
+        drawNewPair(setCurrentPair, pairs, clickedMeals);
       }
     }
   }, [meals, clickedMeals, isFirstLoad]);
