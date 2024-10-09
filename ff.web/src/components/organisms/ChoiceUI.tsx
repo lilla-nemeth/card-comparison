@@ -11,7 +11,7 @@ import { useFlavourFlow } from "@vuo/context/FlavourFlowContext";
 const ChoiceUI: React.FC<ChoiceUIProps> = () => {
   const { currentPair, handleChoice } = useFlavourFlow();
   const [selectedMealId, setSelectedMealId] = useState<string | null>(null);
-  const [direction, setDirection] = useState<CardSwipeDirection | "">("");
+  const [directions, setDirections] = useState<CardSwipeDirection>({});
 
   const cardVariants = {
     current: { opacity: 1, scale: 1 },
@@ -34,18 +34,17 @@ const ChoiceUI: React.FC<ChoiceUIProps> = () => {
     const loser = currentPair.find((m) => m.id !== meal.id) as FlavourFlowMeal;
     handleChoice(meal, loser);
 
+    const newDirections: CardSwipeDirection = {
+      [meal.id]: "up",
+      [loser.id]: "down",
+    };
+    setDirections(newDirections);
+
     setTimeout(() => {
       setSelectedMealId(null);
+      setDirections({});
     }, 300);
     return meal.id;
-  };
-
-  const handleDirectionChange = (newDirection: "up" | "down") => {
-    setDirection(newDirection);
-
-    setTimeout(() => {
-      setDirection("");
-    }, 300);
   };
 
   return (
@@ -58,7 +57,7 @@ const ChoiceUI: React.FC<ChoiceUIProps> = () => {
                 <div key={meal.id}>
                   <motion.div
                     variants={cardVariants}
-                    custom={{ direction }}
+                    custom={{ direction: directions[meal.id] || "" }}
                     exit="exit"
                     tabIndex={index}
                     initial={{ opacity: 0 }}
@@ -69,9 +68,6 @@ const ChoiceUI: React.FC<ChoiceUIProps> = () => {
                       meals={currentPair}
                       onClick={() => {
                         handleCardClick(currentPair, meal);
-                        handleDirectionChange(
-                          selectedMealId !== null ? "down" : "up",
-                        );
                       }}
                       cardContainerClass={module.cardContainer}
                       cardClass={
