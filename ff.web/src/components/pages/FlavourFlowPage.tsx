@@ -13,28 +13,15 @@ import { useFlavourFlow } from "@vuo/context/FlavourFlowContext";
 const FlavourFlowPage = () => {
   const { meals, currentPair, clickedMeals, setCurrentPair, pairs } =
     useFlavourFlow();
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    if (pairs.length > 0 && clickedMeals.size < meals.length) {
+    if (currentPair.length === 0) {
       drawNewPair(setCurrentPair, pairs, clickedMeals);
-    } else {
-      setCurrentPair([]);
     }
-  }, [meals, clickedMeals, location.pathname]);
-
-  useEffect(() => {
-    if (isFirstLoad) {
-      setIsFirstLoad(false);
-      const pairs = findPairsByQuestionset(meals);
-      if (pairs.length > 0) {
-        drawNewPair(setCurrentPair, pairs, clickedMeals);
-      }
-    }
-  }, [meals, clickedMeals, isFirstLoad]);
+  }, [currentPair, clickedMeals, pairs, setCurrentPair]);
 
   const handleNavigate = () => {
     navigate("/flavour-flow/results", { state: { meals } });

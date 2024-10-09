@@ -1,5 +1,5 @@
 import { FlavourFlowMeal } from "@vuo/types/dataTypes";
-import { createContext, useState, useContext, useEffect, useMemo } from "react";
+import { createContext, useState, useContext, useMemo, useEffect } from "react";
 import { dataset } from "@vuo/utils/FlavourFlowData";
 import {
   calculateElo,
@@ -30,11 +30,19 @@ export const FlavourFlowProvider: React.FC<{ children: React.ReactNode }> = ({
   const [currentPair, setCurrentPair] = useState<FlavourFlowMeal[]>([]);
   const [clickedMeals, setClickedMeals] = useState<Set<string>>(new Set());
 
-  // useMemo to only render pairs when it's needed
+  // useMemo to only render pairs when they're needed
   const pairs: FlavourFlowMeal[][] = useMemo(
     () => findPairsByQuestionset(meals),
     [meals],
   );
+
+  useEffect(() => {
+    if (pairs.length > 0) {
+      drawNewPair(setCurrentPair, pairs, clickedMeals);
+    } else {
+      setCurrentPair([]);
+    }
+  }, [meals, clickedMeals]);
 
   const handleChoice = (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => {
     const { newWinnerElo, newLoserElo } = calculateElo(
