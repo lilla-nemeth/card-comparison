@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
 import module from "@vuo/scss/components/pages/FlavourFlow.module.scss";
 import Page from "../templates/Page";
-import { dataset } from "@vuo/utils/FlavourFlowData";
-import { FlavourFlowMeal } from "@vuo/types/dataTypes";
 import ChoiceUI from "../organisms/ChoiceUI";
 import {
-  probability,
-  calculateElo,
-  createDataForRanking,
   drawNewPair,
-  updateElo,
   findPairsByQuestionset,
 } from "@vuo/utils/FlavourFlowFunctions";
 import Button from "../atoms/Button";

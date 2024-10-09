@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Page from "../templates/Page";
 import { ChoiceUIProps } from "@vuo/types/organismProps";
 import { motion, AnimatePresence } from "framer-motion";
@@ -26,16 +26,11 @@ const ChoiceUI: React.FC<ChoiceUIProps> = () => {
     }),
   };
 
-  // This updates the selectedMealId
-  const handleSelectedCard = (id: FlavourFlowMeal["id"]) => {
-    setSelectedMealId(id);
-  };
-
   const handleCardClick = (
     currentPair: FlavourFlowMeal[],
     meal: FlavourFlowMeal,
   ) => {
-    // setSelectedMealId(meal.id);
+    setSelectedMealId(meal.id);
     const loser = currentPair.find((m) => m.id !== meal.id) as FlavourFlowMeal;
     handleChoice(meal, loser);
 
@@ -45,13 +40,13 @@ const ChoiceUI: React.FC<ChoiceUIProps> = () => {
     return meal.id;
   };
 
-  // const handleDirectionChange = (newDirection: "up" | "down") => {
-  //   setDirection(newDirection);
+  const handleDirectionChange = (newDirection: "up" | "down") => {
+    setDirection(newDirection);
 
-  //   setTimeout(() => {
-  //     setDirection("");
-  //   }, 300);
-  // };
+    setTimeout(() => {
+      setDirection("");
+    }, 300);
+  };
 
   return (
     <Page>
@@ -73,11 +68,10 @@ const ChoiceUI: React.FC<ChoiceUIProps> = () => {
                       meal={meal}
                       meals={currentPair}
                       onClick={() => {
-                        handleSelectedCard(meal.id);
                         handleCardClick(currentPair, meal);
-                        // handleDirectionChange(
-                        //   selectedMealId !== null ? "down" : "up",
-                        // );
+                        handleDirectionChange(
+                          selectedMealId !== null ? "down" : "up",
+                        );
                       }}
                       cardContainerClass={module.cardContainer}
                       cardClass={
