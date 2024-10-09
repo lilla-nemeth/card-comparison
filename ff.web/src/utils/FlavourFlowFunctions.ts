@@ -1,5 +1,6 @@
 import { Dispatch } from "react";
 import { FlavourFlowDataset, FlavourFlowMeal } from "@vuo/types/dataTypes";
+import { v4 as uuidv4 } from "uuid";
 
 // Function that updates id and returns the meals
 const createDataForRanking = (
@@ -9,7 +10,7 @@ const createDataForRanking = (
     questionSet.flatMap((question) =>
       Object.values(question).map((choice) => ({
         ...choice,
-        id: Math.random().toString(36).slice(2, 9), // Generate random ID
+        id: uuidv4(),
       })),
     ),
   );
