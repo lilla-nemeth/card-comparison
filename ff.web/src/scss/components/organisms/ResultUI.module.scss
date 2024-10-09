@@ -5,7 +5,7 @@
   position: relative;
   width: 100%;
   max-width: 30rem;
-  aspect-ratio: 1 / 1;
+  // aspect-ratio: 1 / 1;
   height: 100%;
   align-items: center;
   flex-direction: column;
@@ -19,18 +19,28 @@
 
 .logoContainer {
   width: 100%;
-  flex: 2;
+  flex: 1;
+  padding: 2rem 2rem 0.5rem 2rem;
+}
+
+.logo {
+  color: var(--text-primary-light);
+  width: 5em;
+  font-weight: 600;
+  font-size: 5em;
+  line-height: 3.5rem;
 }
 
 .cardContainer {
   display: flex;
   width: 100%;
-  flex: 3;
+  flex: 4;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: var(--space-16);
+  gap: var(--space-32);
   z-index: 10;
   justify-content: flex-start;
+  padding: 0.5rem 2rem 1rem 2rem;
 }
 
 .cardWrapper {
@@ -73,5 +83,5 @@
   background-color: var(--color-white);
   z-index: -1;
   top: 2.5%;
-  left: 15%;
+  left: 5%;
 }
