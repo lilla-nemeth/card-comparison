@@ -8,23 +8,10 @@ import module from "@vuo/scss/components/organisms/ChoiceUI.module.scss";
 import { CardSwipeDirection } from "@vuo/types/moleculeProps";
 import { useFlavourFlow } from "@vuo/context/FlavourFlowContext";
 
-const ChoiceUI: React.FC<ChoiceUIProps> = (
-  {
-    // meals,
-    // handleChoice,
-    // isAnimating,
-    // setIsAnimating,
-  },
-) => {
-  const { currentPair, isAnimating, setIsAnimating, handleChoice } =
-    useFlavourFlow();
-
+const ChoiceUI: React.FC<ChoiceUIProps> = () => {
+  const { currentPair, handleChoice } = useFlavourFlow();
   const [selectedMealId, setSelectedMealId] = useState<string | null>(null);
   const [direction, setDirection] = useState<CardSwipeDirection | "">("");
-
-  if (!currentPair || currentPair.length === 0) {
-    return null;
-  }
 
   const cardVariants = {
     current: { opacity: 1, scale: 1 },
@@ -48,13 +35,11 @@ const ChoiceUI: React.FC<ChoiceUIProps> = (
     currentPair: FlavourFlowMeal[],
     meal: FlavourFlowMeal,
   ) => {
-    setIsAnimating?.(true);
     // setSelectedMealId(meal.id);
     const loser = currentPair.find((m) => m.id !== meal.id) as FlavourFlowMeal;
     handleChoice(meal, loser);
 
     setTimeout(() => {
-      setIsAnimating?.(false);
       setSelectedMealId(null);
     }, 300);
     return meal.id;
@@ -73,67 +58,66 @@ const ChoiceUI: React.FC<ChoiceUIProps> = (
       <div className={module.staticContainer}>
         <div>
           <AnimatePresence>
-            {!isAnimating &&
-              currentPair.map((meal: FlavourFlowMeal, index: number) => {
-                return (
-                  <div key={meal.id}>
-                    <motion.div
-                      variants={cardVariants}
-                      custom={{ direction }}
-                      exit="exit"
-                      tabIndex={index}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1, transition: { duration: 0.5 } }}
-                    >
-                      <Card
-                        meal={meal}
-                        meals={currentPair}
-                        onClick={() => {
-                          handleSelectedCard(meal.id);
-                          handleCardClick(currentPair, meal);
-                          // handleDirectionChange(
-                          //   selectedMealId !== null ? "down" : "up",
-                          // );
-                        }}
-                        cardContainerClass={module.cardContainer}
-                        cardClass={
-                          index === 0
-                            ? `${module.card} ${module.firstCard}`
-                            : `${module.card} ${module.secondCard}`
-                        }
-                        titleClass={module.cardTitle}
-                        btnClass={
-                          selectedMealId === meal.id
-                            ? module.cardButtonActive
-                            : module.cardButton
-                        }
-                        btnIconClass={
-                          selectedMealId === meal.id
-                            ? module.cardButtonIconActive
-                            : module.cardButtonIcon
-                        }
-                        textClass={
-                          selectedMealId === meal.id
-                            ? module.cardTextActive
-                            : module.cardText
-                        }
-                        overlayClass={
-                          selectedMealId === meal.id
-                            ? module.cardOverlayActive
-                            : ""
-                        }
-                        imageClass={module.cardImage}
-                        deckContainerClass={module.cardDeckContainer}
-                        deckClass={
-                          index === 0
-                            ? `${module.cardDeck} ${module.firstCardDeck}`
-                            : `${module.cardDeck} ${module.secondCardDeck}`
-                        }
-                      />
-                    </motion.div>
-                  </div>
-                );
-              })}
+            {currentPair.map((meal: FlavourFlowMeal, index: number) => {
+              return (
+                <div key={meal.id}>
+                  <motion.div
+                    variants={cardVariants}
+                    custom={{ direction }}
+                    exit="exit"
+                    tabIndex={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, transition: { duration: 0.5 } }}
+                  >
+                    <Card
+                      meal={meal}
+                      meals={currentPair}
+                      onClick={() => {
+                        handleSelectedCard(meal.id);
+                        handleCardClick(currentPair, meal);
+                        // handleDirectionChange(
+                        //   selectedMealId !== null ? "down" : "up",
+                        // );
+                      }}
+                      cardContainerClass={module.cardContainer}
+                      cardClass={
+                        index === 0
+                          ? `${module.card} ${module.firstCard}`
+                          : `${module.card} ${module.secondCard}`
+                      }
+                      titleClass={module.cardTitle}
+                      btnClass={
+                        selectedMealId === meal.id
+                          ? module.cardButtonActive
+                          : module.cardButton
+                      }
+                      btnIconClass={
+                        selectedMealId === meal.id
+                          ? module.cardButtonIconActive
+                          : module.cardButtonIcon
+                      }
+                      textClass={
+                        selectedMealId === meal.id
+                          ? module.cardTextActive
+                          : module.cardText
+                      }
+                      overlayClass={
+                        selectedMealId === meal.id
+                          ? module.cardOverlayActive
+                          : ""
+                      }
+                      imageClass={module.cardImage}
+                      deckContainerClass={module.cardDeckContainer}
+                      deckClass={
+                        index === 0
+                          ? `${module.cardDeck} ${module.firstCardDeck}`
+                          : `${module.cardDeck} ${module.secondCardDeck}`
+                      }
+                    />
+                  </motion.div>
+                </div>
+              );
+            })}
           </AnimatePresence>
         </div>
       </div>

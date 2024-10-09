@@ -14,10 +14,9 @@ interface FlavourFlowContextType {
   setMeals: Dispatch<SetStateAction<FlavourFlowMeal[]>>;
   currentPair: FlavourFlowMeal[];
   setCurrentPair: Dispatch<SetStateAction<FlavourFlowMeal[]>>;
-  isAnimating: boolean;
-  setIsAnimating: Dispatch<SetStateAction<boolean>>;
   clickedMeals: Set<string>;
   handleChoice: (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => void;
+  pairs: FlavourFlowMeal[][];
 }
 
 export type { AppContextPropTypes, AppContextValue, FlavourFlowContextType };

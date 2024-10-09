@@ -1,5 +1,5 @@
 import { FlavourFlowMeal } from "@vuo/types/dataTypes";
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useContext, useEffect, useMemo } from "react";
 import { dataset } from "@vuo/utils/FlavourFlowData";
 import {
   calculateElo,
@@ -16,10 +16,9 @@ const FlavourFlowContext = createContext<FlavourFlowContextType>({
   setMeals: () => {},
   currentPair: [],
   setCurrentPair: () => {},
-  isAnimating: false,
-  setIsAnimating: () => {},
   handleChoice: () => {},
   clickedMeals: new Set(),
+  pairs: [],
 });
 
 export const FlavourFlowProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -30,27 +29,12 @@ export const FlavourFlowProvider: React.FC<{ children: React.ReactNode }> = ({
   );
   const [currentPair, setCurrentPair] = useState<FlavourFlowMeal[]>([]);
   const [clickedMeals, setClickedMeals] = useState<Set<string>>(new Set());
-  const [isAnimating, setIsAnimating] = useState(false);
 
-  const pairs: FlavourFlowMeal[][] = findPairsByQuestionset(meals);
-
-  //   useEffect(() => {
-  //     // const initialMeals = createDataForRanking(dataset);
-  //     // setMeals(initialMeals);
-
-  //     if (pairs.length > 0) {
-  //       // Initial pair
-  //       drawNewPair(setCurrentPair, pairs, clickedMeals, setIsAnimating);
-  //     }
-  //   }, []);
-
-  useEffect(() => {
-    if (pairs.length > 0 && clickedMeals.size < meals.length) {
-      drawNewPair(setCurrentPair, pairs, clickedMeals, setIsAnimating);
-    } else {
-      setCurrentPair([]);
-    }
-  }, [meals, clickedMeals]);
+  // useMemo to only render pairs when it's needed
+  const pairs: FlavourFlowMeal[][] = useMemo(
+    () => findPairsByQuestionset(meals),
+    [meals],
+  );
 
   const handleChoice = (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => {
     const { newWinnerElo, newLoserElo } = calculateElo(
@@ -59,20 +43,11 @@ export const FlavourFlowProvider: React.FC<{ children: React.ReactNode }> = ({
       probability,
     );
 
-    // Update meals' ELOs
     setMeals((prevMeals) =>
       updateElo(prevMeals, winner, loser, newWinnerElo, newLoserElo),
     );
 
     setClickedMeals((prev) => new Set(prev).add(winner.id).add(loser.id));
-
-    // Draw a new pair of meals
-    drawNewPair(
-      setCurrentPair,
-      findPairsByQuestionset(meals),
-      clickedMeals,
-      setIsAnimating,
-    );
   };
 
   return (
@@ -82,10 +57,9 @@ export const FlavourFlowProvider: React.FC<{ children: React.ReactNode }> = ({
         setMeals,
         currentPair,
         setCurrentPair,
-        isAnimating,
-        setIsAnimating,
         handleChoice,
         clickedMeals,
+        pairs,
       }}
     >
       {children}

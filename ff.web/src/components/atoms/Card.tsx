@@ -10,7 +10,6 @@ import { CardProps } from "@vuo/types/atomProps";
 const Card = ({
   meal,
   onClick,
-  // isSelected,
   cardClass,
   titleClass,
   textClass,

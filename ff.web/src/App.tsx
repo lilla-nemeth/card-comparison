@@ -33,7 +33,10 @@ const App = () => {
                   <Route path="/meal-map" element={<MealMap />} />
                   <Route path="/shopping-cart" element={<ShoppingCart />} />
                   <Route path="/profile" element={<ProfilePage />} />
-                  <Route path="/flavour-flow" element={<FlavourFlowPage />} />
+                  <Route
+                    path="/flavour-flow"
+                    element={<FlavourFlowPage key={location.pathname} />}
+                  />
                   <Route
                     path="/flavour-flow/results"
                     element={<FlavourFlowResultPage />}
