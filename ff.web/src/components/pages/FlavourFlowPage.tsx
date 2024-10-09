@@ -14,60 +14,83 @@ import {
 } from "@vuo/utils/FlavourFlowFunctions";
 import Button from "../atoms/Button";
 import { useNavigate } from "react-router-dom";
+import { useFlavourFlow } from "@vuo/context/FlavourFlowContext";
 
 const FlavourFlowPage = () => {
-  const [meals, setMeals] = useState<FlavourFlowMeal[]>(
-    createDataForRanking(dataset),
-  );
-  const [currentPair, setCurrentPair] = useState<FlavourFlowMeal[]>([]);
-  const [clickedMeals, setClickedMeals] = useState<Set<string>>(new Set());
-  const [isAnimating, setIsAnimating] = useState(false);
+  const {
+    meals,
+    currentPair,
+    clickedMeals,
+    // setMeals,
+    setCurrentPair,
+    // setClickedMeals,
+    // isAnimating,
+    setIsAnimating,
+    // handleChoice,
+  } = useFlavourFlow();
+
+  // const [meals, setMeals] = useState<FlavourFlowMeal[]>(
+  //   createDataForRanking(dataset),
+  // );
+  // const [currentPair, setCurrentPair] = useState<FlavourFlowMeal[]>([]);
+  // const [clickedMeals, setClickedMeals] = useState<Set<string>>(new Set());
+  // const [isAnimating, setIsAnimating] = useState(false);
   const navigate = useNavigate();
 
+  // const pairs: FlavourFlowMeal[][] = findPairsByQuestionset(meals);
+
+  // useEffect(() => {
+  //   if (pairs.length > 0) {
+  //     // Initial pair
+  //     drawNewPair(setCurrentPair, pairs, clickedMeals, setIsAnimating);
+  //   }
+  // }, [pairs, clickedMeals]);
+
   useEffect(() => {
-    const pairs = findPairsByQuestionset(meals);
-    if (pairs.length > 0) {
-      // Initial pair
-      drawNewPair(setCurrentPair, pairs, clickedMeals, setIsAnimating);
+    if (meals.length && currentPair.length === 0) {
+      const pairs = findPairsByQuestionset(meals); // Regenerate pairs
+      if (pairs.length > 0) {
+        drawNewPair(setCurrentPair, pairs, clickedMeals, setIsAnimating);
+      }
     }
-  }, [meals, clickedMeals]);
+  }, [currentPair, meals, clickedMeals]);
 
   const handleNavigate = () => {
     navigate("/flavour-flow/results", { state: { meals } });
   };
 
-  const handleChoice = (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => {
-    const { newWinnerElo, newLoserElo } = calculateElo(
-      winner,
-      loser,
-      probability,
-    );
+  // const handleChoice = (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => {
+  //   const { newWinnerElo, newLoserElo } = calculateElo(
+  //     winner,
+  //     loser,
+  //     probability,
+  //   );
 
-    // Update meals' ELOs
-    setMeals((prevMeals) =>
-      updateElo(prevMeals, winner, loser, newWinnerElo, newLoserElo),
-    );
+  //   // Update meals' ELOs
+  //   setMeals((prevMeals) =>
+  //     updateElo(prevMeals, winner, loser, newWinnerElo, newLoserElo),
+  //   );
 
-    setClickedMeals((prev) => new Set(prev).add(winner.id).add(loser.id));
+  //   setClickedMeals((prev) => new Set(prev).add(winner.id).add(loser.id));
 
-    // Draw a new pair of meals
-    drawNewPair(
-      setCurrentPair,
-      findPairsByQuestionset(meals),
-      clickedMeals,
-      setIsAnimating,
-    );
-  };
+  //   // Draw a new pair of meals
+  //   drawNewPair(
+  //     setCurrentPair,
+  //     findPairsByQuestionset(meals),
+  //     clickedMeals,
+  //     setIsAnimating,
+  //   );
+  // };
 
   return (
     <Page>
       <div className={module.flavourFlowContainer}>
         {currentPair.length ? (
           <ChoiceUI
-            meals={currentPair}
-            isAnimating={isAnimating}
-            setIsAnimating={setIsAnimating}
-            handleChoice={handleChoice}
+          // meals={currentPair}
+          // isAnimating={isAnimating}
+          // setIsAnimating={setIsAnimating}
+          // handleChoice={handleChoice}
           />
         ) : (
           <div className={module.resultButtonContainer}>

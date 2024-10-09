@@ -6,15 +6,25 @@ import Card from "@vuo/components/atoms/Card";
 import { FlavourFlowMeal } from "@vuo/types/dataTypes";
 import module from "@vuo/scss/components/organisms/ChoiceUI.module.scss";
 import { CardSwipeDirection } from "@vuo/types/moleculeProps";
+import { useFlavourFlow } from "@vuo/context/FlavourFlowContext";
 
-const ChoiceUI: React.FC<ChoiceUIProps> = ({
-  meals,
-  handleChoice,
-  isAnimating,
-  setIsAnimating,
-}) => {
+const ChoiceUI: React.FC<ChoiceUIProps> = (
+  {
+    // meals,
+    // handleChoice,
+    // isAnimating,
+    // setIsAnimating,
+  },
+) => {
+  const { currentPair, isAnimating, setIsAnimating, handleChoice } =
+    useFlavourFlow();
+
   const [selectedMealId, setSelectedMealId] = useState<string | null>(null);
   const [direction, setDirection] = useState<CardSwipeDirection | "">("");
+
+  if (!currentPair || currentPair.length === 0) {
+    return null;
+  }
 
   const cardVariants = {
     current: { opacity: 1, scale: 1 },
@@ -34,10 +44,13 @@ const ChoiceUI: React.FC<ChoiceUIProps> = ({
     setSelectedMealId(id);
   };
 
-  const handleCardClick = (meals: FlavourFlowMeal[], meal: FlavourFlowMeal) => {
+  const handleCardClick = (
+    currentPair: FlavourFlowMeal[],
+    meal: FlavourFlowMeal,
+  ) => {
     setIsAnimating?.(true);
     // setSelectedMealId(meal.id);
-    const loser = meals.find((m) => m.id !== meal.id) as FlavourFlowMeal;
+    const loser = currentPair.find((m) => m.id !== meal.id) as FlavourFlowMeal;
     handleChoice(meal, loser);
 
     setTimeout(() => {
@@ -61,7 +74,7 @@ const ChoiceUI: React.FC<ChoiceUIProps> = ({
         <div>
           <AnimatePresence>
             {!isAnimating &&
-              meals.map((meal: FlavourFlowMeal, index: number) => {
+              currentPair.map((meal: FlavourFlowMeal, index: number) => {
                 return (
                   <div key={meal.id}>
                     <motion.div
@@ -74,10 +87,10 @@ const ChoiceUI: React.FC<ChoiceUIProps> = ({
                     >
                       <Card
                         meal={meal}
-                        meals={meals}
+                        meals={currentPair}
                         onClick={() => {
                           handleSelectedCard(meal.id);
-                          handleCardClick(meals, meal);
+                          handleCardClick(currentPair, meal);
                           // handleDirectionChange(
                           //   selectedMealId !== null ? "down" : "up",
                           // );
