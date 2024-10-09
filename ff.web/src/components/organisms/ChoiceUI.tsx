@@ -7,13 +7,13 @@ import { FlavourFlowMeal } from "@vuo/types/dataTypes";
 import module from "@vuo/scss/components/organisms/ChoiceUI.module.scss";
 import { CardSwipeDirection } from "@vuo/types/moleculeProps";
 
-const ChoiceUI = ({
-  meals = [],
-  setMeals = () => {},
+const ChoiceUI: React.FC<ChoiceUIProps> = ({
+  meals,
+  setMeals,
+  handleChoice,
   isAnimating,
   setIsAnimating,
-  handleChoice,
-}: ChoiceUIProps) => {
+}) => {
   const [selectedMealId, setSelectedMealId] = useState<string | null>(null);
   const [direction, setDirection] = useState<CardSwipeDirection | "">("");
   const [isSelected, setIsSelected] = useState<boolean>(false);
@@ -57,13 +57,10 @@ const ChoiceUI = ({
     setIsSelected(selectedMealId !== null);
   }, [selectedMealId]);
 
-  const containerClass =
-    meals?.length > 2 ? module.scrollableContainer : module.staticContainer;
-
   return (
     <Page>
-      <div className={containerClass}>
-        <div className={module.cardContainer}>
+      <div className={module.staticContainer}>
+        <div>
           <AnimatePresence>
             {!isAnimating &&
               meals.map((meal: FlavourFlowMeal, index: number) => {

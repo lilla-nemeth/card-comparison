@@ -2,10 +2,14 @@ import { FlavourFlowMeal } from "./dataTypes";
 
 interface ChoiceUIProps {
   handleChoice: (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => void;
-  setMeals?: React.Dispatch<React.SetStateAction<FlavourFlowMeal[]>>;
+  setMeals: React.Dispatch<React.SetStateAction<FlavourFlowMeal[]>>;
   isAnimating?: boolean;
-  meals?: FlavourFlowMeal[];
+  meals: FlavourFlowMeal[];
   setIsAnimating?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export type { ChoiceUIProps };
+interface ResultUIProps {
+  meals: FlavourFlowMeal[];
+}
+
+export type { ChoiceUIProps, ResultUIProps };

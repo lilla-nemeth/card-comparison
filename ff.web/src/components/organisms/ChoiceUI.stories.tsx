@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import ChoiceUI from "./ChoiceUINew";
+import ChoiceUI from "./ChoiceUI";
 
 import CauliflowerImage from "../../../public/images/CauliflowerRice.webp";
 import Day1BaconImage from "../../../public/images/1.webp";

@@ -1,7 +1,3 @@
-// TODO: use this background color for the page or as a new theme
-// background-color: var(--surface-brand-orange-light);
-
-.scrollableContainer,
 .staticContainer {
   display: flex;
   justify-content: center;
@@ -13,11 +9,6 @@
   height: 100%;
   gap: var(--space-32);
   align-items: center;
-}
-
-.scrollableContainer {
-  overflow-x: auto;
-  scrollbar-width: thin;
 }
 
 .card,
@@ -107,7 +98,7 @@
 }
 
 .cardButtonActive {
-  background-color: var(--surface-brand-orange-medium);
+  background-color: var(--surface-brand-orange-dark);
   z-index: 110;
 }
 
@@ -136,7 +127,9 @@
 .cardImage {
   display: block;
   object-fit: cover;
-  filter: brightness(60%);
+  filter: brightness(70%);
+  // Filter for not chosen cards:
+  // filter: brightness(60%);
 }
 
 .cardOverlayActive {
@@ -150,7 +143,7 @@
   width: 100%;
   opacity: 0.5 !important;
   transition: 0.5s ease;
-  background-color: var(--surface-brand-orange-medium);
+  background-color: var(--surface-brand-orange-dark);
 }
 
 .cardTextActive {
