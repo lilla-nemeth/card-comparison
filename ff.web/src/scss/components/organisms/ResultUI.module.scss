@@ -78,10 +78,14 @@
   background-color: var(--color-black);
 }
 
+.cardText {
+  display: none;
+}
+
 .cardDeck {
   position: absolute;
   background-color: var(--color-white);
   z-index: -1;
   top: 2.5%;
-  left: 5%;
+  left: 7%;
 }

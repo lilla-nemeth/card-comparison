@@ -20,14 +20,14 @@ const ResultUI: React.FC<ResultUIProps> = ({ meals }) => {
       <div className={resultUIModules.cardContainer}>
         {winnerMeals.map((meal: FlavourFlowMeal) => {
           return (
-            <div className={resultUIModules.cardWrapper}>
+            <div className={resultUIModules.cardWrapper} key={meal.id}>
               <Card
-                id={`card ${meal.id}`}
                 meal={meal}
                 cardClass={resultUIModules.card}
                 titleClass={cardModules.cardTitle}
                 btnClass={cardModules.cardButton}
                 btnIconClass={cardModules.cardButtonIcon}
+                textClass={cardModules.cardText}
                 imageClass={cardModules.cardImage}
                 deckContainerClass={resultUIModules.cardDeckContainer}
                 deckClass={resultUIModules.cardDeck}

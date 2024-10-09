@@ -57,14 +57,11 @@ type className = string;
 interface CardClassNameProps {
   cardContainerClass?: className;
   cardClass?: className;
-  cardDraggedClass?: className;
   titleClass?: className;
-  btnActiveClass?: className;
-  btnIconActiveClass?: className;
-  textActiveClass?: className;
-  overlayActiveClass?: className;
+  textClass?: className;
   btnClass?: className;
   btnIconClass?: className;
+  overlayClass?: className;
   imageClass?: className;
   deckContainerClass?: className;
   deckClass?: className;
