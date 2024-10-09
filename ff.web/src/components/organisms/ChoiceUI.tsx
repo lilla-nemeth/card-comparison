@@ -60,7 +60,7 @@ const ChoiceUI: React.FC<ChoiceUIProps> = ({
   return (
     <Page>
       <div className={module.staticContainer}>
-        <div className={module.cardContainer}>
+        <div>
           <AnimatePresence>
             {!isAnimating &&
               meals.map((meal: FlavourFlowMeal, index: number) => {

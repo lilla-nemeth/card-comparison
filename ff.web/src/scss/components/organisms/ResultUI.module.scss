@@ -6,9 +6,7 @@
   width: 100%;
   max-width: 30rem;
   aspect-ratio: 1 / 1;
-  //   overflow: hidden;
   height: 100%;
-  gap: var(--space-32);
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
@@ -21,13 +19,36 @@
 
 .logoContainer {
   width: 100%;
-  aspect-ratio: 2 / 1;
+  flex: 2;
 }
 
 .cardContainer {
+  display: flex;
   width: 100%;
-  aspect-ratio: 2 / 1;
+  flex: 3;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-16);
+  z-index: 10;
+  justify-content: flex-start;
 }
+
+.cardWrapper {
+  position: relative;
+  height: 25em;
+  box-sizing: border-box;
+  // flex: 1 1 auto;
+  flex: 1 1 calc(50% - var(--space-16));
+  justify-content: center;
+  display: flex;
+}
+
+/* This option works also to render an empty div if the length of winnerMeals array is odd */
+// .cardContainer:has(.cardWrapper:nth-child(odd):last-child):after {
+//   content: "";
+//   flex: 1 1 calc(50% - var(--space-16));
+//   visibility: hidden;
+// }
 
 .card,
 .cardImage,
@@ -38,20 +59,22 @@
 
 .card,
 .cardDeck {
-  position: absolute;
   cursor: pointer;
   width: 14em;
-  //   display: inline-block;
-  //   align-items: center;
-  //   justify-content: center;
 }
 
 .card {
   z-index: 500;
+  position: relative;
   background-color: var(--color-black);
 }
 
 .cardDeck {
-  background-color: var(--color-white);
-  z-index: 0;
+  position: absolute;
+  // background-color: var(--color-white);
+  // temporary color for styling:
+  background-color: #bc31b3;
+  z-index: -1;
+  top: 2.5%;
+  left: 15%;
 }
