@@ -21,7 +21,7 @@ const FlavourFlowPage = () => {
     if (currentPair.length === 0) {
       drawNewPair(setCurrentPair, pairs, clickedMeals);
     }
-  }, [currentPair, clickedMeals, pairs, setCurrentPair]);
+  }, [clickedMeals, pairs, setCurrentPair]);
 
   const handleNavigate = () => {
     navigate("/flavour-flow/results", { state: { meals } });

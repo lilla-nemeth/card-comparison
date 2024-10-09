@@ -42,7 +42,7 @@ export const FlavourFlowProvider: React.FC<{ children: React.ReactNode }> = ({
     } else {
       setCurrentPair([]);
     }
-  }, [meals, clickedMeals]);
+  }, [meals, pairs, setCurrentPair, clickedMeals]);
 
   const handleChoice = (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => {
     const { newWinnerElo, newLoserElo } = calculateElo(
