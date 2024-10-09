@@ -37,13 +37,12 @@
   position: relative;
   height: 25em;
   box-sizing: border-box;
-  // flex: 1 1 auto;
   flex: 1 1 calc(50% - var(--space-16));
   justify-content: center;
   display: flex;
 }
 
-/* This option works also to render an empty div if the length of winnerMeals array is odd */
+/* Alternative option to render an empty div if the length of winnerMeals is odd */
 // .cardContainer:has(.cardWrapper:nth-child(odd):last-child):after {
 //   content: "";
 //   flex: 1 1 calc(50% - var(--space-16));
@@ -71,9 +70,7 @@
 
 .cardDeck {
   position: absolute;
-  // background-color: var(--color-white);
-  // temporary color for styling:
-  background-color: #bc31b3;
+  background-color: var(--color-white);
   z-index: -1;
   top: 2.5%;
   left: 15%;
