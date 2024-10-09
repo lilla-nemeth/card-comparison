@@ -7,21 +7,13 @@ import {
   findPairsByQuestionset,
 } from "@vuo/utils/FlavourFlowFunctions";
 import Button from "../atoms/Button";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useFlavourFlow } from "@vuo/context/FlavourFlowContext";
 
 const FlavourFlowPage = () => {
-  const { meals, currentPair, clickedMeals, setCurrentPair, pairs } =
-    useFlavourFlow();
+  const { meals, currentPair } = useFlavourFlow();
 
   const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    if (currentPair.length === 0) {
-      drawNewPair(setCurrentPair, pairs, clickedMeals);
-    }
-  }, [clickedMeals, pairs, setCurrentPair]);
 
   const handleNavigate = () => {
     navigate("/flavour-flow/results", { state: { meals } });
