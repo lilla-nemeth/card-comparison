@@ -27,6 +27,7 @@ const ResultUI: React.FC<ResultUIProps> = ({ meals }) => {
                 titleClass={cardModules.cardTitle}
                 btnClass={cardModules.cardButton}
                 btnIconClass={cardModules.cardButtonIcon}
+                textClass={cardModules.cardText}
                 imageClass={cardModules.cardImage}
                 deckContainerClass={resultUIModules.cardDeckContainer}
                 deckClass={resultUIModules.cardDeck}

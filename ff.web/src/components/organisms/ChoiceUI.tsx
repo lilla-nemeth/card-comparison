@@ -9,14 +9,12 @@ import { CardSwipeDirection } from "@vuo/types/moleculeProps";
 
 const ChoiceUI: React.FC<ChoiceUIProps> = ({
   meals,
-  setMeals,
   handleChoice,
   isAnimating,
   setIsAnimating,
 }) => {
   const [selectedMealId, setSelectedMealId] = useState<string | null>(null);
   const [direction, setDirection] = useState<CardSwipeDirection | "">("");
-  // const [isSelected, setIsSelected] = useState<boolean>(false);
 
   const cardVariants = {
     current: { opacity: 1, scale: 1 },
@@ -31,35 +29,31 @@ const ChoiceUI: React.FC<ChoiceUIProps> = ({
     }),
   };
 
-  const handleSelectedCardClick = (id: FlavourFlowMeal["id"]) => {
+  // This updates the selectedMealId
+  const handleSelectedCard = (id: FlavourFlowMeal["id"]) => {
     setSelectedMealId(id);
   };
 
-  // const handleCardClick = (meals: FlavourFlowMeal[], meal: FlavourFlowMeal) => {
-  //   setIsAnimating?.(true);
-  //   setSelectedMealId(meal.id);
-  //   const loser = meals.find((m) => m.id !== meal.id) as FlavourFlowMeal;
-  //   handleChoice(meal, loser);
+  const handleCardClick = (meals: FlavourFlowMeal[], meal: FlavourFlowMeal) => {
+    setIsAnimating?.(true);
+    // setSelectedMealId(meal.id);
+    const loser = meals.find((m) => m.id !== meal.id) as FlavourFlowMeal;
+    handleChoice(meal, loser);
 
-  //   setTimeout(() => {
-  //     setIsAnimating?.(false);
-  //     setSelectedMealId(null);
-  //   }, 300);
-  //   return meal.id;
-  // };
+    setTimeout(() => {
+      setIsAnimating?.(false);
+      setSelectedMealId(null);
+    }, 300);
+    return meal.id;
+  };
 
   // const handleDirectionChange = (newDirection: "up" | "down") => {
   //   setDirection(newDirection);
-  //   setMeals((prev) => prev.slice(1));
 
   //   setTimeout(() => {
   //     setDirection("");
   //   }, 300);
   // };
-
-  // useEffect(() => {
-  //   setIsSelected(selectedMealId !== null);
-  // }, [selectedMealId]);
 
   return (
     <Page>
@@ -68,7 +62,6 @@ const ChoiceUI: React.FC<ChoiceUIProps> = ({
           <AnimatePresence>
             {!isAnimating &&
               meals.map((meal: FlavourFlowMeal, index: number) => {
-                // const isSelected = meal.id === selectedMealId;
                 return (
                   <div key={meal.id}>
                     <motion.div
@@ -83,13 +76,12 @@ const ChoiceUI: React.FC<ChoiceUIProps> = ({
                         meal={meal}
                         meals={meals}
                         onClick={() => {
-                          // setIsSelected(selectedMealId === meal.id);
-                          // handleCardClick(meals, meal);
-                          // handleDirectionChange(isSelected ? "down" : "up");
-
-                          handleSelectedCardClick(meal.id);
+                          handleSelectedCard(meal.id);
+                          handleCardClick(meals, meal);
+                          // handleDirectionChange(
+                          //   selectedMealId !== null ? "down" : "up",
+                          // );
                         }}
-                        // isSelected={isSelected}
                         cardContainerClass={module.cardContainer}
                         cardClass={
                           index === 0

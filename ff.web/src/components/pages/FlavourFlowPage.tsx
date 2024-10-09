@@ -65,7 +65,6 @@ const FlavourFlowPage = () => {
         {currentPair.length ? (
           <ChoiceUI
             meals={currentPair}
-            setMeals={setMeals}
             isAnimating={isAnimating}
             setIsAnimating={setIsAnimating}
             handleChoice={handleChoice}
