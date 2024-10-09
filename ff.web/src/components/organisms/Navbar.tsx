@@ -1,9 +1,11 @@
 import useStackNavigator from "@vuo/utils/StackNavigator";
 import { NavBar } from "antd-mobile";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Navbar({ hideBackButton = false }) {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const { pathname } = location;
   const hideOnRoutes = ["/"];
   const isVisible = !hideOnRoutes.includes(location.pathname);
@@ -23,7 +25,13 @@ export default function Navbar({ hideBackButton = false }) {
   if (isVisible)
     return (
       <div>
-        <NavBar back={hideBackButton ? null : ""} onBack={() => goBack()}>
+        <NavBar
+          back={hideBackButton ? null : ""}
+          onBack={() => {
+            goBack();
+            navigate(-1);
+          }}
+        >
           {getTitle()}
         </NavBar>
       </div>
