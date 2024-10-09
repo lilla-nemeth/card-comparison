@@ -83,22 +83,25 @@ const findPairsByQuestionset = (
 
   const pairs: FlavourFlowMeal[][] = [];
 
-  for (const questionset in groupedMeals) {
-    const mealsInQuestionset = groupedMeals[questionset];
-
+  Object.values(groupedMeals).forEach((mealsInQuestionset) => {
     while (mealsInQuestionset.length > 1) {
-      const meal1 = mealsInQuestionset.splice(
-        Math.floor(Math.random() * mealsInQuestionset.length),
-        1,
-      )[0];
-      const meal2 = mealsInQuestionset.splice(
-        Math.floor(Math.random() * mealsInQuestionset.length),
-        1,
-      )[0];
+      const randomIndex1 = Math.floor(
+        Math.random() * mealsInQuestionset.length,
+      );
+      const meal1 = mealsInQuestionset[randomIndex1];
+
+      mealsInQuestionset.splice(randomIndex1, 1);
+
+      const randomIndex2 = Math.floor(
+        Math.random() * mealsInQuestionset.length,
+      );
+      const meal2 = mealsInQuestionset[randomIndex2];
+
+      mealsInQuestionset.splice(randomIndex2, 1);
 
       pairs.push([meal1, meal2]);
     }
-  }
+  });
 
   return pairs;
 };
@@ -116,8 +119,6 @@ const drawNewPair = (
     const randomIndex = Math.floor(Math.random() * availablePairs.length);
 
     setCurrentPair(availablePairs[randomIndex]);
-
-    setTimeout(() => {}, 50);
   } else {
     setCurrentPair([]);
   }
