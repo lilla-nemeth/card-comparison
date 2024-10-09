@@ -83,22 +83,25 @@ const findPairsByQuestionset = (
 
   const pairs: FlavourFlowMeal[][] = [];
 
-  for (const questionset in groupedMeals) {
-    const mealsInQuestionset = groupedMeals[questionset];
-
+  Object.values(groupedMeals).forEach((mealsInQuestionset) => {
     while (mealsInQuestionset.length > 1) {
-      const meal1 = mealsInQuestionset.splice(
-        Math.floor(Math.random() * mealsInQuestionset.length),
-        1,
-      )[0];
-      const meal2 = mealsInQuestionset.splice(
-        Math.floor(Math.random() * mealsInQuestionset.length),
-        1,
-      )[0];
+      const randomIndex1 = Math.floor(
+        Math.random() * mealsInQuestionset.length,
+      );
+      const meal1 = mealsInQuestionset[randomIndex1];
+
+      mealsInQuestionset.splice(randomIndex1, 1);
+
+      const randomIndex2 = Math.floor(
+        Math.random() * mealsInQuestionset.length,
+      );
+      const meal2 = mealsInQuestionset[randomIndex2];
+
+      mealsInQuestionset.splice(randomIndex2, 1);
 
       pairs.push([meal1, meal2]);
     }
-  }
+  });
 
   return pairs;
 };
@@ -107,7 +110,6 @@ const drawNewPair = (
   setCurrentPair: Dispatch<React.SetStateAction<FlavourFlowMeal[]>>,
   pairs: FlavourFlowMeal[][],
   clickedMeals: Set<string>,
-  setIsAnimating: Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const availablePairs = pairs.filter(
     (pair) => !clickedMeals.has(pair[0].id) && !clickedMeals.has(pair[1].id),
@@ -115,12 +117,8 @@ const drawNewPair = (
 
   if (availablePairs.length > 0) {
     const randomIndex = Math.floor(Math.random() * availablePairs.length);
-    setIsAnimating(true);
-    setCurrentPair(availablePairs[randomIndex]);
 
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 50);
+    setCurrentPair(availablePairs[randomIndex]);
   } else {
     setCurrentPair([]);
   }

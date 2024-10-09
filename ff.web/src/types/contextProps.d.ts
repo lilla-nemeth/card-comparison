@@ -9,6 +9,14 @@ interface AppContextValue {
   setIsOnboardingComplete: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface FlavourFlowContextType {
+  meals: FlavourFlowMeal[];
+  setMeals: Dispatch<SetStateAction<FlavourFlowMeal[]>>;
+  currentPair: FlavourFlowMeal[];
+  setCurrentPair: Dispatch<SetStateAction<FlavourFlowMeal[]>>;
+  clickedMeals: Set<string>;
+  handleChoice: (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => void;
+  pairs: FlavourFlowMeal[][];
+}
 
-
-export type { AppContextPropTypes, AppContextValue };
+export type { AppContextPropTypes, AppContextValue, FlavourFlowContextType };
