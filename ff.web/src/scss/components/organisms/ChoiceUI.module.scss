@@ -12,7 +12,6 @@
 }
 
 .card,
-.cardOverlay,
 .cardOverlayActive,
 .cardImage,
 .cardDeck {
@@ -128,8 +127,6 @@
   display: block;
   object-fit: cover;
   filter: brightness(70%);
-  // Filter for not chosen cards:
-  // filter: brightness(60%);
 }
 
 .cardOverlayActive {
@@ -143,7 +140,14 @@
   width: 100%;
   opacity: 0.5 !important;
   transition: 0.5s ease;
+}
+
+.cardOverlayActive {
   background-color: var(--surface-brand-orange-dark);
+}
+
+.cardText {
+  display: none;
 }
 
 .cardTextActive {
@@ -167,8 +171,4 @@
   font-weight: 500;
   font-size: 2rem;
   line-height: 1.4;
-}
-
-.card:active {
-  filter: unset;
 }
