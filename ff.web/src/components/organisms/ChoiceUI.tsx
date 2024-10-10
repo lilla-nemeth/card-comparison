@@ -54,58 +54,55 @@ const ChoiceUI: React.FC<ChoiceUIProps> = () => {
           <AnimatePresence>
             {currentPair.map((meal: FlavourFlowMeal, index: number) => {
               return (
-                <div key={meal.id}>
-                  <motion.div
-                    variants={cardVariants}
-                    custom={{ direction: directions[meal.id] || "" }}
-                    exit="exit"
-                    tabIndex={index}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1, transition: { duration: 0.5 } }}
-                  >
-                    <Card
-                      meal={meal}
-                      meals={currentPair}
-                      onClick={() => {
-                        handleCardClick(currentPair, meal);
-                      }}
-                      cardContainerClass={module.cardContainer}
-                      cardClass={
-                        index === 0
-                          ? `${module.card} ${module.firstCard}`
-                          : `${module.card} ${module.secondCard}`
-                      }
-                      titleClass={module.cardTitle}
-                      btnClass={
-                        selectedMealId === meal.id
-                          ? module.cardButtonActive
-                          : module.cardButton
-                      }
-                      btnIconClass={
-                        selectedMealId === meal.id
-                          ? module.cardButtonIconActive
-                          : module.cardButtonIcon
-                      }
-                      textClass={
-                        selectedMealId === meal.id
-                          ? module.cardTextActive
-                          : module.cardText
-                      }
-                      overlayClass={
-                        selectedMealId === meal.id
-                          ? module.cardOverlayActive
-                          : ""
-                      }
-                      imageClass={module.cardImage}
-                      deckContainerClass={module.cardDeckContainer}
-                      deckClass={
-                        index === 0
-                          ? `${module.cardDeck} ${module.firstCardDeck}`
-                          : `${module.cardDeck} ${module.secondCardDeck}`
-                      }
-                    />
-                  </motion.div>
-                </div>
+                <motion.div
+                  key={meal.id}
+                  variants={cardVariants}
+                  custom={{ direction: directions[meal.id] || "" }}
+                  exit="exit"
+                  tabIndex={index}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1, transition: { duration: 0.5 } }}
+                >
+                  <Card
+                    meal={meal}
+                    meals={currentPair}
+                    onClick={() => {
+                      handleCardClick(currentPair, meal);
+                    }}
+                    cardContainerClass={module.cardContainer}
+                    cardClass={
+                      index === 0
+                        ? `${module.card} ${module.firstCard}`
+                        : `${module.card} ${module.secondCard}`
+                    }
+                    titleClass={module.cardTitle}
+                    btnClass={
+                      selectedMealId === meal.id
+                        ? module.cardButtonActive
+                        : module.cardButton
+                    }
+                    btnIconClass={
+                      selectedMealId === meal.id
+                        ? module.cardButtonIconActive
+                        : module.cardButtonIcon
+                    }
+                    textClass={
+                      selectedMealId === meal.id
+                        ? module.cardTextActive
+                        : module.cardText
+                    }
+                    overlayClass={
+                      selectedMealId === meal.id ? module.cardOverlayActive : ""
+                    }
+                    imageClass={module.cardImage}
+                    deckContainerClass={module.cardDeckContainer}
+                    deckClass={
+                      index === 0
+                        ? `${module.cardDeck} ${module.firstCardDeck}`
+                        : `${module.cardDeck} ${module.secondCardDeck}`
+                    }
+                  />
+                </motion.div>
               );
             })}
           </AnimatePresence>
