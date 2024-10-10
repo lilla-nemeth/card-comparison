@@ -17,6 +17,7 @@ interface FlavourFlowContextType {
   clickedMeals: Set<string>;
   handleChoice: (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => void;
   pairs: FlavourFlowMeal[][];
+  setClickedMeals?: Dispatch<SetStateAction<Set<string>>>;
 }
 
 export type { AppContextPropTypes, AppContextValue, FlavourFlowContextType };

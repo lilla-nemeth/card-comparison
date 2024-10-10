@@ -18,6 +18,7 @@ const FlavourFlowContext = createContext<FlavourFlowContextType>({
   setCurrentPair: () => {},
   handleChoice: () => {},
   clickedMeals: new Set(),
+  setClickedMeals: new Set(),
   pairs: [],
 });
 
@@ -37,6 +38,7 @@ export const FlavourFlowProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 
   useEffect(() => {
+    console.log(clickedMeals);
     if (pairs.length > 0) {
       drawNewPair(setCurrentPair, pairs, clickedMeals);
     } else {
@@ -68,6 +70,7 @@ export const FlavourFlowProvider: React.FC<{ children: React.ReactNode }> = ({
         handleChoice,
         clickedMeals,
         pairs,
+        setClickedMeals,
       }}
     >
       {children}
