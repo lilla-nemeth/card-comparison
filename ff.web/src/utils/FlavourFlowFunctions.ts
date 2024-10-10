@@ -124,8 +124,10 @@ const drawNewPair = (
   }
 };
 
-const getWinners = (meals: FlavourFlowMeal[]) => {
-  return meals.filter((meal) => meal.elo > 1200);
+const getWinnersByAttributes = (meals: FlavourFlowMeal[]) => {
+  const winners = meals.filter((meal) => meal.elo > 1200);
+  console.log(winners);
+  return winners;
 };
 
 export {
@@ -135,5 +137,5 @@ export {
   createDataForRanking,
   findPairsByQuestionset,
   drawNewPair,
-  getWinners,
+  getWinnersByAttributes,
 };
