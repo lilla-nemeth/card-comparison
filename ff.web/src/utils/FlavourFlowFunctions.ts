@@ -125,6 +125,25 @@ const getWinnersByAttributes = (meals: FlavourFlowMeal[]) => {
   return winners;
 };
 
+const findRandomPairs = (meals: FlavourFlowMeal[]): FlavourFlowMeal[][] => {
+  const pairs: FlavourFlowMeal[][] = [];
+  let shuffledMeals = [...meals];
+
+  shuffledMeals = shuffledMeals.sort(() => Math.random() - 0.5);
+
+  while (shuffledMeals.length > 1) {
+    const meal1 = shuffledMeals.shift()!;
+    const meal2 = shuffledMeals.shift()!;
+    pairs.push([meal1, meal2]);
+  }
+
+  if (shuffledMeals.length === 1) {
+    pairs.push([shuffledMeals[0]]);
+  }
+
+  return pairs;
+};
+
 export {
   calculateElo,
   probability,
@@ -133,4 +152,5 @@ export {
   findPairsByCategories,
   drawNewPair,
   getWinnersByAttributes,
+  findRandomPairs,
 };
