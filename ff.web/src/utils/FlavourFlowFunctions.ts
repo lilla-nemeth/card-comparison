@@ -125,15 +125,7 @@ const drawNewPair = (
 };
 
 const getWinners = (meals: FlavourFlowMeal[]) => {
-  const winners = [];
-
-  for (let meal of meals) {
-    if (meal.elo > 1200) {
-      winners.push(meal);
-    }
-  }
-
-  return winners;
+  return meals.filter((meal) => meal.elo > 1200);
 };
 
 export {

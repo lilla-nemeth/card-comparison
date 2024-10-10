@@ -38,7 +38,6 @@ export const FlavourFlowProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 
   useEffect(() => {
-    console.log(clickedMeals);
     if (pairs.length > 0) {
       drawNewPair(setCurrentPair, pairs, clickedMeals);
     } else {
