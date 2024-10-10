@@ -92,20 +92,22 @@ const dataset: FlavourFlowDataset = {
   ],
   questionset4: [
     {
-      choice6: {
-        id: "7",
-        title: "Whole Foods",
+      choice8: {
+        id: "9",
+        title: "Whole Ingredients",
         elo: 1200,
+        // would need different image
         image: Day6StuffedImage,
-        name: "Stuffed",
+        name: "Chickpea Salad",
         category: "Nutrition Content",
       },
-      choice7: {
-        id: "8",
+      choice9: {
+        id: "10",
         title: "Processed Ingredients",
         elo: 1200,
+        // would need different image
         image: Day7BoneImage,
-        name: "Bone",
+        name: "Chicken Nachos",
         category: "Nutrition Content",
       },
     },
