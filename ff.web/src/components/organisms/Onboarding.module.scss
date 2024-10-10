@@ -1,0 +1,233 @@
+.onboardingContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--surface-primary);
+  color: var(--text-primary);
+}
+
+.onboardingHeader {
+  padding: var(--space-16);
+  position: relative;
+}
+
+.onboardingContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-24);
+  padding-bottom: calc(var(--space-24) + 56px);
+}
+
+.onboardingStep {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.onboardingNavigation {
+  position: fixed;
+  bottom: 56px;
+  left: 0;
+  right: 0;
+  background-color: var(--surface-secondary);
+  padding: var(--space-16);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.title {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--space-24);
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--space-24);
+  color: var(--text-secondary);
+}
+
+.onboardingOption {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-24);
+  padding: var(--space-20);
+  border-radius: var(--radius-16);
+  background-color: var(--surface-secondary);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: var(--surface-tertiary);
+    transform: translateY(-2px);
+  }
+
+  &.selected {
+    background-color: var(--surface-brand-blue);
+    color: var(--button-text);
+  }
+}
+
+.onboardingRadio {
+  display: none;
+}
+
+.onboardingLabel {
+  display: flex;
+  flex-direction: column;
+  margin-left: var(--space-16);
+}
+
+.onboardingLabelTitle {
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+}
+
+.onboardingLabelDescription {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.onboardingButton {
+  display: inline-block;
+  margin: var(--space-8);
+  padding: var(--space-12) var(--space-20);
+  border: none;
+  border-radius: var(--radius-24);
+  background-color: var(--surface-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  font-weight: bold;
+
+  &:hover {
+    background-color: var(--surface-tertiary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &.selected {
+    background-color: var(--surface-brand-blue);
+    color: var(--button-text);
+    transform: translateY(0);
+    box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+  }
+}
+
+.onboardingNumberInput {
+  width: 100%;
+  padding: var(--space-8);
+  font-size: var(--font-size-md);
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-8);
+  color: var(--text-primary);
+}
+
+.onboardingToggleItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-16);
+}
+
+.onboardingNote {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-top: var(--space-16);
+}
+
+.onboardingSearchInput {
+  width: 100%;
+  padding: var(--space-8);
+  font-size: var(--font-size-md);
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-8);
+  color: var(--text-primary);
+  margin-bottom: var(--space-16);
+}
+
+.onboardingSelectedItems {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-16);
+}
+
+.onboardingSelectedItem {
+  margin: var(--space-4);
+  padding: var(--space-4) var(--space-8);
+  background-color: var(--surface-tertiary);
+  border-radius: var(--radius-24);
+  font-size: var(--font-size-sm);
+}
+
+.onboardingCommonItems {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.onboardingCuisineItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-16);
+}
+
+.onboardingCuisineButtons {
+  display: flex;
+  gap: var(--space-8);
+}
+
+.onboardingProgress {
+  margin-bottom: var(--space-16);
+}
+
+.onboardingButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navButton {
+  min-width: 100px;
+}
+
+@media (max-width: 768px) {
+  .onboardingStep {
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .description {
+    font-size: var(--font-size-sm);
+  }
+
+  .onboardingOption {
+    padding: var(--space-16);
+  }
+
+  .onboardingLabelTitle {
+    font-size: var(--font-size-md);
+  }
+
+  .onboardingLabelDescription {
+    font-size: var(--font-size-xs);
+  }
+
+  .onboardingButton {
+    font-size: var(--font-size-sm);
+    padding: var(--space-8) var(--space-16);
+  }
+}

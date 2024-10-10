@@ -1,47 +1,44 @@
 import { useState, useEffect } from 'react'
-// import { ChevronLeft, Search, X } from 'lucide-react'
-// import { Button } from "@/components/ui/button"
 import Button from "../atoms/Button"
-// import Input from "../atoms/Input" //TODO use this instead of html inputs
-// import { Label } from "@/components/ui/label" //TODO create a react component for labels
-// import RadioGroupItem from "../molecules/RadioGroupItem"
-// import RadioGroup from "../molecules/RadioGroup"
 import Slider from "../atoms/Slider"
 import ProgressBar from '../atoms/ProgressBar'
 import ToggleSwitch from '../molecules/ToggleSwitch'
 import useStackNavigator from '@vuo/utils/StackNavigator'
 import { useAppContext } from '@vuo/context/AppContext'
+import { useTheme } from '@vuo/context/ThemeContext'
+import styles from './Onboarding.module.scss'
 
-//TODO separating basic information from food preferences?
+enum OnboardingStatus {
+  notStarted = 'notStarted',
+  completed = 'completed',
+}
+
 const steps = [
-  { id: 'intro', title: 'Your meal plan awaits',  },
-  { id: 'goals', title: 'Your goals',  },
-  { id: 'sex', title: 'About you',  },
-  { id: 'age', title: 'Age',  },
+  { id: 'intro', title: 'Your meal plan awaits', status: OnboardingStatus.notStarted },
+  { id: 'goals', title: 'Your goals', status: OnboardingStatus.notStarted },
+  { id: 'sex', title: 'About you', status: OnboardingStatus.notStarted },
+  { id: 'age', title: 'Age', status: OnboardingStatus.notStarted },
   { id: 'height', title: 'Height' },
-  { id: 'current-weight', title: 'Current weight',  },
-  { id: 'goal-weight', title: 'Goal weight',  },
-  { id: 'motivation', title: 'Motivation',  },
-  { id: 'activity', title: 'Activity level',  },
-  { id: 'mindset', title: 'Your mindset',  },
-  { id: 'speed', title: 'Speed',  },
+  { id: 'current-weight', title: 'Current weight', status: OnboardingStatus.notStarted },
+  { id: 'goal-weight', title: 'Goal weight', status: OnboardingStatus.notStarted },
+  { id: 'motivation', title: 'Motivation', status: OnboardingStatus.notStarted },
+  { id: 'activity', title: 'Activity level', status: OnboardingStatus.notStarted },
+  { id: 'mindset', title: 'Your mindset', status: OnboardingStatus.notStarted },
+  { id: 'speed', title: 'Speed', status: OnboardingStatus.notStarted },
   { id: 'diet-plan', title: 'Diet plan' },
-  { id: 'past-experience', title: 'Past experience',  },
-  { id: 'format', title: 'Format',  },
-  { id: 'allergies', title: 'Allergies',  },
-  { id: 'dislikes', title: 'Dislikes',  },
-  { id: 'cuisines', title: 'Cuisines',  },
-  { id: 'pantry', title: 'Your pantry',  },
-  { id: 'cooking-skills', title: 'Cooking skills',  },
+  { id: 'past-experience', title: 'Past experience', status: OnboardingStatus.notStarted },
+  { id: 'format', title: 'Format', status: OnboardingStatus.notStarted },
+  { id: 'allergies', title: 'Allergies', status: OnboardingStatus.notStarted },
+  { id: 'dislikes', title: 'Dislikes', status: OnboardingStatus.notStarted },
+  { id: 'cuisines', title: 'Cuisines', status: OnboardingStatus.notStarted },
+  { id: 'pantry', title: 'Your pantry', status: OnboardingStatus.notStarted },
+  { id: 'cooking-skills', title: 'Cooking skills', status: OnboardingStatus.notStarted },
 ]
 
 const allergies = ['Shellfish', 'Fish', 'Dairy', 'Peanut', 'Tree nut', 'Egg', 'Gluten', 'Soy', 'Sesame']
 const commonDislikes = ['beef', 'beets', 'bell peppers', 'broccoli', 'brussels sprouts', 'cilantro', 'eggplant', 'eggs', 'fish', 'ginger', 'kale', 'mayonnaise', 'mushrooms', 'okra', 'olives', 'peas']
 const cuisines = ['American', 'Italian', 'Mexican', 'Asian', 'Chinese', 'Japanese', 'Thai', 'Indian']
 // TODO add the status of the steps to the formData object, (you may need to modify the rendering of the steps)
-
-let isResumed = false
-
 export default function OnboardingFlow() {
   const { navigateWithState } = useStackNavigator()
 
@@ -50,7 +47,6 @@ export default function OnboardingFlow() {
   const { setIsOnboardingComplete } = useAppContext()
 
   const [formData, setFormData] = useState({
-    completedSteps: [],
     goals: [],
     sex: '',
     age: '',
@@ -71,39 +67,20 @@ export default function OnboardingFlow() {
     cookingSkills: '',
   })
 
-
-  //the onboarding form is rerendered avery time the user completes a step
   useEffect(() => {
-    // if(localStorage.getItem('onboardingData') && localStorage.getItem('profileData')) {
-    //   setFormData(JSON.parse(localStorage.getItem('profileData')))
-    // }
-      
-      
-    //check if user has already started onboarding
-    if(localStorage.getItem('onboardingData')) {
-      const data = JSON.parse(localStorage.getItem('onboardingData'))
-      setFormData(data ? data : {})
-      let stepsDone = data.completedSteps.length
-      let allSteps = steps.length
-      console.log('stepsDone:', stepsDone)
-      console.log('allSteps:', allSteps)
-      setProgress((stepsDone / allSteps) * 100)
+    const calculateProgress = () => {
+      const completedSteps = steps.filter(step => step.status === OnboardingStatus.completed).length;
+      return (completedSteps / steps.length) * 100;
+    };
 
-      //if the user is resuming the onboarding process, set the current step to the last step completed
-      if(!isResumed) {
-        setCurrentStep(stepsDone)
-        isResumed = true
-      }
-
-      return () => {
-        isResumed = false
-      }
-
-    //new user visits the page
+    if (localStorage.getItem('onboardingData')) {
+      const data = JSON.parse(localStorage.getItem('onboardingData'));
+      setFormData(data || {});
+      setProgress(calculateProgress());
     } else {
-      setProgress((currentStep / (steps.length - 1)) * 100)
+      setProgress(calculateProgress());
     }
-  }, [currentStep])
+  }, [currentStep]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -131,20 +108,19 @@ export default function OnboardingFlow() {
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
-      const formDataAndSteps = {
-        ...formData,
-        completedSteps: [...formData.completedSteps, steps[currentStep].id]
-      }
-      localStorage.setItem('onboardingData', JSON.stringify(formDataAndSteps))
-      setCurrentStep(prev => prev + 1)
+      steps[currentStep].status = OnboardingStatus.completed;
+      setCurrentStep(currentStep + 1);
+      setProgress(((currentStep + 1) / steps.length) * 100);
     }
   }
 
   const handleBack = () => {
     if (currentStep > 0) {
-      setCurrentStep(prev => prev - 1)
+      steps[currentStep].status = OnboardingStatus.notStarted;
+      setCurrentStep(prev => prev - 1);
+      setProgress(((currentStep - 1) / steps.length) * 100);
     }
-  }
+  };
 
   const handleFinish = () => {
     localStorage.setItem('profileData', JSON.stringify(formData))
@@ -153,282 +129,179 @@ export default function OnboardingFlow() {
     navigateWithState("/home")
   }
 
+  const handleExit = () => {
+    if (window.confirm("Are you sure you want to exit? Your progress will be saved.")) {
+      localStorage.setItem('onboardingData', JSON.stringify(formData));
+      navigateWithState("/home");
+    }
+  };
+
+  const renderOption = (value, label, description = '', isChecked, onChange) => (
+    <div 
+      key={value}
+      className={`${styles.onboardingOption} ${isChecked ? styles.selected : ''}`}
+      onClick={() => onChange(value)}
+    >
+      <input 
+        type="radio"
+        value={value}
+        id={value}
+        checked={isChecked}
+        onChange={() => onChange(value)}
+        className={styles.onboardingRadio}
+      />
+      <label htmlFor={value} className={styles.onboardingLabel}>
+        <span className={styles.onboardingLabelTitle}>{label}</span>
+        {description && <span className={styles.onboardingLabelDescription}>{description}</span>}
+      </label>
+    </div>
+  );
+
   const renderStep = () => {
-    const step = steps[currentStep]
+    const step = steps[currentStep];
+    
     switch (step.id) {
       case 'intro':
         return (
-          <div className="space-y-4">
-            {/* <img src="/placeholder.svg?height=200&width=200" alt="Lemons" className="mx-auto" /> */}
-            <h2 className="text-2xl font-bold text-center">{step.title}</h2>
-            <p className="text-center text-gray-600">
-              We'll learn about your goals and preferences to help build your first custom meal plan.
-            </p>
+          <div className={styles.onboardingIntro}>
+            <h2>{step.title}</h2>
+            <p className={styles.description}>We'll learn about your goals and preferences to help build your first custom meal plan.</p>
           </div>
-        )
+        );
+      
       case 'goals':
         return (
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">{step.title}</h2>
-            <p className="text-gray-600">What can we help you accomplish? We'll personalize our recommendations based on your goals.</p>
+          <div className={styles.onboardingMultiSelect}>
+            <h2>{step.title}</h2>
+            <p> What can we help you accomplish? We'll personalize our recommendations based on your goals.</p>
             {['Lose weight', 'Hit my macros', 'Eat healthy', 'Gain weight', 'Save time'].map(goal => (
-              <Button
+              <button
                 key={goal}
-                color={formData.goals.includes(goal) ? "primary" : "secondary"}
+                className={`${styles.onboardingButton} ${formData.goals.includes(goal) ? styles.selected : ''}`}
                 onClick={() => handleMultiSelect(goal, 'goals')}
               >
                 {goal}
-              </Button>
+              </button>
             ))}
           </div>
-        )
-        case 'sex':
-          return (
-            <div style={{ marginBottom: '16px' }}>
-              <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>{step.title}</h2>
-              <p style={{ color: '#4B5563' }}>What is your sex? We'll use this to estimate your daily energy needs.</p>
-              
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <input 
-                  type="radio" 
-                  value="female" 
-                  id="female" 
-                  checked={formData.sex === 'female'} 
-                  onChange={(e) => setFormData(prev => ({ ...prev, sex: e.target.value }))} 
-                />
-                <label htmlFor="female">Female</label>
-              </div>
-        
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <input 
-                  type="radio" 
-                  value="male" 
-                  id="male" 
-                  checked={formData.sex === 'male'} 
-                  onChange={(e) => setFormData(prev => ({ ...prev, sex: e.target.value }))} 
-                />
-                <label htmlFor="male">Male</label>
-              </div>
-            </div>
-          )
-        
+        );
+      
+      case 'sex':
+        return (
+          <div className={styles.onboardingSingleSelect}>
+            <h2>{step.title}</h2>
+            <p> What is your sex? We'll use this to estimate your daily energy needs.</p>
+            {renderOption('female', 'Female', '', formData.sex === 'female', (value) => setFormData(prev => ({ ...prev, sex: value })))}
+            {renderOption('male', 'Male', '', formData.sex === 'male', (value) => setFormData(prev => ({ ...prev, sex: value })))}
+          </div>
+        );
+      
       case 'age':
         return (
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">{step.title}</h2>
-            <p className="text-gray-600">How old are you?</p>
+          <div className={styles.onboardingInput}>
+            <h2>{step.title}</h2>
+            <p>How old are you?</p>
             <input
               type="number"
               name="age"
               value={formData.age}
               onChange={handleInputChange}
               placeholder="Enter your age"
+              className={styles.onboardingNumberInput}
             />
           </div>
-        )
+        );
+      
       case 'height':
         return (
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">{step.title}</h2>
-            <p className="text-gray-600">How tall are you?</p>
+          <div className={styles.onboardingInput}>
+            <h2>{step.title}</h2>
+            <p>How tall are you?</p>
             <input
               type="number"
               name="height"
               value={formData.height}
               onChange={handleInputChange}
               placeholder="Enter your height in cm"
+              className={styles.onboardingNumberInput}
             />
           </div>
-        )
+        );
+      
       case 'current-weight':
         return (
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">{step.title}</h2>
-            <p className="text-gray-600">How much do you currently weigh?</p>
+          <div className={styles.onboardingInput}>
+            <h2>{step.title}</h2>
+            <p>How much do you currently weigh?</p>
             <input
               type="number"
               name="currentWeight"
               value={formData.currentWeight}
               onChange={handleInputChange}
               placeholder="Enter your weight in kg"
+              className={styles.onboardingNumberInput}
             />
           </div>
-        )
+        );
+      
       case 'goal-weight':
         return (
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">{step.title}</h2>
-            <p className="text-gray-600">What is your goal weight?</p>
+          <div className={styles.onboardingInput}>
+            <h2>{step.title}</h2>
+            <p>What is your goal weight?</p>
             <input
               type="number"
               name="goalWeight"
               value={formData.goalWeight}
               onChange={handleInputChange}
               placeholder="Enter your goal weight in kg"
+              className={styles.onboardingNumberInput}
             />
           </div>
-        )
-        case 'motivation':
-          return (
-            <div style={{ marginBottom: '16px' }}>
-              <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>{step.title}</h2>
-              <p style={{ color: '#4B5563' }}>How would you describe your current motivation to plan healthy meals and meet your nutrition goals?</p>
-              
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <input 
-                  type="radio" 
-                  value="ready-to-tackle-anything" 
-                  id="ready-to-tackle-anything" 
-                  checked={formData.motivation === 'ready-to-tackle-anything'} 
-                  onChange={(e) => setFormData(prev => ({ ...prev, motivation: e.target.value }))} 
-                />
-                <label htmlFor="ready-to-tackle-anything">Ready to tackle anything (Prefer big changes)</label>
-              </div>
-        
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <input 
-                  type="radio" 
-                  value="willing-to-give-it-a-go" 
-                  id="willing-to-give-it-a-go" 
-                  checked={formData.motivation === 'willing-to-give-it-a-go'} 
-                  onChange={(e) => setFormData(prev => ({ ...prev, motivation: e.target.value }))} 
-                />
-                <label htmlFor="willing-to-give-it-a-go">Willing to give it a go (Prefer moderate changes)</label>
-              </div>
-        
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <input 
-                  type="radio" 
-                  value="small-changes-are-best" 
-                  id="small-changes-are-best" 
-                  checked={formData.motivation === 'small-changes-are-best'} 
-                  onChange={(e) => setFormData(prev => ({ ...prev, motivation: e.target.value }))} 
-                />
-                <label htmlFor="small-changes-are-best">Small changes are best (Prefer to take things step by step)</label>
-              </div>
-        
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <input 
-                  type="radio" 
-                  value="not-ready-yet" 
-                  id="not-ready-yet" 
-                  checked={formData.motivation === 'not-ready-yet'} 
-                  onChange={(e) => setFormData(prev => ({ ...prev, motivation: e.target.value }))} 
-                />
-                <label htmlFor="not-ready-yet">Not ready yet</label>
-              </div>
-            </div>
-          )
-          case 'activity':
-            return (
-              <div style={{ marginBottom: '16px' }}>
-                <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>{step.title}</h2>
-                <p style={{ color: '#4B5563' }}>How often do you exercise?</p>
-                
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <input 
-                    type="radio" 
-                    value="sedentary" 
-                    id="sedentary" 
-                    checked={formData.activityLevel === 'sedentary'} 
-                    onChange={(e) => setFormData(prev => ({ ...prev, activityLevel: e.target.value }))} 
-                  />
-                  <label htmlFor="sedentary">Sedentary (No exercise, desk job)</label>
-                </div>
-          
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <input 
-                    type="radio" 
-                    value="light-exercise" 
-                    id="light-exercise" 
-                    checked={formData.activityLevel === 'light-exercise'} 
-                    onChange={(e) => setFormData(prev => ({ ...prev, activityLevel: e.target.value }))} 
-                  />
-                  <label htmlFor="light-exercise">Light exercise (1-2 days per week)</label>
-                </div>
-          
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <input 
-                    type="radio" 
-                    value="moderate-exercise" 
-                    id="moderate-exercise" 
-                    checked={formData.activityLevel === 'moderate-exercise'} 
-                    onChange={(e) => setFormData(prev => ({ ...prev, activityLevel: e.target.value }))} 
-                  />
-                  <label htmlFor="moderate-exercise">Moderate exercise (3-5 days per week)</label>
-                </div>
-          
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <input 
-                    type="radio" 
-                    value="heavy-exercise" 
-                    id="heavy-exercise" 
-                    checked={formData.activityLevel === 'heavy-exercise'} 
-                    onChange={(e) => setFormData(prev => ({ ...prev, activityLevel: e.target.value }))} 
-                  />
-                  <label htmlFor="heavy-exercise">Heavy exercise (6-7 days per week)</label>
-                </div>
-          
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <input 
-                    type="radio" 
-                    value="athlete" 
-                    id="athlete" 
-                    checked={formData.activityLevel === 'athlete'} 
-                    onChange={(e) => setFormData(prev => ({ ...prev, activityLevel: e.target.value }))} 
-                  />
-                  <label htmlFor="athlete">Athlete (Daily exercise or heavy labor)</label>
-                </div>
-              </div>
-            )
-          
-            case 'mindset':
-              return (
-                <div style={{ marginBottom: '16px' }}>
-                  <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>{step.title}</h2>
-                  <p style={{ color: '#4B5563' }}>How do you relate to the statement: "I know what I should be doing to eat healthy, but I need to find a way to do it that fits into my life"?</p>
-                  
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <input 
-                      type="radio" 
-                      value="agree" 
-                      id="agree" 
-                      checked={formData.mindset === 'agree'} 
-                      onChange={(e) => setFormData(prev => ({ ...prev, mindset: e.target.value }))} 
-                    />
-                    <label htmlFor="agree">Agree</label>
-                  </div>
-            
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <input 
-                      type="radio" 
-                      value="neutral" 
-                      id="neutral" 
-                      checked={formData.mindset === 'neutral'} 
-                      onChange={(e) => setFormData(prev => ({ ...prev, mindset: e.target.value }))} 
-                    />
-                    <label htmlFor="neutral">Neutral</label>
-                  </div>
-            
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <input 
-                      type="radio" 
-                      value="disagree" 
-                      id="disagree" 
-                      checked={formData.mindset === 'disagree'} 
-                      onChange={(e) => setFormData(prev => ({ ...prev, mindset: e.target.value }))} 
-                    />
-                    <label htmlFor="disagree">Disagree</label>
-                  </div>
-                </div>
-              )
-            
+        );
+      
+      case 'motivation':
+        return (
+          <div className={styles.onboardingSingleSelect}>
+            <h2>{step.title}</h2>
+            <p>How motivated are you to make changes to your diet?</p>
+            {renderOption('very-motivated', 'Very motivated', 'Ready for big changes', formData.motivation === 'very-motivated', (value) => setFormData(prev => ({ ...prev, motivation: value })))}
+            {renderOption('willing-to-give-it-a-go', 'Willing to give it a go', 'Prefer moderate changes', formData.motivation === 'willing-to-give-it-a-go', (value) => setFormData(prev => ({ ...prev, motivation: value })))}
+            {renderOption('small-changes-are-best', 'Small changes are best', 'Prefer to take things step by step', formData.motivation === 'small-changes-are-best', (value) => setFormData(prev => ({ ...prev, motivation: value })))}
+            {renderOption('not-ready-yet', 'Not ready yet', '', formData.motivation === 'not-ready-yet', (value) => setFormData(prev => ({ ...prev, motivation: value })))}
+          </div>
+        );
+      
+      case 'activity':
+        return (
+          <div className={styles.onboardingSingleSelect}>
+            <h2>{step.title}</h2>
+            <p>How often do you exercise?</p>
+            {renderOption('sedentary', 'Sedentary', 'No exercise, desk job', formData.activityLevel === 'sedentary', (value) => setFormData(prev => ({ ...prev, activityLevel: value })))}
+            {renderOption('light-exercise', 'Light exercise', '1-2 days per week', formData.activityLevel === 'light-exercise', (value) => setFormData(prev => ({ ...prev, activityLevel: value })))}
+            {renderOption('moderate-exercise', 'Moderate exercise', '3-5 days per week', formData.activityLevel === 'moderate-exercise', (value) => setFormData(prev => ({ ...prev, activityLevel: value })))}
+            {renderOption('heavy-exercise', 'Heavy exercise', '6-7 days per week', formData.activityLevel === 'heavy-exercise', (value) => setFormData(prev => ({ ...prev, activityLevel: value })))}
+            {renderOption('athlete', 'Athlete', 'Daily exercise or heavy labor', formData.activityLevel === 'athlete', (value) => setFormData(prev => ({ ...prev, activityLevel: value })))}
+          </div>
+        );
+      
+      case 'mindset':
+        return (
+          <div className={styles.onboardingSingleSelect}>
+            <h2>{step.title}</h2>
+            <p>How do you relate to the statement: "I know what I should be doing to eat healthy, but I need to find a way to do it that fits into my life"?</p>
+            {renderOption('agree', 'Agree', '', formData.mindset === 'agree', (value) => setFormData(prev => ({ ...prev, mindset: value })))}
+            {renderOption('neutral', 'Neutral', '', formData.mindset === 'neutral', (value) => setFormData(prev => ({ ...prev, mindset: value })))}
+            {renderOption('disagree', 'Disagree', '', formData.mindset === 'disagree', (value) => setFormData(prev => ({ ...prev, mindset: value })))}
+          </div>
+        );
+      
       case 'speed':
         return (
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">{step.title}</h2>
-            <p className="text-gray-600">Based on your information, we recommend a moderate pace, but feel free to adjust!</p>
-            <div className="flex items-center justify-between">
+          <div className={styles.onboardingSpeed}>
+            <h2>{step.title}</h2>
+            <p>Based on your information, we recommend a moderate pace, but feel free to adjust!</p>
+            <div className={styles.onboardingSlider}>
               <span>🐢</span>
               <Slider
                 defaultValue={[1]}
@@ -441,317 +314,194 @@ export default function OnboardingFlow() {
               />
               <span>⚡</span>
             </div>
-            <p className="text-center font-semibold">{formData.speed.charAt(0).toUpperCase() + formData.speed.slice(1)}</p>
-            <p className="text-center text-sm text-gray-600">
+            <p className={styles.onboardingSpeedLabel}>
+              {formData.speed.charAt(0).toUpperCase() + formData.speed.slice(1)}
+            </p>
+            <p className={styles.onboardingSpeedDescription}>
               {formData.speed === 'slow' && 'Sustainable and gradual pace'}
               {formData.speed === 'moderate' && 'Sustainable and moderate pace'}
               {formData.speed === 'fast' && 'Ambitious and quick pace'}
             </p>
           </div>
-        )
-        case 'diet-plan':
-          return (
-            <div style={{ marginBottom: '16px' }}>
-              <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>{step.title}</h2>
-              <p style={{ color: '#4B5563' }}>We'll start with a 1 week custom plan to help you gain weight. Which plan best suits your preferences?</p>
-              
-              {[
-                { name: 'Balanced', description: 'Flexible approach, thoughtful portions' },
-                { name: 'Pescatarian', description: 'Seafood, healthy fats' },
-                { name: 'Flexitarian', description: 'Less meat, heart-healthy' },
-                { name: 'Vegetarian', description: 'Clean eating, complex carbs' },
-                { name: 'Low carb', description: 'Reduced carbohydrate intake' },
-                { name: 'Keto', description: 'High fat, very low carb' },
-              ].map((diet) => (
-                <div key={diet.name} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <input 
-                    type="radio" 
-                    value={diet.name.toLowerCase()} 
-                    id={diet.name.toLowerCase()} 
-                    checked={formData.dietPlan === diet.name.toLowerCase()} 
-                    onChange={(e) => setFormData(prev => ({ ...prev, dietPlan: e.target.value }))} 
-                  />
-                  <label htmlFor={diet.name.toLowerCase()}>
-                    <span style={{ fontWeight: '600' }}>{diet.name}</span>
-                    <span style={{ display: 'block', fontSize: '12px', color: '#4B5563' }}>{diet.description}</span>
-                  </label>
-                </div>
-              ))}
-            </div>
-          )
-        case 'past-experience':
-          return (
-            <div style={{ marginBottom: '16px' }}>
-              <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>{step.title}</h2>
-              <p style={{ color: '#4B5563' }}>What best describes your experience with changing the way you eat?</p>
-              
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <input 
-                  type="radio" 
-                  value="no-past-experience" 
-                  id="no-past-experience" 
-                  checked={formData.pastExperience === 'no-past-experience'} 
-                  onChange={(e) => setFormData(prev => ({ ...prev, pastExperience: e.target.value }))} 
-                />
-                <label htmlFor="no-past-experience">
-                  <span style={{ fontWeight: '600' }}>No past experience</span>
-                  <span style={{ display: 'block', fontSize: '12px', color: '#4B5563' }}>Trying to make changes for the first time</span>
-                </label>
-              </div>
-        
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <input 
-                  type="radio" 
-                  value="tried-before" 
-                  id="tried-before" 
-                  checked={formData.pastExperience === 'tried-before'} 
-                  onChange={(e) => setFormData(prev => ({ ...prev, pastExperience: e.target.value }))} 
-                />
-                <label htmlFor="tried-before">
-                  <span style={{ fontWeight: '600' }}>Tried before</span>
-                  <span style={{ display: 'block', fontSize: '12px', color: '#4B5563' }}>Giving healthy eating another shot</span>
-                </label>
-              </div>
-            </div>
-          )
-        
-          case 'format':
-            return (
-              <div style={{ marginBottom: '16px' }}>
-                <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>{step.title}</h2>
-                <p style={{ color: '#4B5563' }}>What meals would you like to plan? You can adjust this if you change your mind later!</p>
-                
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <input 
-                    type="radio" 
-                    value="dinners" 
-                    id="dinners" 
-                    checked={formData.format === 'dinners'} 
-                    onChange={(e) => setFormData(prev => ({ ...prev, format: e.target.value }))} 
-                  />
-                  <label htmlFor="dinners">
-                    <span style={{ fontWeight: '600' }}>Dinners</span>
-                    <span style={{ display: 'block', fontSize: '12px', color: '#4B5563' }}>A few dinner ideas every week</span>
-                  </label>
-                </div>
-          
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <input 
-                    type="radio" 
-                    value="lunches-and-dinners" 
-                    id="lunches-and-dinners" 
-                    checked={formData.format === 'lunches-and-dinners'} 
-                    onChange={(e) => setFormData(prev => ({ ...prev, format: e.target.value }))} 
-                  />
-                  <label htmlFor="lunches-and-dinners">
-                    <span style={{ fontWeight: '600' }}>Lunches and dinners</span>
-                    <span style={{ display: 'block', fontSize: '12px', color: '#4B5563' }}>Make lunch and dinner most days</span>
-                  </label>
-                </div>
-          
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <input 
-                    type="radio" 
-                    value="every-meal" 
-                    id="every-meal" 
-                    checked={formData.format === 'every-meal'} 
-                    onChange={(e) => setFormData(prev => ({ ...prev, format: e.target.value }))} 
-                  />
-                  <label htmlFor="every-meal">
-                    <span style={{ fontWeight: '600' }}>Every meal</span>
-                    <span style={{ display: 'block', fontSize: '12px', color: '#4B5563' }}>Make breakfast, lunch, dinner every day</span>
-                  </label>
-                </div>
-          
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <input 
-                    type="radio" 
-                    value="custom" 
-                    id="custom" 
-                    checked={formData.format === 'custom'} 
-                    onChange={(e) => setFormData(prev => ({ ...prev, format: e.target.value }))} 
-                  />
-                  <label htmlFor="custom">Custom</label>
-                </div>
-              </div>
-            )
-          
+        );
+      
+      case 'diet-plan':
+        return (
+          <div className={styles.onboardingSingleSelect}>
+            <h2>{step.title}</h2>
+            <p>We'll start with a 1 week custom plan to help you gain weight. Which plan best suits your preferences?</p>
+            {[
+              { name: 'Balanced', description: 'Flexible approach, thoughtful portions' },
+              { name: 'Pescatarian', description: 'Seafood, healthy fats' },
+              { name: 'Flexitarian', description: 'Less meat, heart-healthy' },
+              { name: 'Vegetarian', description: 'Clean eating, complex carbs' },
+              { name: 'Low carb', description: 'Reduced carbohydrate intake' },
+              { name: 'Keto', description: 'High fat, very low carb' },
+            ].map((diet) => (
+              renderOption(diet.name.toLowerCase(), diet.name, diet.description, formData.dietPlan === diet.name.toLowerCase(), (value) => setFormData(prev => ({ ...prev, dietPlan: value })))
+            ))}
+          </div>
+        );
+      
+      case 'past-experience':
+        return (
+          <div className={styles.onboardingSingleSelect}>
+            <h2>{step.title}</h2>
+            <p> What best describes your experience with changing the way you eat?</p>
+            {renderOption('no-past-experience', 'No past experience', 'Trying to make changes for the first time', formData.pastExperience === 'no-past-experience', (value) => setFormData(prev => ({ ...prev, pastExperience: value })))}
+            {renderOption('tried-before', 'Tried before', 'Giving healthy eating another shot', formData.pastExperience === 'tried-before', (value) => setFormData(prev => ({ ...prev, pastExperience: value })))}
+          </div>
+        );
+      
+      case 'format':
+        return (
+          <div className={styles.onboardingSingleSelect}>
+            <h2>{step.title}</h2>
+            <p> What meals would you like to plan? You can adjust this if you change your mind later!</p>
+            {renderOption('dinners', 'Dinners', 'A few dinner ideas every week', formData.format === 'dinners', (value) => setFormData(prev => ({ ...prev, format: value })))}
+            {renderOption('lunches-and-dinners', 'Lunches and dinners', 'Make lunch and dinner most days', formData.format === 'lunches-and-dinners', (value) => setFormData(prev => ({ ...prev, format: value })))}
+            {renderOption('every-meal', 'Every meal', 'Make breakfast, lunch, dinner every day', formData.format === 'every-meal', (value) => setFormData(prev => ({ ...prev, format: value })))}
+            {renderOption('custom', 'Custom', '', formData.format === 'custom', (value) => setFormData(prev => ({ ...prev, format: value })))}
+          </div>
+        );
+      
       case 'allergies':
         return (
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">{step.title}</h2>
-            <p className="text-gray-600">Do you have any food allergies or restrictions?</p>
+          <div className={styles.onboardingToggleList}>
+            <h2>{step.title}</h2>
+            <p> Do you have any food allergies or restrictions?</p>
             {allergies.map((allergy) => (
-              <div key={allergy} className="flex items-center justify-between border-b border-gray-200 py-2">
-                <label htmlFor={allergy} className="text-base">{allergy}</label>
+              <div key={allergy} className={styles.onboardingToggleItem}>
+                <label htmlFor={allergy}>{allergy}</label>
                 <ToggleSwitch
-                  // id={allergy}
                   checked={formData.allergies.includes(allergy)}
                   onCheckedChange={() => handleMultiSelect(allergy, 'allergies')}
                 />
               </div>
             ))}
-            <p className="text-sm text-gray-500 mt-4">
+            <p className={styles.onboardingNote}>
               If you have other allergies or restrictions that aren't listed here, you can add them as a "dislike" on the next page! Any recipes that contain a disliked ingredient will not be recommended to you.
             </p>
           </div>
-        )
+        );
+      
       case 'dislikes':
         return (
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">{step.title}</h2>
-            <p className="text-gray-600">Are there any foods you dislike?</p>
-            <div className="relative">
-            
-              <input
-                placeholder="Search"
-                onChange={(e) => {
-                  const value = e.target.value.toLowerCase()
-                  console.log('Searching for:', value)
-                }}
-              />
-            </div>
-            {formData.dislikes.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-2">
-                {formData.dislikes.map((dislike) => (
-                  <Button
-                    key={dislike}
-                    color="secondary"
-                    onClick={() => handleMultiSelect(dislike, 'dislikes')}
-                  >
-                    {dislike}
-                    X
-                  </Button>
-                ))}
-              </div>
-            )}
-            <div className="mt-4">
-              <h3 className="text-sm font-semibold text-gray-500 mb-2">COMMON DISLIKES</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {commonDislikes.map((dislike) => (
-                  <Button
-                    key={dislike}
-                    color={formData.dislikes.includes(dislike) ? "primary" : "secondary"}
-                    onClick={() => handleMultiSelect(dislike, 'dislikes')}
-                  >
-                    {dislike}
-                    {formData.dislikes.includes(dislike) && "X"}
-                  </Button>
-                ))}
-              </div>
+          <div className={styles.onboardingMultiSelect}>
+            <h2>{step.title}</h2>
+            <p> Are there any foods you dislike?</p>
+            <input
+              type="text"
+              placeholder="Add a food you dislike"
+              onChange={(e) => {
+                const value = e.target.value.toLowerCase();
+                console.log('Searching for:', value);
+              }}
+              className={styles.onboardingSearchInput}
+            />
+            <h4>Common Dislikes</h4>
+            <div className={styles.onboardingCommonItems}>
+              {commonDislikes.map((dislike) => (
+                <button
+                  key={dislike}
+                  className={`${styles.onboardingButton} ${formData.dislikes.includes(dislike) ? styles.selected : ''}`}
+                  onClick={() => handleMultiSelect(dislike, 'dislikes')}
+                >
+                  {dislike}
+                </button>
+              ))}
             </div>
           </div>
-        )
+        );
+      
       case 'cuisines':
         return (
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">{step.title}</h2>
-            <p className="text-gray-600">Are there any cuisines you especially like or dislike?</p>
+          <div className={styles.onboardingCuisinePreferences}>
+            <h2>{step.title}</h2>
+            <p> Are there any cuisines you especially like or dislike?</p>
             {cuisines.map((cuisine) => (
-              <div key={cuisine} className="flex items-center justify-between border-b border-gray-200 py-2">
-                <span className="text-base">{cuisine}</span>
-                <div className="flex space-x-2">
-                  <Button
-                    color={formData.cuisinePreferences[cuisine] === 'dislike' ? "primary" : "secondary"}
+              <div key={cuisine} className={styles.onboardingCuisineItem}>
+                <span>{cuisine}</span>
+                <div className={styles.onboardingCuisineButtons}>
+                  <button
+                    className={`${styles.onboardingButton} ${formData.cuisinePreferences[cuisine] === 'dislike' ? styles.selected : ''}`}
                     onClick={() => handleCuisinePreference(cuisine, 'dislike')}
                   >
                     👎
-                  </Button>
-                  <Button
-                    color={formData.cuisinePreferences[cuisine] === 'like' ? "primary" : "secondary"}
+                  </button>
+                  <button
+                    className={`${styles.onboardingButton} ${formData.cuisinePreferences[cuisine] === 'like' ? styles.selected : ''}`}
                     onClick={() => handleCuisinePreference(cuisine, 'like')}
                   >
                     ❤️
-                  </Button>
+                  </button>
                 </div>
               </div>
             ))}
           </div>
-        )
-        case 'pantry':
-          return (
-            <div style={{ marginBottom: '16px' }}>
-              <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>{step.title}</h2>
-              <p style={{ color: '#4B5563' }}>How well-stocked is your kitchen right now?</p>
-              
-              {[
-                { value: "empty", label: "Empty", description: "Don't have anything" },
-                { value: "basic", label: "Basic", description: "Only have oil, salt, and pepper" },
-                { value: "average", label: "Average", description: "Have common spices and seasonings" },
-                { value: "well-stocked", label: "Well-stocked", description: "Have a wide selection of spices and seasonings" },
-              ].map((option) => (
-                <div 
-                  key={option.value} 
-                  style={{ display: 'flex', alignItems: 'center', gap: '8px', border: '1px solid #e0e0e0', borderRadius: '8px', padding: '16px', cursor: 'pointer' }}
-                >
-                  <input 
-                    type="radio" 
-                    value={option.value} 
-                    id={option.value} 
-                    checked={formData.pantry === option.value} 
-                    onChange={(e) => setFormData(prev => ({ ...prev, pantry: e.target.value }))} 
-                  />
-                  <label htmlFor={option.value} style={{ flexGrow: 1, cursor: 'pointer' }}>
-                    <span style={{ fontWeight: '600' }}>{option.label}</span>
-                    <span style={{ display: 'block', fontSize: '12px', color: '#4B5563' }}>{option.description}</span>
-                  </label>
-                </div>
-              ))}
-            </div>
-          )
-        
-          case 'cooking-skills':
-            return (
-              <div style={{ marginBottom: '16px' }}>
-                <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>{step.title}</h2>
-                <p style={{ color: '#4B5563' }}>How would you describe your cooking skills?</p>
-                
-                {[
-                  { value: "novice", label: "Novice", description: '"I can cook boxed mac and cheese"' },
-                  { value: "basic", label: "Basic", description: '"I only cook simple recipes"' },
-                  { value: "intermediate", label: "Intermediate", description: '"I routinely try new recipes"' },
-                  { value: "advanced", label: "Advanced", description: '"I\'m comfortable cooking any recipe"' },
-                ].map((option) => (
-                  <div 
-                    key={option.value} 
-                    style={{ display: 'flex', alignItems: 'center', gap: '8px', border: '1px solid #e0e0e0', borderRadius: '8px', padding: '16px', cursor: 'pointer' }}
-                  >
-                    <input 
-                      type="radio" 
-                      value={option.value} 
-                      id={option.value} 
-                      checked={formData.cookingSkills === option.value} 
-                      onChange={(e) => setFormData(prev => ({ ...prev, cookingSkills: e.target.value }))} 
-                    />
-                    <label htmlFor={option.value} style={{ flexGrow: 1, cursor: 'pointer' }}>
-                      <span style={{ fontWeight: '600' }}>{option.label}</span>
-                      <span style={{ display: 'block', fontSize: '12px', color: '#4B5563' }}>{option.description}</span>
-                    </label>
-                  </div>
-                ))}
-              </div>
-            )
-          
+        );
+      
+      case 'pantry':
+        return (
+          <div className={styles.onboardingSingleSelect}>
+            <h2>{step.title}</h2>
+            <p> How well-stocked is your kitchen right now?</p>
+            {[
+              { value: "empty", label: "Empty", description: "Don't have anything" },
+              { value: "basic", label: "Basic", description: "Only have oil, salt, and pepper" },
+              { value: "average", label: "Average", description: "Have common spices and seasonings" },
+              { value: "well-stocked", label: "Well-stocked", description: "Have a wide selection of spices and seasonings" },
+            ].map((option) => (
+              renderOption(option.value, option.label, option.description, formData.pantry === option.value, (value) => setFormData(prev => ({ ...prev, pantry: value })))
+            ))}
+          </div>
+        );
+      
+      case 'cooking-skills':
+        return (
+          <div className={styles.onboardingSingleSelect}>
+            <h2>{step.title}</h2>
+            <p> How would you describe your cooking skills?</p>
+            {[
+              { value: "novice", label: "Novice", description: '"I can cook boxed mac and cheese"' },
+              { value: "basic", label: "Basic", description: '"I only cook simple recipes"' },
+              { value: "intermediate", label: "Intermediate", description: '"I routinely try new recipes"' },
+              { value: "advanced", label: "Advanced", description: '"I\'m comfortable cooking any recipe"' },
+            ].map((option) => (
+              renderOption(option.value, option.label, option.description, formData.cookingSkills === option.value, (value) => setFormData(prev => ({ ...prev, cookingSkills: value })))
+            ))}
+          </div>
+        );
+      
       default:
-        return null
+        return null;
     }
   }
-
   return (
-    <div>
-      <ProgressBar value={progress} />
-      {currentStep > 0 && (
-        <Button color="primary" onClick={handleBack}>
-          Back
+    <div className={styles.onboardingContainer}>
+      <div className={styles.onboardingHeader}>
+        <Button color="secondary" onClick={handleExit} className={styles.onboardingExitButton} style={{ position: 'absolute', top: 10, right: 10 }}>
+          <span className={styles.exitIcon}>×</span>
         </Button>
-      )}
-      {renderStep()}
-      {currentStep < steps.length - 1 && (
-        <Button onClick={handleNext}>Next</Button>
-      )}
-      {currentStep === steps.length - 1 && (
-        <Button onClick={handleFinish}>Finish</Button>
-      )}
+      </div>
+      <div className={styles.onboardingContent}>
+        <div className={styles.onboardingStep}>
+          {renderStep()}
+        </div>
+      </div>
+      <div className={styles.onboardingNavigation}>
+        <ProgressBar value={progress} className={styles.onboardingProgress} />
+        <div className={styles.onboardingButtons}>
+          <Button color="secondary" onClick={handleBack} className={styles.navButton} disabled={currentStep === 0}>
+            Back
+          </Button>
+          {currentStep < steps.length - 1 ? (
+            <Button color="primary" onClick={handleNext} className={styles.navButton}>Next</Button>
+          ) : (
+            <Button color="primary" onClick={handleFinish} className={styles.navButton}>Finish</Button>
+          )}
+        </div>
+      </div>
     </div>
   )
 }
