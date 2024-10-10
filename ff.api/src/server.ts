@@ -1,9 +1,12 @@
 import app from "./app";
+import { connectToDatabase, closeDatabaseConnection } from "./database";
+// import { createWebSocketServer } from './websocketServer';
 
-const PORT = process.env.VITE_FFAPI_PORT || 3001; // Fallback to 3001 if PORT is not defined
+const PORT = process.env.VITE_FFAPI_PORT || '3001';
 
 const startServer = async () => {
   try {
+    await connectToDatabase();
     const server = app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
@@ -12,9 +15,11 @@ const startServer = async () => {
       console.error("Failed to start server:", error.message, error.stack);
     });
 
-    // Graceful shutdown
+    // createWebSocketServer(server); //TODO ENABLE WEBSOCKET when working on multiplayer
+
     const gracefulShutdown = async () => {
       console.log("Shutting down gracefully...");
+      await closeDatabaseConnection();
       server.close((err) => {
         if (err) {
           console.error("Error closing server:", err);
@@ -27,11 +32,8 @@ const startServer = async () => {
     process.on("SIGINT", gracefulShutdown);
     process.on("SIGTERM", gracefulShutdown);
   } catch (error) {
-    console.error(
-      "Failed to start server:",
-      error instanceof Error ? error.message : error
-    );
-    process.exit(1); // Exit with a failure code
+    console.error("Failed to start server:", error instanceof Error ? error.message : error);
+    process.exit(1);
   }
 };
 

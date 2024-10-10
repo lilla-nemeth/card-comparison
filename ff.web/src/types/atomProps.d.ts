@@ -11,6 +11,9 @@ interface CustomButtonProps {
   tabIndex?: Number;
   block?: any;
   type?: "button" | "submit" | "reset";
+  className?: className;
+  disabled?: boolean;
+  style?: React.CSSProperties;
 }
 
 interface LogoProps {
@@ -27,6 +30,7 @@ interface InputProps {
 
 interface ProgressBarProps {
   value: number;
+  className?: className;
 }
 
 interface SectionProps {
@@ -35,11 +39,12 @@ interface SectionProps {
 
 interface SliderProps {
   value?: number;
-  defaultValue: number[];
+  defaultValue?: number[];
   min?: number;
   max: number;
   step?: number;
-  onChange: (value: number) => void;
+  onChange?: (value: number) => void;
+  onValueChange?: (value: number[]) => void;
 }
 
 interface IconProps {

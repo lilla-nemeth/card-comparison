@@ -1,10 +1,13 @@
-import Navbar from "../organisms/Navbar";
+import React from 'react'
+import Navbar from '../atoms/Navbar'
 
-export default function AuthenticatedPage({ children }: any) {
+export default function AuthenticatedPage({children}: any) {
+
   return (
     <div>
-      <Navbar />
-      {children}
+        <Navbar/>
+        {children}
+        
     </div>
-  );
+  )
 }

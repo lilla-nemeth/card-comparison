@@ -1,11 +1,12 @@
-import Page from "../templates/Page";
+import React from 'react'
+import Page from '../templates/Page'
 
 function NotFoundPage() {
   return (
     <Page>
-      <div>You should not be here...</div>
+        <div>You should not be here...</div>
     </Page>
-  );
+  )
 }
 
-export default NotFoundPage;
+export default NotFoundPage

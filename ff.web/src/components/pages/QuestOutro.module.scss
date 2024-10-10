@@ -1,0 +1,162 @@
+$bounce: cubic-bezier(.34, 1.2, .35, 1);
+$overBounce: cubic-bezier(.34, 10, .35, 1);
+
+.outro_achievements_title {
+  animation-name: screenFlyInFromBottom;
+  animation-delay: .5s;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: $bounce;
+  color: var(--white);
+  transform: translateY(100vh);
+}
+
+@keyframes screenFlyInFromBottom {
+  from {
+    transform: translateY(100vh);
+  }
+
+  to {
+    transform: translateY(0vh);
+  }
+}
+
+@keyframes skillFlyInFromBottom {
+  from {
+    transform: scale(10) translateY(200px) translateX(-50%);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1) translateY(0vh) translateX(-50%);
+    opacity: 1;
+  }
+}
+
+@keyframes skillScaleOut {
+  from {
+    scale: 1;
+    opacity: 1;
+    transform-origin: 50% 50%;
+  }
+
+  to {
+    scale: .3;
+    opacity: 0;
+    transform-origin: 50% 200%;
+  }
+}
+
+.outro_achievements {
+  text-align: center;
+  width: 100%;
+}
+
+.outro_achievements_scroller_snap {
+  scroll-snap-type: x mandatory;
+}
+
+.outro_achievements_scroller {
+  display: flex;
+  justify-content: start;
+  overflow: auto;
+  width: 100%;
+}
+
+.outro_achievements_scroller_track {
+  display: flex;
+  justify-content: start;
+  padding: 0 100%;
+  // outline: 1px dotted green;
+  // outline-offset: -1px;
+}
+
+.outro_achievements_scroller_box {
+  flex: 0 0 auto;
+  width: 280px;
+  padding: 24px 12px;
+  scroll-snap-align: center;
+  // outline: 1px dashed red;
+  // outline-offset: -1px;
+}
+
+.outro_achievements_scroller .achievement {
+  width: 100%;
+}
+
+.outro_score {
+  background-color: var(--gray-900);
+  border-radius: 24px;
+  scale: var(--score-scale);
+  transition: scale .2s $overBounce;
+  width: 128px;
+}
+
+.outro_skills {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 0px;
+}
+
+.outro_skill_score_value {
+  color: var(--orange);
+}
+
+.outro_skill_text {
+  color: var(--white);
+}
+
+.outro_skills .skill {
+  border-radius: 16px;
+  color: var(--white);
+  display: flex;
+  padding: 6px 12px;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  width: min-content;
+  max-width: 360px;
+  rotate: -5deg;
+  transform: scale(10) translateY(200px) translateX(-50%);
+  opacity: 1;
+  animation-name: skillFlyInFromBottom, skillScaleOut;
+  animation-delay: var(--delay), calc(var(--delay) + .5s);
+  animation-duration: .3s, .2s;
+  animation-fill-mode: both, forwards;
+  animation-timing-function: $bounce, linear;
+}
+
+.skill_chip {
+  position: absolute;
+  right: 2px;
+  top: 100%;
+  transform: translateY(-50%);
+}
+
+.skill_title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.outro_actions {
+  animation-name: actionsFlyInBottom;
+  animation-delay: var(--delay);
+  animation-delay: 0;
+  animation-duration: .3s;
+  animation-timing-function: $bounce;
+  animation-fill-mode: both;
+}
+
+@keyframes actionsFlyInBottom {
+  from {
+    transform: translateY(150%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}

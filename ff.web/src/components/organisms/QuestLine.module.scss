@@ -1,0 +1,98 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.flexRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name, .date {
+  padding: 10px;
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  padding: 1rem;
+  // border: 2px solid green;
+}
+
+.scrollContainer {
+  width: 90%;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory; 
+  padding: 1rem 0
+  // border: 2px solid pink;
+}
+
+.achievementContainer {
+  // flex: 0 0 33.3333%;
+  display: flex;
+  scroll-snap-align: start;
+  // border: 2px solid red;
+}
+
+.achievementContainerSmall {
+  flex: 0 0 50%;
+  display: flex;
+  scroll-snap-align: start;
+  // border: 2px solid red;
+}
+
+.trophyImageActive {
+  width: 56px;
+  height: 56px;
+  border-radius: 28.8px;
+  align-self: center;
+  box-shadow: 0px 0px 10px 3px #35C759;
+  background: #35C759;
+}
+
+.trophyImagePassive {
+  width: 56px;
+  height: 56px;
+  align-self: center;
+  opacity: 0.4
+}
+
+.endLine {
+  width: 100%;
+  align-self: end;
+  height: 50%;
+}
+
+.imageContainer {
+  width: 10%;
+  display: flex;
+  align-items: center;
+  min-width: 56px;
+  // border: 2px solid blue;
+}
+
+.goal {
+  width: 56px;
+  height: 56px
+}
+
+.customButton {
+  display: flex;
+  padding: var(--spacing-2, 16px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-half, 4px);
+  align-self: stretch;
+  border-radius: var(--radius-XL, 24px);
+  border: 2px solid var(--color-grey-systemGrayAccessibleLight, #6C6C70);
+  background: var(--surface-surface-primary, #242426);
+  box-shadow: var(--shadow-inner-shadow-x, 0px) var(--shadow-inner-shadow-y, -4px) 0px 0px var(--color-grey-systemGrayAccessibleLight, #6C6C70) inset;
+  color: white;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 140%
+}
+

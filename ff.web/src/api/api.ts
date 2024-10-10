@@ -1,7 +1,7 @@
 // ff.web/src/api/api.ts
 import axios from 'axios';
 
-const API_URL = ""
+const BASE_URL = 'http://localhost:7702/v1' //TODO remove these as fetching logic will live in viewModels
 
 // Common headers for all requests
 const headers = {
@@ -10,5 +10,21 @@ const headers = {
 };
 
 // fetchMealMap
+
+export const fetchRecipes = async () => {
+  const response = await fetch(`${BASE_URL}/mealmap/recipes`);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+};
+
+export const fetchQuests = async () => {
+  const response = await fetch(`${BASE_URL}/quests`);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+};
 
 
