@@ -1,0 +1,38 @@
+//DEFAULT DARK THEME 
+:root {
+  --surface-primary: #{$surface-primary-dark};
+  --surface-secondary: #{$surface-secondary-dark};
+  --text-primary: #{$text-primary-dark};
+  --text-secondary: #{$text-secondary-dark};
+  --button-text: #{$button-text};
+
+  //OLD STYLING, remove when not needed anymore
+  // --c: #{$white};
+  // --bg: #{$gray-1000};
+  // --accent-fill: #{$blue-500};
+  // --accent-text: #{$white};
+
+
+  // --btn-c: var(--c);
+  // --btn-bg: #{cmix(--bg, black, 25%)};
+  // --brand-pink: #FF2D55
+}
+
+.light-theme {
+  --surface-primary: #{$surface-primary-light};
+  --surface-secondary: #{$surface-secondary-light};
+  --text-primary: #{$text-primary-light};
+  --text-secondary: #{$text-secondary-light};
+  --button-text: #{$button-text};
+
+  //OLD STYLING, remove when not needed anymore
+  // --c: pink;
+  // --bg: cyan;
+  // --accent-fill: yellow;
+  // --accent-text: indigo;
+
+
+  // --btn-c: red;
+  // --btn-bg: grey;
+  // --brand-pink: blue
+}

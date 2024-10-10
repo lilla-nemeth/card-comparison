@@ -1,0 +1,45 @@
+// ff.web/src/components/atoms/ToggleSwitch.module.scss
+.switch {
+    position: relative;
+    display: inline-block;
+    width: var(--toggle-width, 60px);
+    height: var(--toggle-height, 34px);
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--surface-secondary);
+    transition: 0.4s;
+    border-radius: var(--radius-16);
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: var(--toggle-knob-size, 26px);
+    width: var(--toggle-knob-size, 26px);
+    left: var(--toggle-knob-offset, 4px);
+    bottom: var(--toggle-knob-offset, 4px);
+    background-color: var(--surface-primary);
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: var(--surface-brand-blue);
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(var(--toggle-knob-translate, 26px));
+  }

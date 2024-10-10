@@ -1,0 +1,143 @@
+//Button state colors are derived from color and background, state and variant colors should be configured explicitly in color-theme when we have more designs.
+
+.btn {
+  --btn-active-c: var(--btn-c);
+  --btn-active-bg: #{cmix(--btn-bg, black, 10%)};
+  --btn-pressed-c: var(--btn-c);
+  --btn-pressed-bg: #{cmix(--btn-active-bg, black, 5%)};
+  --btn-pressed-active-c: var(--btn-pressed-c);
+  --btn-pressed-active-bg: #{cmix(--btn-pressed-bg, black, 10%)};
+
+  text-decoration: none;
+  white-space: nowrap;
+  appearance: none;
+  font: inherit;
+  // @include font-button(); TODO replace with new value
+  text-overflow: ellipsis;
+  display: inline-flex;
+  flex-shrink: 0;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  color: var(--btn-c);
+  background-color: var(--btn-bg);
+  background-clip: padding-box;
+  --focus-accent: currentColor;
+  outline-offset: -4px; //More outline offset because buttons have a thick border for effects
+
+  * {pointer-events: none;} //Make sure click events are always emitted from the button itself.
+
+  &:active {
+    color: var(--btn-active-c);
+    background-color: var(--btn-active-bg);
+  }
+  &[aria-pressed="true"] {
+    color: var(--btn-pressed-c);
+    background-color: var(--btn-pressed-bg);
+  }
+  &[aria-pressed="true"]:active {
+    color: var(--btn-pressed-active-c);
+    background-color: var(--btn-pressed-active-bg);
+  }
+}
+
+.btn-floating {
+  position: absolute;
+  bottom: 24px;
+  min-width: 240px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.btn-raised {
+  padding: 10px; //TODO: convert to ems so they scale
+  padding-top: 3px;
+  padding-bottom: 7px;
+  box-shadow: inset 0 -4px 0 0 black(.2);
+
+  &:active {
+    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-shadow: inset 0 -1px 0 0 black(.2);
+  }
+  &[aria-pressed="true"] {
+    padding: 10px;
+    padding-top: 4px;
+    padding-bottom: 6px;
+    box-shadow: inset 0 -2px 0 0 black(.2);
+  }
+  &[aria-pressed="true"]:active {
+    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-shadow: inset 0 -1px 0 0 black(.2);
+  }
+}
+
+.btn-gray {
+  --btn-c: #{$white};
+  --btn-bg: #{$gray-500};
+}
+.btn-blue {
+  --btn-c: #{$white};
+  --btn-bg: #{$blue-500};
+}
+.btn-green {
+  --btn-c: #{$white};
+  --btn-bg: #{$green-500};
+}
+.btn-pink {
+  --btn-c: #{$white};
+  --btn-bg: #{$pink-400};
+}
+.btn-red {
+  --btn-c: #{$white};
+  --btn-bg: #{$red-400};
+}
+.btn-purple {
+  --btn-c: #{$white};
+  --btn-bg: #{$purple-700};
+}
+.btn-purple-toggle {
+  --btn-pressed-c: #{$white};
+  --btn-pressed-bg: #{$purple-500};
+}
+
+//For when a button should only look like its contents
+.btn-transparent {
+  font: inherit;
+  appearance: none;
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+  width: min-content;
+  height: min-content;
+  border: none;
+  background: none;
+}
+
+.btn-small {
+  font-size: .75rem;
+}
+
+.btn-large {
+  font-size: 1.5rem;
+}
+.btn-huge {
+  font-weight: 900;
+  height: 4.125rem;
+  border-radius: 24px;
+}
+
+.btn-circle.btn-circle.btn-circle { //Argh this double class sucks, but it makes sure the circle side padding has more specificity than the pressed states on regular button selectors.
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 9999rem;
+}
+.btn-round {
+  border-radius: 999rem;
+}

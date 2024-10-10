@@ -1,0 +1,104 @@
+.steps {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  container: layout inline-size;
+  /* Updated to align with modern CSS container queries, assuming 'steps / size' was intended for layout containment */
+}
+
+.steps-scroll {
+  overflow: auto;
+  padding: 10px;
+  height: 100%;
+  padding-bottom: 50px;
+  /* Ensures there is space at the bottom */
+  /* scroll-snap-type: y mandatory; /* Uncommented for better scroll behavior */
+}
+
+.step.pinch {
+  background-color: #3634A330;
+  /* Highlight current step */
+  box-shadow: inset 0 -4px 0 0 var(--indigo-600);
+}
+
+.step-skills {
+  margin-top: 10px;
+  text-align: right;
+  /* Align skills to the right */
+}
+
+.pinch-highlight-text {
+  color: var(--indigo-400);
+}
+
+.current .step-title {
+  font-size: 1.4em;
+  /* Increased size for emphasis */
+  color: var(--blue-300);
+  /* Adjusted to use as text color for contrast */
+  background-color: transparent;
+  /* Use transparent background for titles within current step */
+  font-size: 1.2em;
+  white-space: nowrap;
+  width: min-content;
+  height: 3rem;
+  margin: 0;
+  padding: 10px 10px;
+
+  border-radius: 20px;
+
+}
+
+.current .step-content {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  /* Ensure consistent spacing */
+}
+
+.step-actions {
+  pointer-events: none;
+  position: absolute;
+  inset: 5px;
+  top: auto;
+  z-index: 999;
+  /* Ensures action buttons are always clickable */
+}
+
+.step-actions>* {
+  pointer-events: all;
+  /* Makes child elements interactable */
+}
+
+.tools-ingredients-container {
+  display: flex;
+  margin-top: 14px;
+  gap: 20px;
+}
+
+.tools,
+.ingredients {
+  flex: 1;
+  padding: 8px;
+  background-color: var(--gray-1000);
+  /* Light grey backdrop */
+  border-radius: 15px;
+  /* Rounded corners for the backdrop */
+  max-width: 50%;
+}
+
+.skill-container {
+  align-items: start;
+  display: inline-flex;
+  flex-direction: column;
+  margin-left: 8px;
+  margin-top: -12px;
+  position: relative;
+  transform: rotate(-5deg);
+  z-index: 20;
+}
+
+.flex-one {
+  display: flex;
+  flex: 1;
+}

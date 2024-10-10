@@ -1,0 +1,36 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+body {
+  --system-font-stack: -apple-system, BlinkMacSystemFont, avenir next, avenir,
+    segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial,
+    sans-serif;
+  font-family: $font-family, var(--system-font-stack);
+  align-items: stretch;
+  flex-direction: column;
+
+  margin: 0;
+  color: var(--text-primary);
+  background: var(--surface-secondary);
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+pre {
+  font-family: monospace;
+  white-space: pre-wrap;
+}

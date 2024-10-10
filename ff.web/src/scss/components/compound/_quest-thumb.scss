@@ -1,0 +1,35 @@
+.recipe-thumb {
+  color-scheme: dark; /*Recipe thumb is always in dark mode because it has a background image. The image is darkened and text is light on top of that. */
+  flex: 0 0 auto;
+  position: relative;
+  display: grid;
+  grid-template: "a" 1fr / 1fr;
+  place-items: start;
+  place-content: stretch;
+  color: white;
+  background: black;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  border-radius: 32px 32px 0 0;
+  aspect-ratio: 4 / 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.recipe-thumb > * {
+  grid-area: a;
+}
+.recipe-thumb-meta {}
+.recipe-thumb-name {}
+.recipe-thumb-player {
+  font-weight: 700;
+}
+.recipe-thumb-variations {
+  font-size: 1.25em;
+  place-self: end;
+  margin-right: 8rem;
+}
+.recipe-thumb-variation {
+  width: 32px;
+  height: 32px;
+}

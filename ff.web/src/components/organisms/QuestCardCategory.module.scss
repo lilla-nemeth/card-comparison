@@ -1,0 +1,77 @@
+// @font-face {
+//     font-family: 'CustomIconFont';
+//     src: url('../../assets/fixfood/fonts/fixfood-logo.ttf') format('truetype');
+//     unicode-range: U+2718;
+// }
+
+.container {
+    background-color: var(--gray-1000);
+    border-radius: 15px;
+    color: var(--white);
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin-top: 8px;
+    padding: 0px;
+    gap: 10px;
+    width: 100%;
+}
+
+.title {
+    font-size: 1.6em;
+    padding: 0px 10px;
+}
+
+.text {
+    font-size: 1.4em;
+    word-wrap: break-word;
+    margin-bottom: 0.5em;
+}
+
+.container h3 {
+    font-style: normal;
+    font-weight: bold;
+    letter-spacing: 0.48px;
+    margin-top: 0;
+    margin-bottom: 4px;
+}
+
+.quests_container {
+    display: grid;
+    grid-template-columns: repeat(2, 48%);
+    grid-gap: 10px;
+    justify-content: center;
+
+    .show_more_button:last-of-type {
+        width: 100%;
+        justify-self: center;
+        grid-column: 1/-1;
+        background-color: var(--blue);
+    }
+}
+
+@media (max-width: 425px) {
+    .quests_container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        overflow-x: auto;
+        margin-left: 20px;
+        margin-right: 20px;
+        padding-bottom: 4px; //To keep scrollbar under
+
+        .show_more_button {
+            display: none;
+        }
+    }
+
+    .quest_container {
+        flex: 0 0 60%;
+    }
+}
+
+@media (max-width: 280px) {
+    .quest_container {
+        width: 80%;
+    }
+}

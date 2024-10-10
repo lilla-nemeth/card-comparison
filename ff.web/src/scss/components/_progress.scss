@@ -1,0 +1,28 @@
+@mixin progress-bar-empty() {
+  background: cmix(--bg, --c, 10%); //Can't use a transparent color here because webkit renders both progress and -webkit-progress-bar on top of each other and both get styled, but firefox only renders the progress element, so webkit would get double the transparent background, but firefox just one.
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px c(20%);
+}
+@mixin progress-bar-value() {
+  background: var(--c);
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px c(20%);
+}
+
+progress {
+  appearance: none;
+  display: block;
+  height: 10px;
+  width: 100%;
+  border: none;
+  @include progress-bar-empty();
+}
+progress::-webkit-progress-bar {
+  @include progress-bar-empty();
+}
+progress::-webkit-progress-value {
+  @include progress-bar-value();
+}
+progress::-moz-progress-bar {
+  @include progress-bar-value();
+}

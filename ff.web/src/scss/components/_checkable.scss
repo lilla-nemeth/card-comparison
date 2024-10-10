@@ -1,0 +1,48 @@
+input[type="radio"],
+input[type="checkbox"] {
+  display: inline-block;
+  vertical-align: baseline;
+  width: 2.75em;
+  height: 2.75em;
+  margin: 0;
+  padding: 0;
+  background: var(--bg-100);
+  border-radius: 99em;
+  box-shadow: none;
+
+  // &:checked {
+  //   background: var(--green);
+  // }
+}
+
+.switch {
+  position: relative;
+  display: grid;
+  grid-template: "switch";
+
+  input, .icon {
+    grid-area: switch;
+  }
+
+  input {
+    width: 4.5em;
+  }
+
+  .icon {
+    pointer-events: none;
+    position: absolute;
+    inset: 4px;
+    aspect-ratio: 1 / 1;
+    width: calc(2.75em - 8px);
+    height: auto;
+    padding: 5px;
+    border-radius: 99em;
+    background: var(--bg-300);
+    transition: all .15s ease;
+  }
+  :checked + .icon {
+    left: calc(100% - 2.75em + 4px);
+    color: var(--green);
+    background: white;
+  }
+}
