@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { useFlavourFlow } from "@vuo/context/FlavourFlowContext";
 
 const FlavourFlowPage = () => {
-  const { meals, currentPair } = useFlavourFlow();
-
   const navigate = useNavigate();
 
+  const { currentPair } = useFlavourFlow();
+
   const handleNavigate = () => {
-    navigate("/flavour-flow/results", { state: { meals } });
+    navigate("/flavour-flow/results");
   };
 
   return (

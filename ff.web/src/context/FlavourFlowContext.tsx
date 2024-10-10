@@ -6,8 +6,10 @@ import {
   createDataForRanking,
   drawNewPair,
   findPairsByCategories,
+  getWinnersByAttributes,
   probability,
   updateElo,
+  findRandomPairs,
 } from "@vuo/utils/FlavourFlowFunctions";
 import { FlavourFlowContextType } from "@vuo/types/contextProps";
 
@@ -17,33 +19,50 @@ const FlavourFlowContext = createContext<FlavourFlowContextType>({
   currentPair: [],
   setCurrentPair: () => {},
   handleChoice: () => {},
-  clickedMeals: new Set(),
   setClickedMeals: new Set(),
-  pairs: [],
+  attributePairs: [],
+  categoryPairs: [],
+  drawAttributePair: [],
 });
 
 export const FlavourFlowProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [meals, setMeals] = useState<FlavourFlowMeal[]>(
+  const [meals, setMeals] = useState<FlavourFlowMeal[]>(() =>
     createDataForRanking(dataset),
   );
   const [currentPair, setCurrentPair] = useState<FlavourFlowMeal[]>([]);
   const [clickedMeals, setClickedMeals] = useState<Set<string>>(new Set());
 
-  // useMemo to only render pairs when they're needed
-  const pairs: FlavourFlowMeal[][] = useMemo(
-    () => findPairsByCategories(meals),
+  const attributePairs = useMemo<FlavourFlowMeal[][]>(() => {
+    return findPairsByCategories(meals);
+  }, [meals]);
+
+  const winnersByAttributes = useMemo(
+    () => getWinnersByAttributes(meals),
     [meals],
   );
 
+  const categoryPairs = useMemo<FlavourFlowMeal[][]>(() => {
+    return findRandomPairs(winnersByAttributes);
+  }, [meals]);
+
+  const drawAttributePair = drawNewPair(attributePairs, clickedMeals);
   useEffect(() => {
-    if (pairs.length > 0) {
-      drawNewPair(setCurrentPair, pairs, clickedMeals);
+    if (drawAttributePair.length > 0) {
+      setCurrentPair(drawAttributePair);
     } else {
-      setCurrentPair([]);
+      // setClickedMeals(new Set());
+      if (categoryPairs.length > 0) {
+        const drawCategoryPair = drawNewPair(categoryPairs, clickedMeals);
+        if (drawAttributePair.length > 0) {
+          setCurrentPair(drawCategoryPair);
+        } else {
+          setCurrentPair([]);
+        }
+      }
     }
-  }, [meals, pairs, setCurrentPair, clickedMeals]);
+  }, [meals, attributePairs, setCurrentPair, clickedMeals]);
 
   const handleChoice = (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => {
     const { newWinnerElo, newLoserElo } = calculateElo(
@@ -67,9 +86,10 @@ export const FlavourFlowProvider: React.FC<{ children: React.ReactNode }> = ({
         currentPair,
         setCurrentPair,
         handleChoice,
-        clickedMeals,
-        pairs,
+        attributePairs,
+        categoryPairs,
         setClickedMeals,
+        drawAttributePair,
       }}
     >
       {children}

@@ -19,7 +19,7 @@
 
 .logoContainer {
   width: 100%;
-  flex: 1;
+  flex: 0.3;
   padding: 2.5rem 2rem 1rem 2.5rem;
 }
 
@@ -34,7 +34,7 @@
 .cardContainer {
   display: flex;
   width: 100%;
-  flex: 4;
+  flex: 2;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: var(--space-16);

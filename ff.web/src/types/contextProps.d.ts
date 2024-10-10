@@ -14,10 +14,11 @@ interface FlavourFlowContextType {
   setMeals: Dispatch<SetStateAction<FlavourFlowMeal[]>>;
   currentPair: FlavourFlowMeal[];
   setCurrentPair: Dispatch<SetStateAction<FlavourFlowMeal[]>>;
-  clickedMeals: Set<string>;
   handleChoice: (winner: FlavourFlowMeal, loser: FlavourFlowMeal) => void;
-  pairs: FlavourFlowMeal[][];
   setClickedMeals?: Dispatch<SetStateAction<Set<string>>>;
+  attributePairs?: FlavourFlowMeal[][];
+  categoryPairs?: FlavourFlowMeal[][];
+  drawAttributePair?: Dispatch<SetStateAction<FlavourFlowMeal[]>>;
 }
 
 export type { AppContextPropTypes, AppContextValue, FlavourFlowContextType };
