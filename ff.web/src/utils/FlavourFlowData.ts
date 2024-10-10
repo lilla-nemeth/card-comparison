@@ -38,7 +38,7 @@ const dataset: FlavourFlowDataset = {
         elo: 1200,
         image: Day2KetoImage,
         name: "Keto",
-        category: "Time & Complexity",
+        category: "Preparation Time",
       },
       choice3: {
         id: "4",
@@ -46,7 +46,7 @@ const dataset: FlavourFlowDataset = {
         elo: 1200,
         image: Day3ChickenImage,
         name: "Chicken",
-        category: "Time & Complexity",
+        category: "Preparation Time",
       },
     },
   ],
@@ -58,7 +58,7 @@ const dataset: FlavourFlowDataset = {
         elo: 1200,
         image: Day4SalmonImage,
         name: "Salmon",
-        category: "Traditionality",
+        category: "Familiarity",
       },
       choice5: {
         id: "6",
@@ -66,7 +66,7 @@ const dataset: FlavourFlowDataset = {
         elo: 1200,
         image: Day5MexicanImage,
         name: "Mexican",
-        category: "Traditionality",
+        category: "Familiarity",
       },
     },
   ],
@@ -74,19 +74,41 @@ const dataset: FlavourFlowDataset = {
     {
       choice6: {
         id: "7",
-        title: "Simple ingredients",
+        title: "Affordable Ingredients",
         elo: 1200,
         image: Day6StuffedImage,
         name: "Stuffed",
-        category: "Type of Ingredients",
+        category: "Cost",
       },
       choice7: {
         id: "8",
-        title: "Variety of ingredients",
+        title: "Premium Ingredients",
         elo: 1200,
         image: Day7BoneImage,
         name: "Bone",
-        category: "Type of Ingredients",
+        category: "Cost",
+      },
+    },
+  ],
+  questionset4: [
+    {
+      choice8: {
+        id: "9",
+        title: "Whole Ingredients",
+        elo: 1200,
+        // would need different image
+        image: Day6StuffedImage,
+        name: "Chickpea Salad",
+        category: "Nutrition Content",
+      },
+      choice9: {
+        id: "10",
+        title: "Processed Ingredients",
+        elo: 1200,
+        // would need different image
+        image: Day7BoneImage,
+        name: "Chicken Nachos",
+        category: "Nutrition Content",
       },
     },
   ],

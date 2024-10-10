@@ -1,12 +1,14 @@
 import { FlavourFlowMeal } from "@vuo/types/dataTypes";
-import { getWinners } from "@vuo/utils/FlavourFlowFunctions";
+import { getWinnersByAttributes } from "@vuo/utils/FlavourFlowFunctions";
 import { ResultUIProps } from "@vuo/types/organismProps";
 import resultUIModules from "@vuo/scss/components/organisms/ResultUI.module.scss";
 import Card from "../atoms/Card";
 import cardModules from "@vuo/scss/components/organisms/ChoiceUI.module.scss";
+import { useFlavourFlow } from "@vuo/context/FlavourFlowContext";
 
-const ResultUI: React.FC<ResultUIProps> = ({ meals }) => {
-  const winnerMeals = getWinners(meals);
+const ResultUI: React.FC<ResultUIProps> = () => {
+  const { meals } = useFlavourFlow();
+  const winnerMeals = getWinnersByAttributes(meals);
   const containerClass =
     winnerMeals.length > 2
       ? resultUIModules.scrollableContainer

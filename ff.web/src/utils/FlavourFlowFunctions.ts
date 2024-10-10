@@ -1,4 +1,3 @@
-import { Dispatch } from "react";
 import { FlavourFlowDataset, FlavourFlowMeal } from "@vuo/types/dataTypes";
 import { v4 as uuidv4 } from "uuid";
 
@@ -68,49 +67,46 @@ const updateElo = (
   });
 };
 
-const findPairsByQuestionset = (
+const findPairsByCategories = (
   meals: FlavourFlowMeal[],
 ): FlavourFlowMeal[][] => {
   const groupedMeals: Record<string, FlavourFlowMeal[]> = {};
 
-  meals.forEach((meal) => {
-    const questionset = meal.category as string;
-    if (!groupedMeals[questionset]) {
-      groupedMeals[questionset] = [];
-    }
-    groupedMeals[questionset].push(meal);
-  });
-
   const pairs: FlavourFlowMeal[][] = [];
 
-  Object.values(groupedMeals).forEach((mealsInQuestionset) => {
-    while (mealsInQuestionset.length > 1) {
-      const randomIndex1 = Math.floor(
-        Math.random() * mealsInQuestionset.length,
-      );
-      const meal1 = mealsInQuestionset[randomIndex1];
+  meals.forEach((meal) => {
+    const category = meal.category as string;
 
-      mealsInQuestionset.splice(randomIndex1, 1);
+    if (!groupedMeals[category]) {
+      groupedMeals[category] = [];
+    }
+    groupedMeals[category].push(meal);
+  });
 
-      const randomIndex2 = Math.floor(
-        Math.random() * mealsInQuestionset.length,
-      );
-      const meal2 = mealsInQuestionset[randomIndex2];
+  Object.values(groupedMeals).forEach((meals) => {
+    while (meals.length > 1) {
+      const randomIndex1 = Math.floor(Math.random() * meals.length);
+      const meal1 = meals.splice(randomIndex1, 1)[0];
 
-      mealsInQuestionset.splice(randomIndex2, 1);
+      const randomIndex2 = Math.floor(Math.random() * meals.length);
+      const meal2 = meals.splice(randomIndex2, 1)[0];
 
       pairs.push([meal1, meal2]);
+    }
+
+    if (meals.length === 1) {
+      const leftoverMeal = meals[0];
+
+      pairs.push([leftoverMeal]);
     }
   });
 
   return pairs;
 };
 
-const drawNewPair = (
-  setCurrentPair: Dispatch<React.SetStateAction<FlavourFlowMeal[]>>,
-  pairs: FlavourFlowMeal[][],
-  clickedMeals: Set<string>,
-) => {
+const drawNewPair = (pairs: FlavourFlowMeal[][], clickedMeals: Set<string>) => {
+  if (!pairs) return [];
+
   const availablePairs = pairs.filter(
     (pair) => !clickedMeals.has(pair[0].id) && !clickedMeals.has(pair[1].id),
   );
@@ -118,22 +114,34 @@ const drawNewPair = (
   if (availablePairs.length > 0) {
     const randomIndex = Math.floor(Math.random() * availablePairs.length);
 
-    setCurrentPair(availablePairs[randomIndex]);
-  } else {
-    setCurrentPair([]);
+    return availablePairs[randomIndex];
   }
+
+  return [];
 };
 
-const getWinners = (meals: FlavourFlowMeal[]) => {
-  const winners = [];
+const getWinnersByAttributes = (meals: FlavourFlowMeal[]) => {
+  const winners = meals.filter((meal) => meal.elo > 1200);
+  return winners;
+};
 
-  for (let meal of meals) {
-    if (meal.elo > 1200) {
-      winners.push(meal);
-    }
+const findRandomPairs = (meals: FlavourFlowMeal[]): FlavourFlowMeal[][] => {
+  const pairs: FlavourFlowMeal[][] = [];
+  let shuffledMeals = [...meals];
+
+  shuffledMeals = shuffledMeals.sort(() => Math.random() - 0.5);
+
+  while (shuffledMeals.length > 1) {
+    const meal1 = shuffledMeals.shift()!;
+    const meal2 = shuffledMeals.shift()!;
+    pairs.push([meal1, meal2]);
   }
 
-  return winners;
+  if (shuffledMeals.length === 1) {
+    pairs.push([shuffledMeals[0]]);
+  }
+
+  return pairs;
 };
 
 export {
@@ -141,7 +149,8 @@ export {
   probability,
   updateElo,
   createDataForRanking,
-  findPairsByQuestionset,
+  findPairsByCategories,
   drawNewPair,
-  getWinners,
+  getWinnersByAttributes,
+  findRandomPairs,
 };
