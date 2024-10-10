@@ -1,4 +1,3 @@
-import { Dispatch } from "react";
 import { FlavourFlowDataset, FlavourFlowMeal } from "@vuo/types/dataTypes";
 import { v4 as uuidv4 } from "uuid";
 
@@ -73,40 +72,41 @@ const findPairsByCategories = (
 ): FlavourFlowMeal[][] => {
   const groupedMeals: Record<string, FlavourFlowMeal[]> = {};
 
+  const pairs: FlavourFlowMeal[][] = [];
+
   meals.forEach((meal) => {
     const category = meal.category as string;
 
     if (!groupedMeals[category]) {
       groupedMeals[category] = [];
     }
-
     groupedMeals[category].push(meal);
   });
-
-  const pairs: FlavourFlowMeal[][] = [];
 
   Object.values(groupedMeals).forEach((meals) => {
     while (meals.length > 1) {
       const randomIndex1 = Math.floor(Math.random() * meals.length);
-      const meal1 = meals[randomIndex1];
-      meals.splice(randomIndex1, 1);
+      const meal1 = meals.splice(randomIndex1, 1)[0];
 
       const randomIndex2 = Math.floor(Math.random() * meals.length);
-      const meal2 = meals[randomIndex2];
-      meals.splice(randomIndex2, 1);
+      const meal2 = meals.splice(randomIndex2, 1)[0];
 
       pairs.push([meal1, meal2]);
+    }
+
+    if (meals.length === 1) {
+      const leftoverMeal = meals[0];
+
+      pairs.push([leftoverMeal]);
     }
   });
 
   return pairs;
 };
 
-const drawNewPair = (
-  setCurrentPair: Dispatch<React.SetStateAction<FlavourFlowMeal[]>>,
-  pairs: FlavourFlowMeal[][],
-  clickedMeals: Set<string>,
-) => {
+const drawNewPair = (pairs: FlavourFlowMeal[][], clickedMeals: Set<string>) => {
+  if (!pairs) return [];
+
   const availablePairs = pairs.filter(
     (pair) => !clickedMeals.has(pair[0].id) && !clickedMeals.has(pair[1].id),
   );
@@ -114,10 +114,10 @@ const drawNewPair = (
   if (availablePairs.length > 0) {
     const randomIndex = Math.floor(Math.random() * availablePairs.length);
 
-    setCurrentPair(availablePairs[randomIndex]);
-  } else {
-    setCurrentPair([]);
+    return availablePairs[randomIndex];
   }
+
+  return [];
 };
 
 const getWinnersByAttributes = (meals: FlavourFlowMeal[]) => {
