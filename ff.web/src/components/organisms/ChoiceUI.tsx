@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Page from "../templates/Page";
-import { ChoiceUIProps } from "@vuo/types/organismProps";
+
 import { motion, AnimatePresence } from "framer-motion";
 import Card from "@vuo/components/atoms/Card";
 import { FlavourFlowMeal } from "@vuo/types/dataTypes";
@@ -8,7 +8,7 @@ import module from "@vuo/scss/components/organisms/ChoiceUI.module.scss";
 import { CardSwipeDirection } from "@vuo/types/moleculeProps";
 import { useFlavourFlow } from "@vuo/context/FlavourFlowContext";
 
-const ChoiceUI: React.FC<ChoiceUIProps> = () => {
+const ChoiceUI: React.FC = () => {
   const { currentPair, handleChoice } = useFlavourFlow();
   const [selectedMealId, setSelectedMealId] = useState<string | null>(null);
   const [directions, setDirections] = useState<CardSwipeDirection>({});

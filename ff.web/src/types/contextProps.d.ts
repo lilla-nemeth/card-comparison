@@ -6,7 +6,7 @@ type AppContextPropTypes = {
 interface AppContextValue {
   // Add your context properties and methods here
   isOnboardingComplete: boolean;
-  setIsOnboardingComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOnboardingComplete: (value: boolean) => void;
 }
 
 interface FlavourFlowContextType {

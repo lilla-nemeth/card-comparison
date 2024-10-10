@@ -6,7 +6,7 @@ export const getMealMapRecipes = async (req: Request, res: Response) => {
   try {
     const recipes = await RecipeModel
       .find()
-      .limit(42); //food for 14 days, 3 meal per day
+      .limit(42);
 
     if (!recipes || recipes.length === 0) {
       return res.status(404).json({ message: 'recipes not found' });

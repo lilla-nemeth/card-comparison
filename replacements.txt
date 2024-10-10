@@ -1,0 +1,2 @@
+echo "https://api.openai.com/v1/chat/completions==>REDACTED_URL" > replacements.txt
+echo "sk-proj-m3xQeo9zu40hEOlGoGUGT3BlbkFJKlKczOtOrnD4miLsoWb9==>REDACTED_KEY" >> replacements.txt

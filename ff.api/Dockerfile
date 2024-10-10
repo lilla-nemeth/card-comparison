@@ -8,6 +8,5 @@ COPY package*.json /app/
 
 WORKDIR /app
 
-RUN npm install -g nodemon
 RUN npm install
 COPY . /app

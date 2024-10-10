@@ -10,7 +10,7 @@ const Slider: React.FC<SliderProps> = ({
   onChange,
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(Number(event.target.value));
+    onChange && onChange(Number(event.target.value));
   };
 
   return (

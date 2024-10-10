@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@vuo/scss/components/molecules/RadioGroupItem.module.scss";
+import styles from "./RadioGroupItem.module.scss";
 import { RadioGroupItemProps } from "@vuo/types/moleculeProps";
 
 const RadioGroupItem: React.FC<RadioGroupItemProps> = ({
