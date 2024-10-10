@@ -5,7 +5,7 @@ import {
   calculateElo,
   createDataForRanking,
   drawNewPair,
-  findPairsByQuestionset,
+  findPairsByCategories,
   probability,
   updateElo,
 } from "@vuo/utils/FlavourFlowFunctions";
@@ -33,7 +33,7 @@ export const FlavourFlowProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // useMemo to only render pairs when they're needed
   const pairs: FlavourFlowMeal[][] = useMemo(
-    () => findPairsByQuestionset(meals),
+    () => findPairsByCategories(meals),
     [meals],
   );
 
