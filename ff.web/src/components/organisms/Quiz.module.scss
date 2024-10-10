@@ -20,7 +20,7 @@
   justify-content: space-between;
   margin-top: var(--space-32);
   position: fixed;
-  bottom: 56px;
+  bottom: var(--space-64);
   left: 0;
   right: 0;
   background-color: var(--surface-secondary);
@@ -34,14 +34,6 @@
   margin-bottom: var(--space-32);
 }
 
-
-
-.questionText {
-  font-size: 1.17em;
-  font-weight: bold;
-  color: var(--text-primary);
-  margin-bottom: var(--space-16);
-}
 
 .sliderContainer {
   width: 100%;
@@ -57,8 +49,8 @@
 .sliderInput::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 24px;
-  height: 24px;
+  width: var(--space-24);
+  height: var(--space-24);
   background: var(--surface-brand);
   cursor: pointer;
   border-radius: var(--radius-full);
@@ -66,8 +58,8 @@
 }
 
 .sliderInput::-moz-range-thumb {
-  width: 24px;
-  height: 24px;
+  width: var(--space-24);
+  height: var(--space-24);
   background: var(--surface-brand);
   cursor: pointer;
   border-radius: var(--radius-full);
@@ -174,10 +166,6 @@
 
   .quizTitle {
     font-size: var(--font-size-xl);
-  }
-
-  .questionText {
-    font-size: var(--font-size-lg);
   }
 
   .optionButton {
