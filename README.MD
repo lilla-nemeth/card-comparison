@@ -1,4 +1,4 @@
-Card sorting task
+# Card sorting task
 
 ### My changes connected to these pages (components, functionalities, styling):
 
@@ -11,4 +11,4 @@ Card sorting task
 
 or
 
-Use the Dockerfile
+- Use the Dockerfile
