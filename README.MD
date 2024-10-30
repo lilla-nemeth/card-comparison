@@ -1,6 +1,6 @@
 # FlavourFlow - Card comparison  
 
-### Technologies used  
+### 🛠 Technologies used  
 TypeScript, React, Sass, Framer Motion (for animation)
 
 ### The task 
