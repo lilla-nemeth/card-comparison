@@ -29,7 +29,7 @@ An example of the flow could be:
 #### 2. Round (Categories):  
 - User chooses **Preparation Time** over **Cost**, because he likes spending time in his kitchen, and is more important for him than the price of the ingredients.
 
-## ⌨️ My changes mainly connected to these files: 
+## My changes mainly connected to these files: 
 
 #### Pages:
 [FlavourFlowPage](ff.web/src/components/pages/FlavourFlowPage.tsx)  
@@ -55,7 +55,7 @@ An example of the flow could be:
 #### For further details see the commit history:
 [Commit History](https://github.com/lilla-nemeth/card-sorting-task/commits/main/?author=lilla-nemeth&before=e7ad6696bc00db884421cbcfb26b3e6879576109+35)  
 
-## ▶️ To Run the Frontend Part
+## To Run the Frontend Part
 
 1. Go to the ff.web folder and
 
