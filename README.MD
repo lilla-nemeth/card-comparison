@@ -1,24 +1,30 @@
-# FlavourFlow - Card comparison task
+# FlavourFlow - Card comparison
 
-The task was to create a Tinderesque interface. Instead of swiping one card to left and right, the users should choose between two cards based on their preferences and through click actions cards should animate to up and down.  
+## The task 
+
+Create a Tinderesque interface. Instead of swiping one card from the deck to left and right, the users should choose between two cards based on their preferences and through click actions the cards should animate to up and down.  
 
 For the task I followed the instructions and what is common sense.  
-For instance, I did not see the point to compare 2 different attributes "Traditional breakfast" Vs. "Quick and easy".  
-Instead my changes compare 2 cards if they belong to the same group, e.g. "Sweet" Vs. "Savory".  
+For instance, I did not see the point comparing 2 different attributes:
 
-My future development idea was:  
-If the user clicked on all the attributes then a second round filtering would start again with categories.
+<span style="color: red;">"Traditional breakfast"</span> Vs. <span style="color: green;">"Quick and easy"</span>
+
+Instead my changes compare 2 cards if they belong to the same group:   
+
+<span style="color: blue;">"Sweet" Vs. "Savory"</span>  
+
+## My future development idea was:  
+If the user clicked on all the attributes then a second round filtering would start with categories.
 That is why I extended the FlavourFlow data with categories.  
-An example could be: "Taste" Vs. "Preparation Time". 
 
-An example of the flow could be:  
+### An example of the flow could be:  
 
-I. Round (Attributes):  
-1. User chooses "Requires more time" over "Quick and easy" from "Preparation time" category.  
-2. User chooses "Premium Ingredients" over "Affordable Ingredients" from "Cost" category.  
+1. Round (Attributes):  
+- User chooses <span style="color: green;">"Requires more time"</span> over <span style="color: red;">"Quick and easy"</span> from  <span style="color: blue;">"Preparation time"</span> category.  
+- User chooses "Premium Ingredients" over "Affordable Ingredients" from "Cost" category.  
 
-II: Round (No more attributes, just categories):  
-2.  - User chooses "Preparation Time" over "Cost", because he likes spending time in his kitchen, and is more important for him than the price of the ingredients.
+2. Round (No more attributes, just categories):  
+- User chooses "Preparation Time" over "Cost", because he likes spending time in his kitchen, and is more important for him than the price of the ingredients.
 
 ## My changes mainly connected to these files: 
 
