@@ -1,5 +1,7 @@
 # FlavourFlow - Card comparison  
 
+### Technologies used  
+TypeScript, React, Sass, Framer Motion (for animation)
 
 ### The task 
 
@@ -53,7 +55,6 @@ An example of the flow could be:
 
 #### For further details see the commit history:
 [Commit History](https://github.com/lilla-nemeth/card-sorting-task/commits/main/?author=lilla-nemeth&before=e7ad6696bc00db884421cbcfb26b3e6879576109+35)  
-
 
 ## To Run the Frontend Part
 
