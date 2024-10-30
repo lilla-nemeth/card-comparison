@@ -1,20 +1,23 @@
 # FlavourFlow - Card comparison task
 
 The task was to create a Tinderesque interface. Instead of swiping one card to left and right, the users should choose between two cards based on their preferences and through click actions cards should animate to up and down.  
-For the task I followed the instructions and what is common sense.
+
+For the task I followed the instructions and what is common sense.  
 For instance, I did not see the point to compare 2 different attributes "Traditional breakfast" Vs. "Quick and easy".  
 Instead my changes compare 2 cards if they belong to the same group, e.g. "Sweet" Vs. "Savory".  
 
-My future development idea was: If the user clicked on all the attributes then a second round filtering would start again with categories.
+My future development idea was:  
+If the user clicked on all the attributes then a second round filtering would start again with categories.
 That is why I extended the FlavourFlow data with categories.  
 An example could be: "Taste" Vs. "Preparation Time". 
 
-An example of the flow could be:
-I. Round (Attributes):
-1. User chooses "Requires more time" over "Quick and easy" from "Preparation time" category.
-2. User chooses "Premium Ingredients" over "Affordable Ingredients" from "Cost" category.
+An example of the flow could be:  
 
-II: Round (No more attributes, just categories):
+I. Round (Attributes):  
+1. User chooses "Requires more time" over "Quick and easy" from "Preparation time" category.  
+2. User chooses "Premium Ingredients" over "Affordable Ingredients" from "Cost" category.  
+
+II: Round (No more attributes, just categories):  
 2.  - User chooses "Preparation Time" over "Cost", because he likes spending time in his kitchen, and is more important for him than the price of the ingredients.
 
 ## My changes mainly connected to these files: 
